@@ -56,10 +56,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
     </style>
 </head>
-<body class="bg-dark bg-gradient">
+<body >
     <main>
        <div class="col-lg-7 col-md-9 col-sm-12 col-xs-12 mb-4">
-           <h1 class="text-light text-center">XYZ Simple PHP Web Application</h1>
+           <h1 class="text-light text-center">Baola Hosipital System</h1>
         </div>
        <div class="col-lg-3 col-md-8 col-sm-12 col-xs-12">
            <div class="card shadow rounded-0">

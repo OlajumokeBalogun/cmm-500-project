@@ -44,7 +44,7 @@
 					$stat = array("Pending","Started","On-Progress","On-Hold","Over Due","Done");
 					$where = "";
 					
-					$qry = $conn->query("SELECT * FROM Appointment $where order by Status asc");
+					$qry = $conn->query("SELECT * FROM patient ");
 					while($row= $qry->fetch_assoc()):
 						$trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
 						unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);

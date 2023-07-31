@@ -37,15 +37,15 @@
 					$stat = array("Pending","Started","On-Progress","On-Hold","Over Due","Done");
 					$where = "";
 					
-					$qry = $conn->query("SELECT * FROM Appointment $where order by Status asc");
+					$qry = $conn->query("SELECT * FROM Appointment ");
 					while($row= $qry->fetch_assoc()):
 						$trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
 						unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
 						$desc = strtr(html_entity_decode($row['description']),$trans);
 						$desc=str_replace(array("<li>","</li>"), array("",", "), $desc);
 
-					 	$tprog = $conn->query("SELECT * FROM Appointment where Appointment_id = {$row['id']}")->num_rows;
-		                $cprog = $conn->query("SELECT * FROM Appointment where Appointment_id= {$row['id']} and status = 3")->num_rows;
+					 	$tprog = $conn->query("SELECT * FROM Appointment where appointment_id = {$row['id']}")->num_rows;
+		                $cprog = $conn->query("SELECT * FROM Appointment where appointment_id= {$row['id']} and status = 3")->num_rows;
 						$prog = $tprog > 0 ? ($cprog/$tprog) * 100 : 0;
 		                $prog = $prog > 0 ?  number_format($prog,2) : $prog;
 		                $prod = $conn->query("SELECT * FROM Appointment where Appointment_id = {$row['id']}")->num_rows;

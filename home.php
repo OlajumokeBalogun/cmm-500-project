@@ -16,17 +16,16 @@ if($_SESSION['login_type'] != 1)
   <?php 
 
     $where = "";
-    if($_SESSION['firstname'] == "Gbenga"){
-      $where = " where manager_id = '{$_SESSION['id']}' ";
-    }elseif($_SESSION['firstname'] == "Gbenga"){
+    
+     
+   
       $where = " where concat('[',REPLACE(user_ids,',','],['),']') LIKE '%[{$_SESSION['id']}]%' ";
-    }
-     $where2 = "";
-    if($_SESSION['firstname'] == "Gbenga"){
-      $where2 = " where p.manager_id = '{$_SESSION['login_id']}' ";
-    }elseif($_SESSION['firstname'] == "Gbenga"){
-      $where2 = " where concat('[',REPLACE(p.user_ids,',','],['),']') LIKE '%[{$_SESSION['login_id']}]%' ";
-    }
+    
+    
+   
+  
+     
+   
     ?>
         
       <div class="row">

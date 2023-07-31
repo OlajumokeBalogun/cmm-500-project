@@ -238,7 +238,7 @@ Class Action {
 		extract($_POST);
 		$data = "";
 		foreach($_POST as $k => $v){
-			if(!in_array($k, array('Appointment_id','id')) && !is_numeric($k)){
+			if(!in_array($k, array('appointment_id','id')) && !is_numeric($k)){
 				if($k == 'description')
 					$v = htmlentities(str_replace("'","&#x2019;",$v));
 				if(empty($data)){
@@ -253,9 +253,9 @@ Class Action {
 		}
 		// echo $data;exit;
 		if(empty($id)){
-			$save = $this->db->query("INSERT INTO project_list set $data");
+			$save = $this->db->query("INSERT INTO Appointment set $data");
 		}else{
-			$save = $this->db->query("UPDATE project_list set $data where id = $id");
+			$save = $this->db->query("UPDATE Appointment set $data where appointment_id = $id");
 		}
 		if($save){
 			return 1;

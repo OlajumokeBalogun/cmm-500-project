@@ -146,8 +146,10 @@ Class MainClass{
                 $msg = "
                 <html>
                     <body>
-                        <h2>You are Attempting to Login in XYZ Simple PHP Web Application</h2>
-                        <p>Here is yout OTP (One-Time PIN) to verify your Identity.</p>
+                        <h2>You are Attempting to Login in Baola Hosipital System Application</h2>
+                        <p>Here is your 6 digits OTP (One-Time PIN) to verify your Identity.</p>
+                        <p>Your Pin will expire in 5 minutes</p>
+                        
                         <h3><b>".$pin."</b></h3>
                     </body>
                 </html>
