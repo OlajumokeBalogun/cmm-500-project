@@ -48,60 +48,71 @@
 					while($row= $qry->fetch_assoc()):
 						$trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
 						unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
-						$desc = strtr(html_entity_decode($row['description']),$trans);
-						$desc=str_replace(array("<li>","</li>"), array("",", "), $desc);
-
-					 	$tprog = $conn->query("SELECT * FROM Appointment where Appointment_id = {$row['id']}")->num_rows;
+						
 		             
-						$prog = $tprog > 0 ? ($cprog/$tprog) * 100 : 0;
-		                $prog = $prog > 0 ?  number_format($prog,2) : $prog;
-		                $prod = $conn->query("SELECT * FROM Appointment where Appointment_id = {$row['id']}")->num_rows;
-						if($row['status'] == 0 && strtotime(date('Y-m-d')) >= strtotime($row['start_date'])):
-						if($prod  > 0  || $cprog > 0)
-		                  $row['status'] = 2;
-		                else
-		                  $row['status'] = 1;
-						elseif($row['status'] == 0 && strtotime(date('Y-m-d')) > strtotime($row['end_date'])):
-						$row['status'] = 4;
-						endif;
+						
+		               
+						
+						
 					?>
 					<tr>
 						<th class="text-center"><?php echo $i++ ?></th>
 						<td>
-							<p><b><?php echo ucwords($row['name']) ?></b></p>
-							<p class="truncate"><?php echo strip_tags($desc) ?></p>
+							<p><b><?php echo ucwords($row['Firstname']) ?></b></p>
+							
 						</td>
-						<td><b><?php echo date("M d, Y",strtotime($row['start_date'])) ?></b></td>
-						<td><b><?php echo date("M d, Y",strtotime($row['end_date'])) ?></b></td>
-						<td class="text-center">
-							<?php
-							  if($stat[$row['status']] =='Pending'){
-							  	echo "<span class='badge badge-secondary'>{$stat[$row['status']]}</span>";
-							  }elseif($stat[$row['status']] =='Started'){
-							  	echo "<span class='badge badge-primary'>{$stat[$row['status']]}</span>";
-							  }elseif($stat[$row['status']] =='On-Progress'){
-							  	echo "<span class='badge badge-info'>{$stat[$row['status']]}</span>";
-							  }elseif($stat[$row['status']] =='On-Hold'){
-							  	echo "<span class='badge badge-warning'>{$stat[$row['status']]}</span>";
-							  }elseif($stat[$row['status']] =='Over Due'){
-							  	echo "<span class='badge badge-danger'>{$stat[$row['status']]}</span>";
-							  }elseif($stat[$row['status']] =='Done'){
-							  	echo "<span class='badge badge-success'>{$stat[$row['status']]}</span>";
-							  }
-							?>
+						<td>
+							<p><b><?php echo ucwords($row['Lastname']) ?></b></p>
+							
 						</td>
+
+						<td>
+							<p><b><?php echo ucwords($row['age']) ?></b></p>
+							
+						</td>
+						<td>
+							<p><b><?php echo ucwords($row['email']) ?></b></p>
+							
+						</td>
+						<td>
+							<p><b><?php echo ucwords($row['bloodgroup']) ?></b></p>
+							
+						</td>
+						<td>
+							<p><b><?php echo ucwords($row['weight']) ?></b></p>
+							
+						</td>
+						<td>
+							<p><b><?php echo ucwords($row['height']) ?></b></p>
+							
+						</td>
+						<td>
+							<p><b><?php echo ucwords($row['address']) ?></b></p>
+							
+						</td>
+						<td>
+							<p><b><?php echo ucwords($row['gender']) ?></b></p>
+							
+						</td>
+						<td>
+							<p><b><?php echo ucwords($row['Date_joined']) ?></b></p>
+							
+						</td>
+						
+						
+						
 						<td class="text-center">
 							<button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 		                      Action
 		                    </button>
 		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item view_project" href="./index.php?page=view_project&id=<?php echo $row['id'] ?>" data-id="<?php echo $row['id'] ?>">View</a>
+		                      <a class="dropdown-item view_project" href="./index.php?page=view_project&id=<?php echo $row['Patient_Id'] ?>" data-id="<?php echo $row['Patient_Id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
-		                      <?php if($_SESSION['login_type'] != 3): ?>
-		                      <a class="dropdown-item" href="./index.php?page=edit_project&id=<?php echo $row['id'] ?>">Edit</a>
+		                      
+		                      <a class="dropdown-item" href="./index.php?page=edit_project&id=<?php echo $row['Patient_Id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item delete_project" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">Delete</a>
-		                  <?php endif; ?>
+		                      <a class="dropdown-item delete_project" href="javascript:void(0)" data-id="<?php echo $row['Patient_Id'] ?>">Delete</a>
+		                  
 		                    </div>
 						</td>
 					</tr>	

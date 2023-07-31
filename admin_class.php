@@ -238,8 +238,8 @@ Class Action {
 		extract($_POST);
 		$data = "";
 		foreach($_POST as $k => $v){
-			if(!in_array($k, array('appointment_id','id')) && !is_numeric($k)){
-				if($k == 'description')
+			if(!in_array($k, array('appointment_id','patient_name')) && !is_numeric($k)){
+				if($k == 'doctor_name')
 					$v = htmlentities(str_replace("'","&#x2019;",$v));
 				if(empty($data)){
 					$data .= " $k='$v' ";

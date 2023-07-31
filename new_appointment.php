@@ -3,20 +3,20 @@
 <div class="col-lg-12">
 	<div class="card card-outline card-primary">
 		<div class="card-body">
-			<form action="" id="manage-patient">
+			<form action="" id="manage-appointment">
 
         <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
 		<div class="row">
 			<div class="col-md-4">
 			<div class="form-group">
               <label for="" class="control-label">Patient name</label>
-              <select class="form-control form-control-sm select2" name="Patient_Id">
+              <select class="form-control form-control-sm select2" name="Patient_name">
               	<option></option>
               	<?php 
               	$patient = $conn->query("SELECT *,concat(Firstname,' ',Lastname) as name FROM patient  order by concat(Firstname,' ',Lastname) asc ");
               	while($row= $patient->fetch_assoc()):
               	?>
-              	<option value="<?php echo $row['Patient_Id'] ?>" <?php echo isset($Patient_Id) && $Patient_Id == $row['Patient_Id'] ? "selected" : '' ?>><?php echo ucwords($row['name']) ?></option>
+              	<option value="<?php echo $row['name'] ?>" <?php echo isset($Patient_Id) && $Patient_Id == $row['Patient_Id'] ? "selected" : '' ?>><?php echo ucwords($row['name']) ?></option>
               	<?php endwhile; ?>
               </select>
             </div>
@@ -34,7 +34,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 				<label for="" class="control-label">Doctor's name</label>
-              <select class="form-control form-control-sm select2" name="Patient_Id">
+              <select class="form-control form-control-sm select2" name="doctor_name">
               	<option></option>
               	<?php 
               	$users = $conn->query("SELECT *,concat(	firstname,' ',	lastname) as name FROM users order by concat(firstname,' ',	lastname) asc ");
@@ -50,13 +50,13 @@
 			<div class="col-md-6">
             <div class="form-group">
               <label for="" class="control-label">Appointment Date</label>
-              <input type="date" class="form-control form-control-sm" autocomplete="off" name="start_date" value="<?php echo isset($start_date) ? date("Y-m-d",strtotime($start_date)) : '' ?>">
-            </div>
+              <input type="date" class="form-control form-control-sm" name="appointment_date" >
           </div>
+		  </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="" class="control-label">Appointment Time</label>
-              <input type="time" class="form-control form-control-sm" autocomplete="off" name="time" value="<?php echo isset($end_date) ? date("Y-m-d",strtotime($end_date)) : '' ?>">
+              <input type="time" class="form-control form-control-sm"  name="appointment_time" >
             </div>
           </div>
 		</div>
@@ -65,10 +65,10 @@
            <div class="col-md-6">
             <div class="form-group">
               <label for="" class="control-label">Staff name Scheduling Appointment</label>
-              <select class="form-control form-control-sm select2" name="Patient_Id">
+              <select class="form-control form-control-sm select2" name="staff_scheduling">
               	<option></option>
               	<?php 
-              $users = $conn->query("SELECT *,concat(	firstname,' ',	lastname) as name FROM users order by concat(firstname,' ',	lastname) asc ");
+              $users = $conn->query("SELECT *,concat(firstname,' ',	lastname) as name FROM users order by concat(firstname,' ',	lastname) asc ");
               	while($row= $users->fetch_assoc()):
               	?>
               	<option value="<?php echo $row['id'] ?>" <?php echo isset($id) && $id== $row['id'] ? "selected" : '' ?>><?php echo ucwords($row['name']) ?></option>
@@ -91,7 +91,7 @@
 	</div>
 </div>
 <script>
-	$('#manage-project').submit(function(e){
+	$('#manage-appointment').submit(function(e){
 		e.preventDefault()
 		start_load()
 		$.ajax({

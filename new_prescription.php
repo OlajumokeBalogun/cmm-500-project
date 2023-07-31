@@ -3,11 +3,11 @@
 <div class="col-lg-12">
 	<div class="card card-outline card-primary">
 		<div class="card-body">
-			<form action="" id="manage-project">
+			<form action="" id="manage-prescription">
 
         <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-6">
 			<div class="form-group">
               <label for="" class="control-label">Patient name</label>
               <select class="form-control form-control-sm select2" name="Patient_Id">
@@ -21,17 +21,17 @@
               </select>
             </div>
 			</div>
-          	<div class="col-md-4">
+          	<div class="col-md-6">
 				<div class="form-group">
-					<label for="">Status</label>
-					<select name="status" id="status" class="custom-select custom-select-sm">
-						<option value="0" <?php echo isset($status) && $status == 0 ? 'selected' : '' ?>>Pending</option>
-						<option value="3" <?php echo isset($status) && $status == 3 ? 'selected' : '' ?>>On-Hold</option>
-						<option value="5" <?php echo isset($status) && $status == 5 ? 'selected' : '' ?>>Done</option>
+					<label for="">Prescription Status</label>
+					<select name="prescription status" id="prescription status" class="custom-select custom-select-sm">
+						<option value="0" <?php echo isset($status) && $status == 0 ? 'selected' : '' ?>>Collected</option>
+						<option value="3" <?php echo isset($status) && $status == 3 ? 'selected' : '' ?>>Awaiting Collection</option>
+						
 					</select>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="form-group">
 				<label for="" class="control-label">Doctor's name</label>
               <select class="form-control form-control-sm select2" name="Patient_Id">
