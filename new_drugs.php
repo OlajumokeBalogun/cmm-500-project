@@ -24,8 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("ss", $Drug_name, $Drug_desc);
 
     if ($stmt->execute()) {
-        // Insertion successful
-        echo "Data inserted successfully!";
+        header("Location: index.php?page=drugs"); 
+        exit();
     } else {
         // Insertion failed
         echo "Error: " . $conn->error;

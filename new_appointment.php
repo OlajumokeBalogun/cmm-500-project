@@ -3,9 +3,9 @@
 <div class="col-lg-12">
 	<div class="card card-outline card-primary">
 		<div class="card-body">
-			<form action="" id="manage-appointment">
+			<form action="add_appoint.php" method="post">
 
-        <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
+        
 		<div class="row">
 			<div class="col-md-4">
 			<div class="form-group">
@@ -25,9 +25,9 @@
 				<div class="form-group">
 					<label for="">Status</label>
 					<select name="status" id="status" class="custom-select custom-select-sm">
-						<option value="0" <?php echo isset($status) && $status == 0 ? 'selected' : '' ?>>Pending</option>
-						<option value="3" <?php echo isset($status) && $status == 3 ? 'selected' : '' ?>>On-Hold</option>
-						<option value="5" <?php echo isset($status) && $status == 5 ? 'selected' : '' ?>>Done</option>
+						<option value="Pending" >Pending</option>
+						<option value="On-Hold" >On-Hold</option>
+						<option value="Done" >Done</option>
 					</select>
 				</div>
 			</div>
@@ -40,7 +40,7 @@
               	$users = $conn->query("SELECT *,concat(	firstname,' ',	lastname) as name FROM users order by concat(firstname,' ',	lastname) asc ");
               	while($row= $users->fetch_assoc()):
               	?>
-              	<option value="<?php echo $row['id'] ?>" <?php echo isset($id) && $id== $row['id'] ? "selected" : '' ?>><?php echo ucwords($row['name']) ?></option>
+              	<option value="<?php echo $row['name'] ?>" <?php echo isset($id) && $id== $row['id'] ? "selected" : '' ?>><?php echo ucwords($row['name']) ?></option>
               	<?php endwhile; ?>
               </select>
 				</div>
@@ -71,7 +71,7 @@
               $users = $conn->query("SELECT *,concat(firstname,' ',	lastname) as name FROM users order by concat(firstname,' ',	lastname) asc ");
               	while($row= $users->fetch_assoc()):
               	?>
-              	<option value="<?php echo $row['id'] ?>" <?php echo isset($id) && $id== $row['id'] ? "selected" : '' ?>><?php echo ucwords($row['name']) ?></option>
+              	<option value="<?php echo $row['name'] ?>" <?php echo isset($id) && $id== $row['id'] ? "selected" : '' ?>><?php echo ucwords($row['name']) ?></option>
               	<?php endwhile; ?>
               </select>
             </div>
@@ -79,15 +79,14 @@
       
          
         </div>
-		
+		<hr>
+				<div class="col-lg-12 text-right justify-content-center d-flex">
+				<button type="submit" class="btn btn-primary mr-2">Save</button>
+					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=appointment'">Cancel</button>
+				</div>
         </form>
     	</div>
-    	<div class="card-footer border-top border-info">
-    		<div class="d-flex w-100 justify-content-center align-items-center">
-    			<button class="btn btn-flat  bg-gradient-primary mx-2" form="manage-appointment">Save</button>
-    			<button class="btn btn-flat bg-gradient-secondary mx-2" type="button" onclick="location.href='index.php?page=appointment'">Cancel</button>
-    		</div>
-    	</div>
+    	
 	</div>
 </div>
 <script>

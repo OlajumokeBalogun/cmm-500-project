@@ -14,17 +14,18 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Step 2: Sanitize the form data
     $Patient_name = sanitizeInput($_POST["Patient_name"]);
-    $Staff_name = sanitizeInput($_POST["Staff_name"]);
-    $doctorNote = sanitizeInput($_POST["Doctor_note"]);
-    $prescriptionStatus = sanitizeInput($_POST["prescription_status"]);
-    $drugName = sanitizeInput($_POST["Drug_name"]);
+    $amount = sanitizeInput($_POST["amount"]);
+    $Payment_status = sanitizeInput($_POST["Payment_status"]);
+    $Payment_mode = sanitizeInput($_POST["Payment_mode"]);
+    
 
     // Step 3: Use prepared statements to insert data into the database
-    $stmt = $conn->prepare("INSERT INTO prescription (Patient_name, Staff_name, Doctor_Note, prescription_Status, Drug_Name) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss",  $Patient_name, $Staff_name, $doctorNote, $prescriptionStatus, $drugName);
+    $stmt = $conn->prepare("INSERT INTO billing (Patient_name, amount, Payment_status, Payment_mode) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss",  $Patient_name, $amount, $Payment_status, $Payment_mode);
 
     if ($stmt->execute()) {
-        header("Location: index.php?page=prescription"); 
+        // Insertion successful
+        header("Location: index.php?page=billing"); 
         exit();
     } else {
         // Insertion failed

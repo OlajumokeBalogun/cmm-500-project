@@ -85,10 +85,10 @@
 		                      Action
 		                    </button>
 		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item view_project" href="./index.php?page=view_patient&id=<?php echo $row['Patient_Id'] ?>" data-id="<?php echo $row['Patient_Id'] ?>">View</a>
+		                      <a class="dropdown-item view_project" href="./index.php?page=view_patient&Patient_Id=<?php echo $row['Patient_Id'] ?>" data-id="<?php echo $row['Patient_Id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
 		                      
-		                      <a class="dropdown-item" href="./index.php?page=manage_patient&id=<?php echo $row['Patient_Id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="./index.php?page=edit_patient&Patient_Id=<?php echo $row['Patient_Id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
 		                      <a class="dropdown-item delete_project" href="javascript:void(0)" data-id="<?php echo $row['Patient_Id'] ?>">Delete</a>
 		                  

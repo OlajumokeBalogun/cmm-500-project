@@ -13,7 +13,6 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Step 2: Sanitize the form data
     $firstname = sanitizeInput($_POST["firstname"]);
     $middlename = sanitizeInput($_POST["middlename"]);
     $lastname = sanitizeInput($_POST["lastname"]);
@@ -26,37 +25,49 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $address = sanitizeInput($_POST["address"]);
     $gender = sanitizeInput($_POST["gender"]);
 
-    // Step 3: Check if the email already exists in the database
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM patient WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $stmt->bind_result($emailCount);
-    $stmt->fetch();
-    $stmt->close();
+    $Patient_Id = intval($_POST["Patient_Id"]); 
 
-    if ($emailCount > 0) {
-        // Email already exists, prompt the user to try another
-        echo "Email already exists. Please try another email.";
-    } else {
-        // Step 4: Use prepared statements to insert data into the database
-        $stmt = $conn->prepare("INSERT INTO patient (firstname, middlename, lastname, dob, email, age, bloodgroup, weight, height, address, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssisssss", $firstname, $middlename, $lastname, $dob, $email, $age, $bloodgroup, $weight, $height, $address, $gender);
+    
+    $stmt = $conn->prepare("UPDATE patient SET Firstname=?, Middlename=?, Lastname=?, dob=?, email=?,  age=?, bloodgroup=?, weight=?, height=?, address=?, gender=? WHERE Patient_Id=?");
+    $stmt->bind_param("sssssisssssi", $firstname, $middlename, $lastname, $dob, $email, $age, $bloodgroup, $weight, $height, $address, $gender, $Patient_Id);
 
-        if ($stmt->execute()) {
-            header("Location: index.php?page=patient"); 
+    if ($stmt->execute()) {
+        echo "Record updated.";
         exit();
-        } else {
-            // Insertion failed
-            echo "Error: " . $conn->error;
-        }
-
-        $stmt->close();
+    } else {
+        // Update failed
+        echo "Error: " . $conn->error;
     }
+
+    $stmt->close();
+}
+
+
+if (isset($_GET["Patient_Id"])) {
+    $Patient_Id= intval($_GET["Patient_Id"]);
+
+    $sql = "SELECT * FROM patient WHERE Patient_Id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $Patient_Id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 1) {
+        $row = $result->fetch_assoc();
+    } else {
+        echo "Record not found.";
+        exit();
+    }
+
+    $stmt->close();
+} else {
+    echo "Invalid request.";
+    exit();
 }
 
 function sanitizeInput($data)
 {
-    // Remove whitespace and strip HTML tags
+    
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -66,31 +77,28 @@ function sanitizeInput($data)
 $conn->close();
 ?>
 
+<!-- HTML Edit Form -->
+<form action="" method="post">
+    <input type="hidden" name="Patient_Id" value="<?php echo $row["Patient_Id"]; ?>">
 
-
-<div class="col-lg-12">
-	<div class="card">
-		<div class="card-body">
-			<form action="" method="post" >
-				
-				<div class="row">
+    <div class="row">
 					<div class="col-md-4 border-right">
 						<div class="form-group">
 							<label for="" class="control-label">First Name</label>
-							<input type="text" name="firstname" class="form-control form-control-sm" required >
+							<input type="text" name="firstname" class="form-control form-control-sm" value="<?php echo $row["Firstname"]; ?>" required >
 						</div>
 						<div class="form-group">
 							<label for="" class="control-label">Middle Name</label>
-							<input type="text" name="middlename" class="form-control form-control-sm" required >
+							<input type="text" name="middlename" class="form-control form-control-sm" value="<?php echo $row["Middlename"]; ?>" required >
 						</div>
 						<div class="form-group">
 							<label for="" class="control-label">Last Name</label>
-							<input type="text" name="lastname" class="form-control form-control-sm" required >
+							<input type="text" name="lastname" class="form-control form-control-sm" value="<?php echo $row["Lastname"]; ?>" required >
 						</div>
 					
 						<div class="form-group">
 							<label for="" class="control-label">Date of Birth</label>
-							<input type="date" name="dob" class="form-control form-control-sm" required >
+							<input type="date" name="dob" class="form-control form-control-sm" value="<?php echo $row["dob"]; ?>" required >
 						</div>
 						
 						
@@ -100,21 +108,21 @@ $conn->close();
 						
 						<div class="form-group">
 							<label class="control-label">Email</label>
-							<input type="email" class="form-control form-control-sm" name="email" required >
+							<input type="email" class="form-control form-control-sm" name="email" value="<?php echo $row["email"]; ?>" required >
 							<small id="#msg"></small>
 						</div>
 						<div class="form-group">
 							<label for="" class="control-label">Age</label>
-							<input type="number" name="age" class="form-control form-control-sm" required >
+							<input type="number" name="age" class="form-control form-control-sm"  value="<?php echo $row["age"]; ?>" required >
 						</div>
 						<div class="form-group">
 							<label class="control-label">Bloodgroup</label>
-							<input type="text" class="form-control form-control-sm" name="bloodgroup" required >
+							<input type="text" class="form-control form-control-sm" name="bloodgroup" value="<?php echo $row["bloodgroup"]; ?>" required >
 							<small id="#msg"></small>
 						</div>
 						<div class="form-group">
 							<label class="control-label">Weight</label>
-							<input type="text" class="form-control form-control-sm" name="weight" required >
+							<input type="text" class="form-control form-control-sm" name="weight" value="<?php echo $row["weight"]; ?>" required >
 							<small id="#msg"></small>
 						</div>
 					</div>
@@ -123,16 +131,16 @@ $conn->close();
 						
 						<div class="form-group">
 							<label class="control-label">Height</label>
-							<input type="text" class="form-control form-control-sm" name="height" required >
+							<input type="text" class="form-control form-control-sm" name="height" value="<?php echo $row["height"]; ?>" required >
 							<small id="#msg"></small>
 						</div>
 						<div class="form-group">
 							<label for="" class="control-label">Address</label>
-							<input type="text" name="address" class="form-control form-control-sm" required >
+							<input type="text" name="address" class="form-control form-control-sm" value="<?php echo $row["address"]; ?>" required >
 						</div>
 						<div class="form-group">
 							<label for="" class="control-label">Gender</label>
-							<select name="gender" id="gender" class="custom-select custom-select-sm">
+							<select name="gender" id="gender" class="custom-select custom-select-sm" value="<?php echo $row["gender"]; ?>">
 								<option value="Male"  selected>Male</option>
 								<option value="Female" >Female</option>
 								<option value="Prefer not to say">Prefer not to say</option>
@@ -146,7 +154,6 @@ $conn->close();
 				<button type="submit" class="btn btn-primary mr-2">Save</button>
 					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=patient'">Cancel</button>
 				</div>
-			</form>
-		</div>
-	</div>
-</div>
+
+    
+</form>

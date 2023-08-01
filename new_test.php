@@ -3,9 +3,9 @@
 <div class="col-lg-12">
 	<div class="card card-outline card-primary">
 		<div class="card-body">
-			<form action="" id="manage-test">
+			<form action="add_test.php" method="post" >
 
-        <input type="hidden" name="Test_id" value="<?php echo isset($id) ? $id : '' ?>">
+        
 		<div class="row">
 			<div class="col-md-6">
 			<div class="form-group">
@@ -16,7 +16,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 				<label for="" class="control-label">Staff name</label>
-              <select class="form-control form-control-sm select2" name="id">
+              <select class="form-control form-control-sm select2" name="Staff_name">
               	<option></option>
               	<?php 
               	$users = $conn->query("SELECT *,concat(	firstname,' ',	lastname) as name FROM users order by concat(firstname,' ',	lastname) asc ");
@@ -30,12 +30,7 @@
 			</div>
 		
 			<div class="row">
-			<div class="col-md-6">
-            <div class="form-group">
-              <label for="" class="control-label">Test Date</label>
-              <input type="date" class="form-control form-control-sm" autocomplete="off" name="start_date" value="<?php echo isset($start_date) ? date("Y-m-d",strtotime($start_date)) : '' ?>">
-            </div>
-          </div>
+			
 
 		  <div class="col-md-6">
 				<div class="form-group">
@@ -60,26 +55,18 @@
 		  <div class="col-md-6">
 		  <div class="form-group">
               <label for="" class="control-label">Test results</label>
-              <textarea cols="30" rows="10" class="form-control form-control-sm" autocomplete="off" name="start_date" ></textarea>
+              <textarea cols="30" rows="10" class="form-control form-control-sm" autocomplete="off" name="Test_results" ></textarea>
             </div>
           </div>
-
-	
-       
-        	
-         
-      
-         
    
-		
+		  <hr>
+				<div class="col-lg-12 text-right justify-content-center d-flex">
+				<button type="submit" class="btn btn-primary mr-2">Save</button>
+					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=test'">Cancel</button>
+				</div>
         </form>
     	</div>
-    	<div class="card-footer border-top border-info">
-    		<div class="d-flex w-100 justify-content-center align-items-center">
-    			<button class="btn btn-flat  bg-gradient-primary mx-2" form="manage-project">Save</button>
-    			<button class="btn btn-flat bg-gradient-secondary mx-2" type="button" onclick="location.href='index.php?page=project_list'">Cancel</button>
-    		</div>
-    	</div>
+    	
 	</div>
 </div>
 <script>

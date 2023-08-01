@@ -13,11 +13,11 @@
 				
 				<thead>
 					<tr>
-						<th class="text-center">#</th>
+						
 						<th>Billing_Id</th>
-						<th>Patient_Id</th>
-						<th>id</th>
-						<th>amount</th>
+						<th>Patient Name</th>
+						
+						<th>Amount</th>
 						<th>Payment_mode</th>
 						<th>Payment_status</th>
 						<th>Actions</th>
@@ -25,9 +25,7 @@
 				</thead>
 				<tbody>
 					<?php
-					$i = 1;
-					$stat = array("Paid","due","transaction pending","Over Due");
-					$where = "";
+					
 					
 					$qry = $conn->query("SELECT * FROM Billing  ");
 					while($row= $qry->fetch_assoc()):
@@ -38,28 +36,28 @@
 					 	
 		               ?>
 					<tr>
-						<th class="text-center"><?php echo $i++ ?></th>
+						
 						<td>
-							<p><b><?php echo ucwords($row['Billing_id ']) ?></b></p>
+							<p><b><?php echo ucwords($row['Billing_id']) ?></b></p>
 							
 						</td>
 						<td>
-							<p><b><?php echo ucwords($row['Patient_Id ']) ?></b></p>
+							<p><b><?php echo ucwords($row['Patient_name']) ?></b></p>
 							
 						</td>
 						
 						<td>
-							<p><b><?php echo ucwords($row['Amount ']) ?></b></p>
+							<p><b><?php echo ucwords($row['Amount']) ?></b></p>
 							
 						</td>
 						
 						<td>
-							<p><b><?php echo ucwords($row['Payment_mode ']) ?></b></p>
+							<p><b><?php echo ucwords($row['Payment_mode']) ?></b></p>
 							
 						</td>
 
 						<td>
-							<p><b><?php echo ucwords($row['Payment_status ']) ?></b></p>
+							<p><b><?php echo ucwords($row['Payment_status']) ?></b></p>
 							
 						</td>
 

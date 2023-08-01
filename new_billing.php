@@ -3,9 +3,9 @@
 <div class="col-lg-12">
 	<div class="card card-outline card-primary">
 		<div class="card-body">
-			<form action="" id="manage-billing">
+			<form action="add_bill.php" method="post">
 
-        <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
+        
 		<div class="row">
 			<div class="col-md-6">
 			<div class="form-group">
@@ -25,7 +25,7 @@
             <div class="col-md-6">
             <div class="form-group">
 							<label class="control-label">Amount</label>
-							<input type="text" class="form-control form-control-sm" name="amount" required value="<?php echo isset($amount) ? $amount: '' ?>">
+							<input type="text" class="form-control form-control-sm" name="amount" required >
 							<small id="#msg"></small>
 						</div>
 			</div>
@@ -36,10 +36,10 @@
 				<div class="form-group">
 					<label for="">Payment Status</label>
 					<select name="Payment_status" id="Payment_status" class="custom-select custom-select-sm">
-						<option value="Paid" <?php echo isset($Payment_status) ? 'selected' : '' ?>>Paid</option>
-						<option value="Due" <?php echo isset($Payment_status)  ? 'selected' : '' ?>>Due</option>
-						<option value="Over due" <?php echo isset($Payment_status)  ? 'selected' : '' ?>>Over due</option>
-                        <option value="Transaction Pending" <?php echo isset($Payment_status)  ? 'selected' : '' ?>>Transaction Pending</option>
+						<option value="Paid" >Paid</option>
+						<option value="Due" >Due</option>
+						<option value="Over due" >Over due</option>
+                        <option value="Transaction Pending">Transaction Pending</option>
 					</select>
 				</div>
             </div>
@@ -48,10 +48,10 @@
 				<div class="form-group">
 					<label for="">Payment Mode</label>
 					<select name="Payment_mode" id="Payment_mode" class="custom-select custom-select-sm">
-						<option value="cash" <?php echo isset($Payment_mode) ? 'selected' : '' ?>>cash</option>
-						<option value="card/contactless" <?php echo isset($Payment_mode) ? 'selected' : '' ?>>card/contactless</option>
-						<option value="bank transfer" <?php echo isset($Payment_mode)  ? 'selected' : '' ?>>bank transfer</option>
-                        <option value="cheque" <?php echo isset($Payment_mode)  ? 'selected' : '' ?>>cheque</option>
+						<option value="cash">cash</option>
+						<option value="card/contactless" >card/contactless</option>
+						<option value="bank transfer" >bank transfer</option>
+                        <option value="cheque">cheque</option>
 					</select>
 				</div>
 
@@ -62,15 +62,14 @@
 		
          
 		
-		
+			<hr>
+				<div class="col-lg-12 text-right justify-content-center d-flex">
+				<button type="submit" class="btn btn-primary mr-2">Save</button>
+					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=billing'">Cancel</button>
+				</div>
         </form>
     	</div>
-    	<div class="card-footer border-top border-info">
-    		<div class="d-flex w-100 justify-content-center align-items-center">
-    			<button class="btn btn-flat  bg-gradient-primary mx-2" form="manage-billing">Save</button>
-    			<button class="btn btn-flat bg-gradient-secondary mx-2" type="button" onclick="location.href='index.php?page=billing'">Cancel</button>
-    		</div>
-    	</div>
+    	
 	</div>
 </div>
 <script>

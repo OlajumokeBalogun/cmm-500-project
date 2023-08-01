@@ -10,21 +10,13 @@
 		</div>
 		<div class="card-body">
 			<table class="table tabe-hover table-condensed" id="list">
-				<colgroup>
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-				</colgroup>
+				
 				<thead>
 					<tr>
-						<th class="text-center">#</th>
+						
 						<th>Test_Id</th>
-						<th>Patient_Id</th>
-						<th>id</th>
+						<th>Patient Name</th>
+						<th>Staff Name</th>
 						<th>Test_name</th>
 						<th>Test_results</th>
 						<th>Test_date</th>
@@ -44,9 +36,29 @@
 		                
 					?>
 					<tr>
-						<th class="text-center"><?php echo $i++ ?></th>
+						
+						<td>
+							<p><b><?php echo ucwords($row['Test_id']) ?></b></p>
+							
+						</td>
+						<td>
+							<p><b><?php echo ucwords($row['Patient_name']) ?></b></p>
+							
+						</td>
+						<td>
+							<p><b><?php echo ucwords($row['Staff_name']) ?></b></p>
+							
+						</td>
 						<td>
 							<p><b><?php echo ucwords($row['Test_name']) ?></b></p>
+							
+						</td>
+						<td>
+							<p><b><?php echo ucwords($row['Test_results']) ?></b></p>
+							
+						</td>
+						<td>
+							<p><b><?php echo ucwords($row['Test_date']) ?></b></p>
 							
 						</td>
 						
