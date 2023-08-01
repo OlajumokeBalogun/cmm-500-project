@@ -136,6 +136,58 @@ Class Action {
 		}
 	}
 
+	function signup(){
+		extract($_POST);
+		$data = "";
+		foreach($_POST as $k => $v){
+			if(!in_array($k, array('id','cpass')) && !is_numeric($k)){
+				if($k =='password'){
+					if(empty($v))
+						continue;
+					$v = md5($v);
+
+				}
+				if(empty($data)){
+					$data .= " $k='$v' ";
+				}else{
+					$data .= ", $k='$v' ";
+				}
+			}
+		}
+
+		$check = $this->db->query("SELECT * FROM users where email ='$email' ".(!empty($id) ? " and id != {$id} " : ''))->num_rows;
+		if($check > 0){
+			return 2;
+			exit;
+		}
+		if(isset($_FILES['img']) && $_FILES['img']['tmp_name'] != ''){
+			$fname = strtotime(date('y-m-d H:i')).'_'.$_FILES['img']['name'];
+			$move = move_uploaded_file($_FILES['img']['tmp_name'],'assets/uploads/'. $fname);
+			$data .= ", avatar = '$fname' ";
+
+		}
+		if(empty($id)){
+			$save = $this->db->query("INSERT INTO users set $data");
+
+		}else{
+			$save = $this->db->query("UPDATE users set $data where id = $id");
+		}
+
+		if($save){
+			if(empty($id))
+				$id = $this->db->insert_id;
+			foreach ($_POST as $key => $value) {
+				if(!in_array($key, array('id','cpass','password')) && !is_numeric($key))
+					$_SESSION['login_'.$key] = $value;
+			}
+					$_SESSION['login_id'] = $id;
+				if(isset($_FILES['img']) && !empty($_FILES['img']['tmp_name']))
+					$_SESSION['login_avatar'] = $fname;
+			return 1;
+		}
+	}
+
+
 	function update_user(){
 		extract($_POST);
 		$data = "";
@@ -261,9 +313,9 @@ Class Action {
 			return 1;
 		}
 	}
-	function delete_project(){
+	function delete_patient(){
 		extract($_POST);
-		$delete = $this->db->query("DELETE FROM project_list where id = $id");
+		$delete = $this->db->query("DELETE FROM patient where Patient_Id = $id");
 		if($delete){
 			return 1;
 		}

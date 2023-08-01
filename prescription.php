@@ -10,28 +10,17 @@
 		</div>
 		<div class="card-body">
 			<table class="table tabe-hover table-condensed" id="list">
-				<colgroup>
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-					<col width="15%">
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-				</colgroup>
+				
 				<thead>
 					<tr>
-						<th class="text-center">#</th>
+						
 						<th>Prescription_id </th>
-						<th>Patient_Id</th>
-						<th>id</th>
-						<th>Drug_id</th>
+						<th>Patient_name</th>
+						<th>Staff_name</th>
+						<th>Drug_name</th>
 						<th>Doctor_note</th>
+						<th>Prescription Status</th>
 						<th>Prescription_date</th>
-						<th>Prescription_status</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -46,24 +35,24 @@
 						
 					?>
 					<tr>
-						<th class="text-center"><?php echo $i++ ?></th>
+						
 						<td>
 							<p><b><?php echo ucwords($row['Prescription_id']) ?></b></p>
 						
 						</td>
 						
 						<td>
-							<p><b><?php echo ucwords($row['Patient_id']) ?></b></p>
+							<p><b><?php echo ucwords($row['Patient_name']) ?></b></p>
 						
 						</td>
 
 						<td>
-							<p><b><?php echo ucwords($row['id']) ?></b></p>
+							<p><b><?php echo ucwords($row['Staff_name']) ?></b></p>
 						
 						</td>
 
 						<td>
-							<p><b><?php echo ucwords($row['Drug_id']) ?></b></p>
+							<p><b><?php echo ucwords($row['Drug_name']) ?></b></p>
 						
 						</td>
 
@@ -72,7 +61,11 @@
 						
 						</td>
 						<td>
-							<p><b><?php echo ucwords($row['Prescription_status']) ?></b></p>
+							<p><b><?php echo ucwords($row['prescription_status']) ?></b></p>
+						
+						</td>
+						<td>
+							<p><b><?php echo ucwords($row['Prescription_date']) ?></b></p>
 						
 						</td>
 						<td class="text-center">

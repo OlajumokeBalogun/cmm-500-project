@@ -3,7 +3,7 @@
 <div class="col-lg-12">
 	<div class="card card-outline card-primary">
 		<div class="card-body">
-			<form action="" id="manage-prescription">
+			<form action="add_presc.php" method="post" >
 
         <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
 		<div class="row">
@@ -24,7 +24,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 				<label for="" class="control-label">Doctor's name</label>
-              <select class="form-control form-control-sm select2" name="doctor_name">
+              <select class="form-control form-control-sm select2" name="Staff_name">
               	<option></option>
               	<?php 
               	$users = $conn->query("SELECT *,concat(	firstname,' ',	lastname) as name FROM users order by concat(firstname,' ',	lastname) asc ");
@@ -40,19 +40,19 @@
           <div class="col-md-6">
 		  <div class="form-group">
               <label for="" class="control-label">Doctor's notes</label>
-              <textarea cols="30" rows="10" class="form-control form-control-sm" autocomplete="off" name="start_date" value="<?php echo isset($Doctor_note) ? date("Y-m-d",strtotime($Doctor_note)) : '' ?>"></textarea>
+              <textarea cols="30" rows="10" class="form-control form-control-sm" autocomplete="off" name="Doctor_note" ></textarea>
             </div>
           </div>
 
 		  <div class="col-md-6">
 				<div class="form-group">
 					<label for="">Prescription Status</label>
-					<select name="prescription status" id="prescription status" class="custom-select custom-select-sm">
-						<option value="0" <?php echo isset($status) && $status == 0 ? 'selected' : '' ?>>Collected</option>
-						<option value="3" <?php echo isset($status) && $status == 3 ? 'selected' : '' ?>>Awaiting Collection</option>
+					<select name="prescription_status" id="prescription_status" class="custom-select custom-select-sm">
+						<option value="Collected"  selected >Collected</option>
+						<option value="Awaiting Collection" >Awaiting Collection</option>
 						
 					</select>
-				</div>
+				</div>   
 			</div>
 		</div>
 		
@@ -73,15 +73,14 @@
 			
 		
        
-		
+			<hr>
+				<div class="col-lg-12 text-right justify-content-center d-flex">
+				<button type="submit" class="btn btn-primary mr-2">Save</button>
+					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=prescription'">Cancel</button>
+				</div>
         </form>
     	</div>
-    	<div class="card-footer border-top border-info">
-    		<div class="d-flex w-100 justify-content-center align-items-center">
-    			<button class="btn btn-flat  bg-gradient-primary mx-2" form="manage-prescription">Save</button>
-    			<button class="btn btn-flat bg-gradient-secondary mx-2" type="button" onclick="location.href='index.php?page=prescription'">Cancel</button>
-    		</div>
-    	</div>
+    	
 	</div>
 </div>
 <script>

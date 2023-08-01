@@ -11,14 +11,14 @@
 		<div class="card-body">
 			<table class="table tabe-hover table-condensed" id="list">
 				<colgroup>
-					<col width="10%">
+					
 					<col width="30%">
 					<col width="30%">
 					<col width="30%">
 				</colgroup>
 				<thead>
 					<tr>
-						<th class="text-center">#</th>
+						
 						<th>Drug_Id</th>
 						<th>Drug_name</th>
 						<th>Drug_desc</th>
@@ -35,13 +35,13 @@
 					
 					?>
 					<tr>
-						<th class="text-center"><?php echo $i++ ?></th>
+						
 						<td>
 							<p><b><?php echo ucwords($row['Drug_id']) ?></b></p>
 							
 						</td>
 						<td>
-						<p><b><?php echo ucwords($row['Drug_name ']) ?></b></p>
+						<p><b><?php echo ucwords($row['Drug_name']) ?></b></p>
 							</td>
 							<td>
 							<p><b><?php echo ucwords($row['Drug_desc']) ?></b></p>

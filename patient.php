@@ -8,20 +8,7 @@
 		</div>
 		<div class="card-body">
 			<table class="table tabe-hover table-condensed" id="list">
-				<colgroup>
-					<col width="5%">
-					<col width="5%">
-					<col width="5%">
-					<col width="5%">
-					<col width="5%">
-					<col width="10%">
-					<col width="5%">
-					<col width="5%">
-					<col width="10%">
-					<col width="10%">
-					<col width="5%">
-					
-				</colgroup>
+				
 				<thead>
 					<tr>
 						<th class="text-center">#</th>
@@ -30,8 +17,6 @@
 						<th>age</th>
 						<th>email</th>
 						<th>bloodgroup</th>
-						<th>weight</th>
-						<th>height</th>
 						<th>address</th>
 						<th>gender</th>
 						<th>Date_joined</th>
@@ -78,14 +63,8 @@
 							<p><b><?php echo ucwords($row['bloodgroup']) ?></b></p>
 							
 						</td>
-						<td>
-							<p><b><?php echo ucwords($row['weight']) ?></b></p>
-							
-						</td>
-						<td>
-							<p><b><?php echo ucwords($row['height']) ?></b></p>
-							
-						</td>
+						
+						
 						<td>
 							<p><b><?php echo ucwords($row['address']) ?></b></p>
 							
@@ -106,10 +85,10 @@
 		                      Action
 		                    </button>
 		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item view_project" href="./index.php?page=view_project&id=<?php echo $row['Patient_Id'] ?>" data-id="<?php echo $row['Patient_Id'] ?>">View</a>
+		                      <a class="dropdown-item view_project" href="./index.php?page=view_patient&id=<?php echo $row['Patient_Id'] ?>" data-id="<?php echo $row['Patient_Id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
 		                      
-		                      <a class="dropdown-item" href="./index.php?page=edit_project&id=<?php echo $row['Patient_Id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="./index.php?page=manage_patient&id=<?php echo $row['Patient_Id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
 		                      <a class="dropdown-item delete_project" href="javascript:void(0)" data-id="<?php echo $row['Patient_Id'] ?>">Delete</a>
 		                  
@@ -131,28 +110,34 @@
 	}
 </style>
 <script>
-	$(document).ready(function(){
-		$('#list').dataTable()
-	
-	$('.delete_project').click(function(){
-	_conf("Are you sure to delete this project?","delete_project",[$(this).attr('data-id')])
-	})
-	})
-	function delete_project($id){
-		start_load()
-		$.ajax({
-			url:'ajax.php?action=delete_project',
-			method:'POST',
-			data:{id:$id},
-			success:function(resp){
-				if(resp==1){
-					alert_toast("Data successfully deleted",'success')
-					setTimeout(function(){
-						location.reload()
-					},1500)
+    $(document).ready(function () {
+        $('#list').dataTable();
 
-				}
-			}
-		})
-	}
+        $('.delete_patient').click(function () {
+            _conf("Are you sure to delete this patient?", "delete_patient", [$(this).attr('data-id')]);
+        });
+    });
+
+    function delete_patient($id) {
+        start_load();
+        $.ajax({
+            url: 'delete.php',
+            method: 'POST',
+            data: {
+                action: 'delete_patient',
+                Patient_Id: $id
+            },
+            success: function (resp) {
+                if (resp == 1) {
+                    alert_toast("Patient data successfully deleted", 'success');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1500);
+                } else {
+                    alert_toast("Deletion failed. Please try again.", 'error');
+                    end_load();
+                }
+            }
+        });
+    }
 </script>

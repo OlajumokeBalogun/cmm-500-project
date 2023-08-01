@@ -36,6 +36,11 @@ if($action == 'save_user'){
 	if($save)
 		echo $save;
 }
+if($action == 'save_patient'){
+	$save = $crud->save_user();
+	if($save)
+		echo $save;
+}
 if($action == 'update_user'){
 	$save = $crud->update_user();
 	if($save)
@@ -51,11 +56,7 @@ if($action == 'save_appointment'){
 	if($save)
 		echo $save;
 }
-if($action == 'delete_project'){
-	$save = $crud->delete_project();
-	if($save)
-		echo $save;
-}
+
 if($action == 'save_task'){
 	$save = $crud->save_task();
 	if($save)
@@ -71,8 +72,8 @@ if($action == 'save_progress'){
 	if($save)
 		echo $save;
 }
-if($action == 'delete_progress'){
-	$save = $crud->delete_progress();
+if($action == 'delete_patient'){
+	$save = $crud->delete_patient();
 	if($save)
 		echo $save;
 }
