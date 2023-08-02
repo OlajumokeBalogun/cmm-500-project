@@ -59,7 +59,7 @@ $conn->close();
 							<label for="" class="control-label">First Name</label>
 							<div><?php echo $row["Firstname"]; ?></div>
 						</div>
-						<div
+						<div>
 							<label for="" class="control-label">Middle Name</label>
 							
 							<div>
@@ -86,16 +86,17 @@ $conn->close();
 						
 						
 					</div>
+					<div class="col- d-4 border-right">
 					<div class="col-md-4">
-						
 						<div class="form-group">
 							<label class="control-label">Email</label>
 							<div>
 							<?php echo $row["email"]; ?>
 							</div>
-							
+							</div>
 							<small id="#msg"></small>
 						</div>
+						
 						<div class="form-group">
 							<label for="" class="control-label">Age</label>
 							<div>
@@ -121,16 +122,19 @@ $conn->close();
 						</div>
 					</div>
 
+					
+					
 					<div class="col-md-4">
-						
 						<div class="form-group">
 							<label class="control-label">Height</label>
 							<div>
 							<?php echo $row["height"]; ?>
-							</div>
 							
+							</div>
 							<small id="#msg"></small>
 						</div>
+						
+						
 						<div class="form-group">
 							<label for="" class="control-label">Address</label>
 							<div>
@@ -153,6 +157,7 @@ $conn->close();
 				
 					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=patient'">Cancel</button>
 				</div>
-
+</div>
     
-</form>
+</form></div>
+

@@ -28,7 +28,7 @@
 					<?php
 					
 					
-					$qry = $conn->query("SELECT * FROM Prescription ");
+					$qry = $conn->query("SELECT * FROM prescription ");
 					while($row= $qry->fetch_assoc()):
 						$trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
 						unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
@@ -73,13 +73,13 @@
 		                      Action
 		                    </button>
 		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item view_project" href="./index.php?page=view_prescription&id=<?php echo $row['prescription_id'] ?>" data-id="<?php echo $row['prescription_id'] ?>">View</a>
+		                      <a class="dropdown-item view_project" href="./index.php?page=view_prescription&Prescription_id=<?php echo $row['Prescription_id'] ?>" data-id="<?php echo $row['Prescription_id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
-		                      <?php if($_SESSION['login_type'] != 3): ?>
-		                      <a class="dropdown-item" href="./index.php?page=edit_prescription&id=<?php echo $row['id'] ?>">Edit</a>
+		                    
+		                      <a class="dropdown-item" href="./index.php?page=edit_prescription&id=<?php echo $row['Prescription_id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item delete_prescription" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">Delete</a>
-		                  <?php endif; ?>
+		                      <a class="dropdown-item delete_prescription" href="javascript:void(0)" data-id="<?php echo $row['Prescription_id'] ?>">Delete</a>
+		                
 		                    </div>
 						</td>
 					</tr>	
