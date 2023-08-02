@@ -16,7 +16,6 @@
 						
 						<th>Billing_Id</th>
 						<th>Patient Name</th>
-						
 						<th>Amount</th>
 						<th>Payment_mode</th>
 						<th>Payment_status</th>
@@ -73,7 +72,7 @@
 		                      Action
 		                    </button>
 		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item view_project" href="./index.php?page=view_billing&id=<?php echo $row['Billing_id'] ?>" data-id="<?php echo $row['id'] ?>">View</a>
+		                      <a class="dropdown-item view_project" href="./index.php?page=view_billing&Billing_id=<?php echo $row['Billing_id'] ?>" data-id="<?php echo $row['Billing_id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
 		                     
 		                      <a class="dropdown-item" href="./index.php?page=edit_billing&id=<?php echo $row['Billing_id'] ?>">Edit</a>
