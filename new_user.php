@@ -12,6 +12,10 @@
 							<input type="text" name="firstname" class="form-control form-control-sm" required value="<?php echo isset($firstname) ? $firstname : '' ?>">
 						</div>
 						<div class="form-group">
+							<label for="" class="control-label">Middle Name</label>
+							<input type="text" name="middlename" class="form-control form-control-sm" required value="<?php echo isset($middlename) ? $middlename : '' ?>">
+						</div>
+						<div class="form-group">
 							<label for="" class="control-label">Last Name</label>
 							<input type="text" name="lastname" class="form-control form-control-sm" required value="<?php echo isset($lastname) ? $lastname : '' ?>">
 						</div>
@@ -19,24 +23,15 @@
 						<div class="form-group">
 							<label for="" class="control-label">User Role</label>
 							<select name="type" id="type" class="custom-select custom-select-sm">
-								<option value="3" <?php echo isset($type) && $type == 3 ? 'selected' : '' ?>>Employee</option>
-								<option value="2" <?php echo isset($type) && $type == 2 ? 'selected' : '' ?>>Project Manager</option>
-								<option value="1" <?php echo isset($type) && $type == 1 ? 'selected' : '' ?>>Admin</option>
+								<option value="admin" <?php echo isset($type) && $type == "admin" ? 'selected' : '' ?>>Admin</option>
+								<option value="doctor" <?php echo isset($type) && $type == "doctor" ? 'selected' : '' ?>>Doctor</option>
+								<option value="nurse" <?php echo isset($type) && $type == "nurse"? 'selected' : '' ?>>Nurse</option>
+								<option value="receptionist" <?php echo isset($type) && $type == "receptionist"? 'selected' : '' ?>>Receptionist</option>
 							</select>
 						</div>
-						<?php ?>
-							<input type="hidden" name="type" value="3">
-						<?php  ?>
-						<div class="form-group">
-							<label for="" class="control-label">Avatar</label>
-							<div class="custom-file">
-		                      <input type="file" class="custom-file-input" id="customFile" name="img" onchange="displayImg(this,$(this))">
-		                      <label class="custom-file-label" for="customFile">Choose file</label>
-		                    </div>
-						</div>
-						<div class="form-group d-flex justify-content-center align-items-center">
-							<img src="<?php echo isset($avatar) ? 'assets/uploads/'.$avatar :'' ?>" alt="Avatar" id="cimg" class="img-fluid img-thumbnail ">
-						</div>
+						
+						
+						
 					</div>
 					<div class="col-md-6">
 						
@@ -98,6 +93,8 @@
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
+
+	
 	$('#manage_user').submit(function(e){
 		e.preventDefault()
 		$('input').removeClass("border-danger")

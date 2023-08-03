@@ -2,7 +2,7 @@
 include('db_connect.php');
 session_start();
 if(isset($_GET['id'])){
-$user = $conn->query("SELECT * FROM Appointment where appointment_id =".$_GET['id']);
+$user = $conn->query("SELECT * FROM appointment where appointment_id =".$_GET['id']);
 foreach($user->fetch_array() as $k =>$v){
 	$meta[$k] = $v;
 }
@@ -12,7 +12,7 @@ foreach($user->fetch_array() as $k =>$v){
 	<div id="msg"></div>
 	
 	<form action="" id="manage-appointment">	
-		<input type="hidden" name="id" value="<?php echo isset($meta['appointment_id']) ? $meta['appointment_id']: '' ?>">
+		<input type="hidden" name="appointment_id" value="<?php echo isset($meta['appointment_id']) ? $meta['appointment_id']: '' ?>">
 		<div class="form-group">
 			<label for="patient_name">Patient Name</label>
 			<input type="text" name="patient_name" id="patient_name" class="form-control" value="<?php echo isset($meta['patient_name']) ? $meta['patient_name']: '' ?>" required>

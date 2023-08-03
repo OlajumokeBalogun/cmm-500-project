@@ -1,5 +1,5 @@
 <?php
-// Step 1: Database connection
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -13,9 +13,9 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $firstname = sanitizeInput($_POST["firstname"]);
-    $middlename = sanitizeInput($_POST["middlename"]);
-    $lastname = sanitizeInput($_POST["lastname"]);
+    $Firstname = sanitizeInput($_POST["Firstname"]);
+    $Middlename= sanitizeInput($_POST["Middlename"]);
+    $Lastname = sanitizeInput($_POST["Lastname"]);
     $dob = sanitizeInput($_POST["dob"]);
     $email = sanitizeInput($_POST["email"]);
     $age = intval($_POST["age"]);
@@ -29,10 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     
     $stmt = $conn->prepare("UPDATE patient SET Firstname=?, Middlename=?, Lastname=?, dob=?, email=?,  age=?, bloodgroup=?, weight=?, height=?, address=?, gender=? WHERE Patient_Id=?");
-    $stmt->bind_param("sssssisssssi", $firstname, $middlename, $lastname, $dob, $email, $age, $bloodgroup, $weight, $height, $address, $gender, $Patient_Id);
+    $stmt->bind_param("sssssisssssi", $Firstname, $Middlename, $Lastname, $dob, $email, $age, $bloodgroup, $weight, $height, $address, $gender, $Patient_Id);
 
     if ($stmt->execute()) {
-        echo "Record updated.";
+        header("Location: ./index.php?page=patient");
         exit();
     } else {
         // Update failed
@@ -56,6 +56,7 @@ if (isset($_GET["Patient_Id"])) {
         $row = $result->fetch_assoc();
     } else {
         echo "Record not found.";
+		
         exit();
     }
 
@@ -85,15 +86,15 @@ $conn->close();
 					<div class="col-md-4 border-right">
 						<div class="form-group">
 							<label for="" class="control-label">First Name</label>
-							<input type="text" name="firstname" class="form-control form-control-sm" value="<?php echo $row["Firstname"]; ?>" required >
+							<input type="text" name="Firstname" class="form-control form-control-sm" value="<?php echo $row["Firstname"]; ?>" required >
 						</div>
 						<div class="form-group">
 							<label for="" class="control-label">Middle Name</label>
-							<input type="text" name="middlename" class="form-control form-control-sm" value="<?php echo $row["Middlename"]; ?>" required >
+							<input type="text" name="Middlename" class="form-control form-control-sm" value="<?php echo $row["Middlename"]; ?>" required >
 						</div>
 						<div class="form-group">
 							<label for="" class="control-label">Last Name</label>
-							<input type="text" name="lastname" class="form-control form-control-sm" value="<?php echo $row["Lastname"]; ?>" required >
+							<input type="text" name="Lastname" class="form-control form-control-sm" value="<?php echo $row["Lastname"]; ?>" required >
 						</div>
 					
 						<div class="form-group">

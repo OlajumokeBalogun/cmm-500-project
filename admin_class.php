@@ -48,43 +48,95 @@ Class Action {
 			return 3;
 		}
 	}
-	function save_user(){
-		extract($_POST);
-		$data = "";
-		foreach($_POST as $k => $v){
-			if(!in_array($k, array('id','cpass','password')) && !is_numeric($k)){
-				if(empty($data)){
-					$data .= " $k='$v' ";
-				}else{
-					$data .= ", $k='$v' ";
-				}
-			}
-		}
-		if(!empty($password)){
-					$data .= ", password=md5('$password') ";
+	function save_user()
+{
+    extract($_POST);
+    
+	$data = "";
+	
+    foreach ($_POST as $k => $v) {
+        if (!in_array($k, array('id', 'cpass', 'password')) && !is_numeric($k)) {
+            if (empty($data)) {
+                $data .= " $k='$v' ";
+            } else {
+                $data .= ", $k='$v' ";
+            }
+        }
+    }
+	 if (!empty($password)) {
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $data .= ", password='$hashedPassword' ";
+    }
 
-		}
-		$check = $this->db->query("SELECT * FROM users where email ='$email' ".(!empty($id) ? " and id != {$id} " : ''))->num_rows;
-		if($check > 0){
-			return 2;
-			exit;
-		}
-		if(isset($_FILES['img']) && $_FILES['img']['tmp_name'] != ''){
-			$fname = strtotime(date('y-m-d H:i')).'_'.$_FILES['img']['name'];
-			$move = move_uploaded_file($_FILES['img']['tmp_name'],'assets/uploads/'. $fname);
-			$data .= ", avatar = '$fname' ";
+    $check = $this->db->query("SELECT * FROM users where email ='$email'" . (!empty($id) ? " and id != {$id} " : ''))->num_rows;
+    if ($check > 0) {
+        return 2;
+        exit;
+    }
 
-		}
-		if(empty($id)){
-			$save = $this->db->query("INSERT INTO users set $data");
-		}else{
-			$save = $this->db->query("UPDATE users set $data where id = $id");
-		}
+    if (empty($id)) {
+        $save = $this->db->query("INSERT INTO users set $data");
+        $this->send_mail($email, $firstname, $password); // Pass the email and default password as arguments
+    } else {
+        $save = $this->db->query("UPDATE users set $data where id = $id");
+    }
 
-		if($save){
-			return 1;
-		}
-	}
+    if ($save) {
+        return 1;
+    }
+}
+
+function send_mail($to = "", $firstname = "", $password = "")
+{
+    if (!empty($to)) {
+        try {
+            $email = 'testbaola20@gmail.com';
+            $headers = 'From: ' . $email . '\r\n' . 'Reply-To: ' .
+                $email . "\r\n" .
+                'X-Mailer: PHP/' . phpversion() . "\r\n";
+            $headers .= "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+            // The message
+            $msg = "
+            <html>
+                <body>
+                    <h2>Baola Hospital System Application: Your New Default Password and Important Account Update</h2>
+                    <p>Dear $firstname,</p>
+
+                    <p>We hope this message finds you well. We are writing to inform you that your account password has been reset, and we have generated a new default password for you.</p>
+
+                    <p>Your new default password is: $password</p>
+
+                    <p>For security purposes, we strongly recommend that you change your password immediately upon logging in to your account. Please follow these steps to change your password:</p>
+
+                    <ol>
+                        <li>Log in to your account using your current username and the above default password.</li>
+                        <li>Once logged in, navigate to the 'Manage Account' or 'Account Settings' section.</li>
+                        <li>Look for the 'Change Password' icon or link.</li>
+                    </ol>
+
+                    <p>Please remember to create a strong password that includes a combination of uppercase and lowercase letters, numbers, and special characters. Your password should be at least 8 characters long.</p>
+
+                    <p>If you have any difficulties changing your password or need further assistance, please don't hesitate to contact our support team at [Your Support Email or Phone Number].</p>
+
+                    <p>Thank you for being a valued member of our community. We prioritize the security of our users, and updating your password is an essential step in maintaining the confidentiality of your account.</p>
+
+                    <p>Best regards,</p>
+                    <p>[Baola EHR Support Team]</p>
+                </body>
+            </html>
+            ";
+
+            // Send email
+            mail($to, 'Your New Default Password and Important Account Update', $msg, $headers);
+
+        } catch (Exception $e) {
+            // Handle exception if needed
+        }
+    }
+}
+
 	function signup(){
 		extract($_POST);
 		$data = "";
@@ -136,56 +188,7 @@ Class Action {
 		}
 	}
 
-	function signup(){
-		extract($_POST);
-		$data = "";
-		foreach($_POST as $k => $v){
-			if(!in_array($k, array('id','cpass')) && !is_numeric($k)){
-				if($k =='password'){
-					if(empty($v))
-						continue;
-					$v = md5($v);
 
-				}
-				if(empty($data)){
-					$data .= " $k='$v' ";
-				}else{
-					$data .= ", $k='$v' ";
-				}
-			}
-		}
-
-		$check = $this->db->query("SELECT * FROM users where email ='$email' ".(!empty($id) ? " and id != {$id} " : ''))->num_rows;
-		if($check > 0){
-			return 2;
-			exit;
-		}
-		if(isset($_FILES['img']) && $_FILES['img']['tmp_name'] != ''){
-			$fname = strtotime(date('y-m-d H:i')).'_'.$_FILES['img']['name'];
-			$move = move_uploaded_file($_FILES['img']['tmp_name'],'assets/uploads/'. $fname);
-			$data .= ", avatar = '$fname' ";
-
-		}
-		if(empty($id)){
-			$save = $this->db->query("INSERT INTO users set $data");
-
-		}else{
-			$save = $this->db->query("UPDATE users set $data where id = $id");
-		}
-
-		if($save){
-			if(empty($id))
-				$id = $this->db->insert_id;
-			foreach ($_POST as $key => $value) {
-				if(!in_array($key, array('id','cpass','password')) && !is_numeric($key))
-					$_SESSION['login_'.$key] = $value;
-			}
-					$_SESSION['login_id'] = $id;
-				if(isset($_FILES['img']) && !empty($_FILES['img']['tmp_name']))
-					$_SESSION['login_avatar'] = $fname;
-			return 1;
-		}
-	}
 
 
 	function update_user(){
@@ -213,7 +216,8 @@ Class Action {
 
 		}
 		if(!empty($password))
-			$data .= " ,password=md5('$password') ";
+			 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        	$data .= ", password='$hashedPassword' ";
 		if(empty($id)){
 			$save = $this->db->query("INSERT INTO users set $data");
 		}else{

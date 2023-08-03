@@ -25,7 +25,7 @@ foreach($qry as $k => $v){
         <div class="container-fluid">
         	<dl>
         		<dt>Role</dt>
-        		<dd><?php echo $type_arr[$type] ?></dd>
+        		<dd><?php echo $qry['type'] ?></dd>
         	</dl>
         </div>
     </div>

@@ -75,7 +75,7 @@
 		                      <a class="dropdown-item view_project" href="./index.php?page=view_billing&Billing_id=<?php echo $row['Billing_id'] ?>" data-id="<?php echo $row['Billing_id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
 		                     
-		                      <a class="dropdown-item" href="./index.php?page=edit_billing&id=<?php echo $row['Billing_id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="./index.php?page=edit_bill&Billing_id=<?php echo $row['Billing_id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
 		                      <a class="dropdown-item delete_project" href="javascript:void(0)" data-id="<?php echo $row['Billing_id'] ?>">Delete</a>
 		                  

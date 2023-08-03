@@ -55,10 +55,10 @@
 		                      Action
 		                    </button>
 		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item view_project" href="./index.php?page=view_drug&id=<?php echo $row['Drug_id'] ?>" data-id="<?php echo $row['Drug_id'] ?>">View</a>
+		                      <a class="dropdown-item view_project" href="./index.php?page=view_drugs&Drug_id=<?php echo $row['Drug_id'] ?>" data-id="<?php echo $row['Drug_id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
 		                     
-		                      <a class="dropdown-item" href="./index.php?page=edit_drug&id=<?php echo $row['Drug_id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="./index.php?page=edit_drugs&Drug_id=<?php echo $row['Drug_id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
 		                      <a class="dropdown-item delete_drug" href="javascript:void(0)" data-id="<?php echo $row['Drug_id'] ?>">Delete</a>
 		                 

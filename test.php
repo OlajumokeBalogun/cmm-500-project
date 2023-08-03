@@ -70,7 +70,7 @@
 		                      Action
 		                    </button>
 		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item view_project" href="./index.php?page=view_test&id=<?php echo $row['Test_id'] ?>" data-id="<?php echo $row['Test_id'] ?>">View</a>
+		                      <a class="dropdown-item view_project" href="./index.php?page=view_test&Test_id=<?php echo $row['Test_id'] ?>" data-id="<?php echo $row['Test_id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
 		                      
 		                      <a class="dropdown-item" href="./index.php?page=edit_test&id=<?php echo $row['Test_id'] ?>">Edit</a>

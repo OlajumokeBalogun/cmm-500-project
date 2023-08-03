@@ -37,7 +37,7 @@
 					$stat = array("Pending","Started","On-Progress","On-Hold","Over Due","Done");
 					$where = "";
 					
-					$qry = $conn->query("SELECT * FROM Appointment ");
+					$qry = $conn->query("SELECT * FROM appointment ");
 					while($row= $qry->fetch_assoc()):
 						$trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
 						unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
@@ -70,10 +70,10 @@
 		                      Action
 		                    </button>
 		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item view_appointment" href="./index.php?page=view_appointment&id=<?php echo $row['appointment_id'] ?>" data-id="<?php echo $row['appointment_id'] ?>">View</a>
+		                      <a class="dropdown-item view_project"href="./index.php?page=view_appointment&appointment_id=<?php echo $row['appointment_id'] ?>" data-id="<?php echo $row['appointment_id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
 		                     
-		                      <a class="dropdown-item" href="./index.php?page=manage_appointment&id=<?php echo $row['appointment_id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="./index.php?page=manage_appointment&appointment_id=<?php echo $row['appointment_id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
 		                      <a class="dropdown-item delete_appointment" href="javascript:void(0)" data-id="<?php echo $row['appointment_id'] ?>">Delete</a>
 		                 

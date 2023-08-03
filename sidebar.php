@@ -1,13 +1,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <div class="dropdown">
-   	<a href="./" class="brand-link">
-       
-        <h3 class="text-center p-0 m-0"><b><?php echo($_SESSION['firstname'] == 1) ?></b></h3>
-        
-
-    </a>
+   
       
-    </div>
+    
     <div class="sidebar pb-4 mb-4">
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column nav-flat" data-widget="treeview" role="menu" data-accordion="false">
@@ -19,6 +13,7 @@
               </p>
             </a>
           </li>  
+          <?php if ($_SESSION['type'] == 'admin') : ?>
           <li class="nav-item">
             <a href="#" class="nav-link nav-edit_project nav-view_project">
               <i class="nav-icon fas fa-layer-group"></i>
@@ -28,14 +23,16 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-            <?php  ?>
+            
+           
               <li class="nav-item">
                 <a href="./index.php?page=new_user" class="nav-link nav-new_project tree-item">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>Add New</p>
                 </a>
               </li>
-            <?php  ?>
+
+             
             
               <li class="nav-item">
                 <a href="./index.php?page=user_list" class="nav-link nav-project_list tree-item">
@@ -45,6 +42,7 @@
               </li>
             </ul>
           </li> 
+          <?php endif; ?>
           <li class="nav-item">
                 <a href="./index.php?page=patient" class="nav-link nav-task_list">
                   <i class="fas fa-tasks nav-icon"></i>
@@ -57,31 +55,39 @@
                   <p>Appointment</p>
                 </a>
           </li>
+          <?php if ($_SESSION['type'] != 'receptioni') : ?>
           <li class="nav-item">
                 <a href="./index.php?page=drugs" class="nav-link nav-task_list">
                   <i class="fas fa-tasks nav-icon"></i>
                   <p>Drugs</p>
                 </a>
           </li>
+          <?php endif; ?>
+          <?php if ($_SESSION['type'] != 'receptioni') : ?>
           <li class="nav-item">
                 <a href="./index.php?page=billing" class="nav-link nav-task_list">
                   <i class="fas fa-tasks nav-icon"></i>
                   <p>Billing</p>
                 </a>
           </li>
+          <?php endif; ?>
+          <?php if ($_SESSION['type'] != 'receptioni') : ?>
           <li class="nav-item">
                 <a href="./index.php?page=test" class="nav-link nav-task_list">
                   <i class="fas fa-tasks nav-icon"></i>
                   <p>Tests</p>
                 </a>
           </li>
+          <?php endif; ?>
+          <?php if ($_SESSION['type'] != 'receptioni') : ?>
           <li class="nav-item">
                 <a href="./index.php?page=prescription" class="nav-link nav-task_list">
                   <i class="fas fa-tasks nav-icon"></i>
                   <p>Prescription</p>
                 </a>
           </li>
-          <?php if($_SESSION['firstname'] != 3): ?>
+          <?php endif; ?>
+          <?php if ($_SESSION['type'] != 'receptioni') : ?>
            <li class="nav-item">
                 <a href="./index.php?page=reports" class="nav-link nav-reports">
                   <i class="fas fa-th-list nav-icon"></i>

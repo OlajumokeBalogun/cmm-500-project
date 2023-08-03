@@ -2,12 +2,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php 
-  date_default_timezone_set("Asia/Manila");
+  
   
   ob_start();
   $title = isset($_GET['page']) ? ucwords(str_replace("_", ' ', $_GET['page'])) : "Home";
   ?>
-  <title><?php echo $title ?> | <?php echo $_SESSION['system']['name'] ?></title>
+  <title><?php echo $title ?> | <?php echo $_SESSION['firstname']?></title>
   <?php ob_end_flush() ?>
 
   <!-- Google Font: Source Sans Pro -->
