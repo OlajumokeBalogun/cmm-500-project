@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("sssssisssssi", $Firstname, $Middlename, $Lastname, $dob, $email, $age, $bloodgroup, $weight, $height, $address, $gender, $Patient_Id);
 
     if ($stmt->execute()) {
-        header("Location: ./index.php?page=patient");
+        echo "Record updated. <a href='./index.php?page=patient' role='button'>Go back to patient</a>";
         exit();
     } else {
         // Update failed

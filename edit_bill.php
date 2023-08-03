@@ -17,14 +17,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $Amount = sanitizeInput($_POST["Amount"]);
     $Payment_mode= sanitizeInput($_POST["Payment_mode"]);
     $Payment_status = sanitizeInput($_POST["Payment_status"]);
-    $Billing_date = intval($_POST["Billing_date"]);
     
+    $Billing_id= intval($_GET["Billing_id"]);
     
-    $stmt = $conn->prepare("UPDATE billing SET  Patient_name=?, Amount=?, Payment_mode=?, Payment_status=?,  Billing_date=? WHERE Billing_id=?");
-    $stmt->bind_param("sssssi", $Patient_name, $Amount, $Payment_mode, $Payment_status, $Billing_date, $Billing_id);
+    $stmt = $conn->prepare("UPDATE billing SET  Patient_name=?, Amount=?, Payment_mode=?, Payment_status=?   WHERE Billing_id=?");
+    $stmt->bind_param("ssssi", $Patient_name, $Amount, $Payment_mode, $Payment_status,  $Billing_id);
 
     if ($stmt->execute()) {
-        echo "Record updated.";
+        echo "Record updated. <a href='./index.php?page=billing' role='button'> Go back to billing</a>";
         exit();
     } else {
         // Update failed
@@ -88,10 +88,7 @@ $conn->close();
 							<input type="text" name="Payment_mode" class="form-control form-control-sm" value="<?php echo $row["Payment_mode"]; ?>" required >
 						</div>
 
-                        <div class="form-group">
-							<label for="" class="control-label">Billing date</label>
-							<input type="date" name="Billing_date" class="form-control form-control-sm" value="<?php echo $row["Billing_date"]; ?>" required >
-						</div>
+                       
 
 					
 						<div class="form-group">

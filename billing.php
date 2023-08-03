@@ -26,7 +26,7 @@
 					<?php
 					
 					
-					$qry = $conn->query("SELECT * FROM Billing  ");
+					$qry = $conn->query("SELECT * FROM billing  ");
 					while($row= $qry->fetch_assoc()):
 						$trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
 						unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);

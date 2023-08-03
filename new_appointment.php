@@ -40,7 +40,7 @@
               	$users = $conn->query("SELECT *,concat(	firstname,' ',	lastname) as name FROM users order by concat(firstname,' ',	lastname) asc ");
               	while($row= $users->fetch_assoc()):
               	?>
-              	<option value="<?php echo $row['name'] ?>" <?php echo isset($id) && $id== $row['id'] ? "selected" : '' ?>><?php echo ucwords($row['name']) ?></option>
+              	<option value="<?php echo $row['name'] ?>" ><?php echo ucwords($row['name']) ?></option>
               	<?php endwhile; ?>
               </select>
 				</div>

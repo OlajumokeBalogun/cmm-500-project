@@ -66,7 +66,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="assets/img/asian-patient-holding-clipboard-filling-medical-report-while-discussing-health-care-treatment-with-specialist-medic-during-consultation-hospital-waiting-area-diverse-people-standing-reception.jpg" class="d-block w-100" alt="Image 1">
+            <img src="assets\img\pexels-tom-fisk-1692693.jpg" class="d-block w-100" alt="Image 1">
           </div>
           <div class="carousel-item">
             <img src="assets/img/healthcare-specialist-explaining-senior-woman-diagnosis-braing-trauma-tablet-pc.jpg" class="d-block w-100" alt="Image 2">

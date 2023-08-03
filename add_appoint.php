@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         
         $stmt = $conn->prepare("INSERT INTO appointment (Patient_name, status, doctor_name, appointment_date, appointment_time, staff_scheduling) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssisss", $patientName, $status, $doctor_name, $appointmentDate, $appointmentTime, $staffScheduling);
+        $stmt->bind_param("ssssss", $patientName, $status, $doctor_name, $appointmentDate, $appointmentTime, $staffScheduling);
 
         if ($stmt->execute()) {
             header("Location: index.php?page=appointment"); 
