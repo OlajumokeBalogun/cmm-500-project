@@ -53,7 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    
 
     if ($stmt->execute()) {
-        echo "Registration successful!";
+        echo "<script>
+                alert('password strength.');
+                setTimeout(function() {
+                    window.location.href = 'index.php?page=new_user';
+                }, 200); // 1000 milliseconds = 3 seconds
+            </script>";
         send_mail($email, $firstname, $password); 
     } else {
         echo "Error: " . $stmt->error;
