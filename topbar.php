@@ -16,14 +16,14 @@
      
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
+          <i class="fas fa-expand"></i>
         </a>
       </li>
      <li class="nav-item dropdown">
             <a class="nav-link"  data-toggle="dropdown" aria-expanded="true" href="javascript:void(0)">
               <span>
                 <div class="d-felx badge-pill">
-                  <span class="fa fa-user mr-2"></span>
+                  <span class="fas fa-user-md"></span>
                   <span><b><?php echo ucwords($_SESSION['firstname']) ?></b></span>
                   <span class="fa fa-angle-down ml-2"></span>
                 </div>

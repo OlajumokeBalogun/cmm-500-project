@@ -12,30 +12,7 @@ Class MainClass{
     function db_connect(){
         return $this->db;
     }
-    public function register(){
-        foreach($_POST as $k => $v){
-            $$k = $this->db->real_escape_string($v);
-        }
-        $password = password_hash($password, PASSWORD_DEFAULT);
-        $check = $this->db->query("SELECT * FROM `users` where `email`= '$email}' ")->num_rows;
-        if($check > 0){
-            $resp['status'] = 'failed';
-            $_SESSION['flashdata']['type']='danger';
-            $_SESSION['flashdata']['msg'] = ' Email already exists.';
-        }else{
-            $sql = "INSERT INTO `users` (firstname,middlename,lastname,email,`password`) VALUES ('$firstname','$middlename','$lastname','$email','$password')";
-            $save = $this->db->query($sql);
-            if($save){
-                $resp['status'] = 'success';
-            }else{
-                $resp['status'] = 'failed';
-                $resp['err'] = $this->db->error;
-                $_SESSION['flashdata']['type']='danger';
-                $_SESSION['flashdata']['msg'] = ' An error occurred.';
-            }
-        }
-        return json_encode($resp);
-    }
+    
     public function login(){
         extract($_POST);
         $sql = "SELECT * FROM `users` where `email` = ? ";

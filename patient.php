@@ -1,24 +1,34 @@
 <?php include'db_connect.php' ?>
 <div class="col-lg-12">
-	<div class="card card-outline card-success">
+	<div class="card card-outline card-success" style="background-image: url(''); background-size: cover; background-repeat: no-repeat;">
 		<div class="card-header">
 			<div class="card-tools">
-				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="./index.php?page=new_patient"><i class="fa fa-plus"></i> Add New patient</a>
+			<style>
+  .btn-round {
+    border-radius: 50px; /* Adjust the border-radius to control the roundness of the button */
+  }
+</style>
+			<a class="btn btn-block btn-sm btn-default btn-flat border-primary btn-round" href="./index.php?page=new_patient">
+  <i class="fa fa-plus"></i> Add New patient
+</a>
+
 			</div>
 		</div>
+		
+</head>
 		<div class="card-body">
-			<table class="table tabe-hover table-condensed" id="list">
+			<table class="table tabe-hover table-secondary table-striped" id="list">
 				
 				<thead>
 					<tr>
 						<th class="text-center">#</th>
 						<th>Firstname</th>
 						<th>Lastname</th>
-						<th>age</th>
-						<th>email</th>
-						<th>bloodgroup</th>
-						<th>address</th>
-						<th>gender</th>
+						<th>Age</th>
+						<th>Email</th>
+						<th>Bloodgroup</th>
+						<th>Address</th>
+						<th>Gender</th>
 						<th>Date_joined</th>
 						<th>Action</th>
 					</tr>

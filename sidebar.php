@@ -1,4 +1,4 @@
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#007bff;">
    
       
     
@@ -42,23 +42,25 @@
               </li>
             </ul>
           </li> 
+          
           <?php endif; ?>
           <li class="nav-item">
                 <a href="./index.php?page=patient" class="nav-link nav-task_list">
-                  <i class="fas fa-tasks nav-icon"></i>
+                <i class="nav-icon fas fa-hospital-user"></i>
+               
                   <p>Patient</p>
                 </a>
           </li>
           <li class="nav-item">
                 <a href="./index.php?page=appointment" class="nav-link nav-task_list">
-                  <i class="fas fa-tasks nav-icon"></i>
+                  <i class="nav-icon fas fa-calendar-check"></i>
                   <p>Appointment</p>
                 </a>
           </li>
           <?php if ($_SESSION['type'] != 'receptioni') : ?>
           <li class="nav-item">
                 <a href="./index.php?page=drugs" class="nav-link nav-task_list">
-                  <i class="fas fa-tasks nav-icon"></i>
+                  <i class="nav-icon fas fa-capsules"></i>
                   <p>Drugs</p>
                 </a>
           </li>
@@ -66,15 +68,16 @@
           <?php if ($_SESSION['type'] != 'receptioni') : ?>
           <li class="nav-item">
                 <a href="./index.php?page=billing" class="nav-link nav-task_list">
-                  <i class="fas fa-tasks nav-icon"></i>
+                <i class="nav-icon fas fa-pound-sign"></i>
                   <p>Billing</p>
                 </a>
           </li>
+         
           <?php endif; ?>
           <?php if ($_SESSION['type'] != 'receptioni') : ?>
           <li class="nav-item">
                 <a href="./index.php?page=test" class="nav-link nav-task_list">
-                  <i class="fas fa-tasks nav-icon"></i>
+                  <i class="nav-icon fas fa-vial"></i>
                   <p>Tests</p>
                 </a>
           </li>
@@ -82,7 +85,7 @@
           <?php if ($_SESSION['type'] != 'receptioni') : ?>
           <li class="nav-item">
                 <a href="./index.php?page=prescription" class="nav-link nav-task_list">
-                  <i class="fas fa-tasks nav-icon"></i>
+                <i class="nav-icon fas fa-prescription"></i>
                   <p>Prescription</p>
                 </a>
           </li>
@@ -90,10 +93,11 @@
           <?php if ($_SESSION['type'] != 'receptioni') : ?>
            <li class="nav-item">
                 <a href="./index.php?page=reports" class="nav-link nav-reports">
-                  <i class="fas fa-th-list nav-icon"></i>
+                <i class="nav-icon fas fa-chart-line"></i>
                   <p>Report</p>
                 </a>
           </li>
+
           <?php endif; ?>
           <?php if($_SESSION['firstname'] == 1): ?>
           <li class="nav-item">

@@ -3,9 +3,32 @@
 <!-- Info boxes -->
  <div class="col-12">
           <div class="card">
-            <div class="card-body">
-              Welcome <?php echo $_SESSION['firstname'] ?>!
-            </div>
+          <?php
+// Get the current hour in 24-hour format
+$currentHour = date('H');
+
+// Define the greetings based on the time of day
+if ($currentHour >= 5 && $currentHour < 12) {
+    $greeting = 'Good morning';
+} elseif ($currentHour >= 12 && $currentHour < 18) {
+    $greeting = 'Good afternoon';
+} else {
+    $greeting = 'Good evening';
+}
+
+// Get the user's firstname from the session
+$firstname = $_SESSION['firstname'];
+?>
+
+<div class="card-body">
+  <?php echo $greeting; ?>, <?php echo $firstname; ?>!
+</div>
+
+
+
+
+
+
           </div>
   </div>
   <hr>
@@ -84,7 +107,7 @@
                       </td>
                       
                       <td>
-                        <a class="btn btn-primary btn-sm" href="./index.php?page=appointment&id=<?php echo $row['appointment_id'] ?>">
+                        <a class="btn btn-primary btn-sm" href="./index.php?page=view_appointment&appointment_id=<?php echo $row['appointment_id'] ?>">
                               <i class="fas fa-folder">
                               </i>
                               View
@@ -108,7 +131,7 @@
                 <p>Total Appointment</p>
               </div>
               <div class="icon">
-                <i class="fa fa-layer-group"></i>
+              <i class="nav-icon fas fa-calendar-check"></i>
               </div>
             </div>
           </div>
@@ -120,7 +143,7 @@
                 <p>Total Patient</p>
               </div>
               <div class="icon">
-              <i class="fa-regular fa-user"></i>
+              <i class="nav-icon fas fa-hospital-user"></i>
               </div>
             </div>
           </div>

@@ -3,13 +3,15 @@ require_once('auth.php');
 require_once('MainClass.php');
 include 'header.php' 
 ?>
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" >
 <div class="wrapper">
   <?php include 'topbar.php' ?>
   <?php include 'sidebar.php' ?>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+    
+<div class="card-body" style="background-image: url('https://www.freepik.com/free-photo/happy-general-practitioner-talking-senior-man-while-shaking-hands-with-him-during-home-visit_25623932.htm#query=patient&position=1&from_view=search&track=sph'); background-size: cover; background-repeat: no-repeat;">
+  <div class="content-wrapper" >
   	 <div class="toast" id="alert_toast" role="alert" aria-live="assertive" aria-atomic="true">
 	    <div class="toast-body text-white">
 	    </div>
@@ -115,11 +117,14 @@ include 'header.php'
     </div>
   </footer>
 </div>
+</div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <!-- Bootstrap -->
 <?php include 'footer.php' ?>
+
 </body>
+
 </html>
