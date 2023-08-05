@@ -30,15 +30,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->close();
 
     if ($appointmentCount > 0) {
-        
-        echo "Appointment with the same date and time already exists. Please choose a different date and time.";
+        echo "<script>
+            alert('Appointment with the same date and time already exists. Please choose a different date and time..');
+            setTimeout(function() {
+                window.location.href = 'index.php?page=new_appointment';
+            }, 200); // 1000 milliseconds = 3 seconds
+        </script>";
     } else {
         
         $stmt = $conn->prepare("INSERT INTO appointment (Patient_name, status, doctor_name, appointment_date, appointment_time, staff_scheduling) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssss", $patientName, $status, $doctor_name, $appointmentDate, $appointmentTime, $staffScheduling);
 
         if ($stmt->execute()) {
-            header("Location: index.php?page=appointment"); 
+            echo "<script>
+            alert('Appointment record updated successfully.');
+            setTimeout(function() {
+                window.location.href = 'index.php?page=appointment';
+            }, 200); // 1000 milliseconds = 3 seconds
+        </script>";
         exit();
         } else {
             // Insertion failed

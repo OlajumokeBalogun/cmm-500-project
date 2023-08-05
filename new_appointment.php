@@ -16,7 +16,7 @@
               	$patient = $conn->query("SELECT *,concat(Firstname,' ',Lastname) as name FROM patient  order by concat(Firstname,' ',Lastname) asc ");
               	while($row= $patient->fetch_assoc()):
               	?>
-              	<option value="<?php echo $row['name'] ?>" <?php echo isset($Patient_Id) && $Patient_Id == $row['Patient_Id'] ? "selected" : '' ?>><?php echo ucwords($row['name']) ?></option>
+              <option value="<?php echo $row['name'] ?>" ><?php echo ucwords($row['name']) ?></option>
               	<?php endwhile; ?>
               </select>
             </div>

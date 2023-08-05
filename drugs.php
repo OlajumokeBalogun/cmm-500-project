@@ -60,7 +60,8 @@
 		                     
 		                      <a class="dropdown-item" href="./index.php?page=edit_drugs&Drug_id=<?php echo $row['Drug_id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item delete_drug" href="javascript:void(0)" data-id="<?php echo $row['Drug_id'] ?>">Delete</a>
+							  <a class="dropdown-item delete_drugs" href="delete_drugs.php?action=delete_drugs&Drug_id=<?php echo $row['Drug_id'] ?>">Delete</a>
+
 		                 
 		                    </div>
 						</td>

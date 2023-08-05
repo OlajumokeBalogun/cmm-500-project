@@ -32,7 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("sssssisssssi", $Firstname, $Middlename, $Lastname, $dob, $email, $age, $bloodgroup, $weight, $height, $address, $gender, $Patient_Id);
 
     if ($stmt->execute()) {
-        echo "Record updated. <a href='./index.php?page=patient' role='button'>Go back to patient</a>";
+		echo "<script>
+		alert('patient record updated successfully.');
+		setTimeout(function() {
+			window.location.href = 'index.php?page=patient';
+		}, 200); // 1000 milliseconds = 3 seconds
+	</script>";
         exit();
     } else {
         // Update failed

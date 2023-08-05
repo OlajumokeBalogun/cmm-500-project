@@ -40,7 +40,7 @@
           <div class="col-md-6">
 		  <div class="form-group">
               <label for="" class="control-label">Doctor's notes</label>
-              <textarea cols="30" rows="10" class="form-control form-control-sm" autocomplete="off" name="Doctor_note" ></textarea>
+              <textarea cols="30" rows="10" class="summernote form-control" autocomplete="off" name="Doctor_note" ></textarea>
             </div>
           </div>
 

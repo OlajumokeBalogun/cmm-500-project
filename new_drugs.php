@@ -24,7 +24,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("ss", $Drug_name, $Drug_desc);
 
     if ($stmt->execute()) {
-        header("Location: index.php?page=drugs"); 
+		  
+        echo "<script>
+                alert(' Drug Record added  successfully.');
+                setTimeout(function() {
+                    window.location.href = 'index.php?page=drugs';
+                }, 200); // 1000 milliseconds = 3 seconds
+            </script>";
         exit();
     } else {
         // Insertion failed
@@ -63,7 +69,7 @@ $conn->close();
 		  <div class="col-md-6">
             <div class="form-group">
               <label for="" class="control-label">Drug desc</label>
-              <textarea cols="30" rows="10" class="form-control form-control-sm" autocomplete="off" name="Drug_desc" ></textarea>
+              <textarea cols="30" rows="10" class="summernote form-control" autocomplete="off" name="Drug_desc" ></textarea>
             </div>
           </div>
 			
@@ -80,26 +86,3 @@ $conn->close();
     	
 	</div>
 </div>
-<script>
-	$('#manage-project').submit(function(e){
-		e.preventDefault()
-		start_load()
-		$.ajax({
-			url:'ajax.php?action=save_appointment',
-			data: new FormData($(this)[0]),
-		    cache: false,
-		    contentType: false,
-		    processData: false,
-		    method: 'POST',
-		    type: 'POST',
-			success:function(resp){
-				if(resp == 1){
-					alert_toast('Data successfully saved',"success");
-					setTimeout(function(){
-						location.href = 'index.php?page=appointment'
-					},2000)
-				}
-			}
-		})
-	})
-</script>

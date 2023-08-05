@@ -73,9 +73,10 @@
 		                      <a class="dropdown-item view_project" href="./index.php?page=view_test&Test_id=<?php echo $row['Test_id'] ?>" data-id="<?php echo $row['Test_id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
 		                      
-		                      <a class="dropdown-item" href="./index.php?page=edit_test&id=<?php echo $row['Test_id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="./index.php?page=edit_test&Test_id=<?php echo $row['Test_id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item delete_project" href="javascript:void(0)" data-id="<?php echo $row['Test_id'] ?>">Delete</a>
+							  <a class="dropdown-item delete_project" href="delete_test.php?action=delete_test&Test_id=<?php echo $row['Test_id'] ?>">Delete</a>
+
 		                 
 		                    </div>
 						</td>

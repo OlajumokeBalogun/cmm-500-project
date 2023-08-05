@@ -23,18 +23,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $appointment_id= intval($_GET["appointment_id"]);
     
     $stmt = $conn->prepare("UPDATE appointment SET  Patient_name=?, status=?, doctor_name=?, appointment_date=? ,appointment_time=?,staff_scheduling=?  WHERE appointment_id=?");
-    $stmt->bind_param("ssssssi", $status, $Amount, $doctor_name, $appointment_date,  $appointment_time,$staff_scheduling,$appointment_id);
+    $stmt->bind_param("ssssssi", $Patient_name, $status,  $doctor_name, $appointment_date,  $appointment_time,$staff_scheduling,$appointment_id);
 
     if ($stmt->execute()) {
-        echo "Record updated. <a href='./index.php?page=appointment' role='button'> Go back to appointment</a>";
+        echo "<script>
+				alert('Appointment record updated successfully.');
+				setTimeout(function() {
+					window.location.href = 'index.php?page=appointment';
+				}, 200); // 1000 milliseconds = 3 seconds
+			</script>";
         exit();
     } else {
         // Update failed
         echo "Error: " . $conn->error;
     }
-
+	
     $stmt->close();
 }
+
 
 
 if (isset($_GET["appointment_id"])) {
@@ -78,18 +84,10 @@ $conn->close();
 
     <div class="row">
 					<div class="col-md-4 border-right">
-						<div class="form-group">
-							<label for="" class="control-label">Patient Name</label>
-							<select class="form-control form-control-sm select2" name="Patient_name">
-              	<option></option>
-              	<?php 
-              	$patient = $conn->query("SELECT *,concat(Firstname,' ',Lastname) as name FROM patient  order by concat(Firstname,' ',Lastname) asc ");
-              	while($row= $patient->fetch_assoc()):
-              	?>
-              	<option value="<?php echo $row["status"]; ?>"></option>
-              	<?php endwhile; ?>
-              </select>
-			  </div>
+					<div class="form-group">
+							<label for="" class="control-label">Patient name</label>
+							<input type="text" name="Patient_name" class="form-control form-control-sm" value="<?php echo $row["Patient_name"]; ?>" required >
+						</div>
 						</div>
 						<div class="form-group">
 							<label for="" class="control-label">Status</label>
@@ -112,6 +110,7 @@ $conn->close();
 						
 						<div class="form-group">
 							<label for="" class="control-label">Staff scheduling</label>
+							
 							<input type="text" name="staff_scheduling" class="form-control form-control-sm" value="<?php echo $row["staff_scheduling"]; ?>" required >
 						</div>
 						

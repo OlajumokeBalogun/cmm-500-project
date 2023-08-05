@@ -50,19 +50,17 @@ $conn->close();
 ?>
 
 <!-- HTML Edit Form -->
-<form action="" method="post">
-    <input type="hidden" name="Drug_id" value="<?php echo $row["Drug_id"]; ?>">
+
    
     <div class="row">
-					<div class="col- d-4 border-right">
+					<div class="col-md-4">
 						<div class="form-group">
 							<label for="" class="control-label">Drug name</label>
 							<div><?php echo $row["Drug_name"]; ?></div>
 						</div>
 						<div>
 							<label for="" class="control-label">Drug desc</label>
-							
-							<div>
+						
 							<?php echo $row["Drug_desc"]; ?>
 							</div>
 							
@@ -80,13 +78,13 @@ $conn->close();
 					
 					
 					
-				</div>
+			
 				<hr>
 				<div class="col-lg-12 text-right justify-content-center d-flex">
 				
 					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=drugs'">Cancel</button>
 				</div>
-</div>
+
     
-</form></div>
+
 

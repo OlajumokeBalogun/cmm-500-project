@@ -25,7 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($stmt->execute()) {
         // Insertion successful
-        header("Location: index.php?page=billing"); 
+        echo "<script>
+		alert('patient bill records added successfully!!.');
+		setTimeout(function() {
+			window.location.href = 'index.php?page=billing';
+		}, 200); // 1000 milliseconds = 3 seconds
+	</script>";
         exit();
     } else {
         // Insertion failed

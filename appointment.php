@@ -75,7 +75,7 @@
 		                     
 		                      <a class="dropdown-item" href="./index.php?page=edit_appointment&appointment_id=<?php echo $row['appointment_id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item delete_appointment" href="javascript:void(0)" data-id="<?php echo $row['appointment_id'] ?>">Delete</a>
+		                      <a class="dropdown-item delete_appointment" href="delete_appointment.php?action=delete_appointment&appointment_id=<?php echo $row['appointment_id'] ?>">Delete</a>
 		                 
 		                    </div>
 						</td>

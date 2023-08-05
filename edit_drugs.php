@@ -22,7 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("ssi", $Drug_name, $Drug_desc, $Drug_id);
 
     if ($stmt->execute()) {
-        echo "Record updated. <a href='./index.php?page=drugs' role='button'>Go back to drugs</a>";
+        echo "<script>
+		alert('Drug records updated successfully.');
+		setTimeout(function() {
+			window.location.href = 'index.php?page=drugs';
+		}, 200); // 1000 milliseconds = 3 seconds
+	</script>";
         exit();
     } else {
         // Update failed
@@ -81,13 +86,13 @@ function sanitizeInput($data)
     
     <div class="form-group">
         <label for="" class="control-label">Drug desc</label>
-        <input type="text" name="Drug_desc" class="form-control form-control-sm" value="<?php echo $row["Drug_desc"]; ?>" required>
+        <input type="text" name="Drug_desc" class="summernote form-control" value="<?php echo $row["Drug_desc"]; ?>" required>
     </div>
     
     <hr>
     <div class="col-lg-12 text-right justify-content-center d-flex">
         <button type="submit" class="btn btn-primary mr-2">Save</button>
-        <button class="btn btn-secondary" type="button" onclick="location.href = 'drugs.php'">Cancel</button>
+        <button class="btn btn-secondary" type="button" onclick="location.href =  'index.php?page=drugs'">Cancel</button>
     </div>
 </form>
 

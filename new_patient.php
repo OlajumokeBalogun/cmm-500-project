@@ -43,7 +43,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->bind_param("sssssisssss", $firstname, $middlename, $lastname, $dob, $email, $age, $bloodgroup, $weight, $height, $address, $gender);
 
         if ($stmt->execute()) {
-            header("Location: index.php?page=patient"); 
+            echo "<script>
+				alert('New patient record created successfully.');
+				setTimeout(function() {
+					window.location.href = 'index.php?page=patient';
+				}, 200); // 1000 milliseconds = 3 seconds
+			</script>";
         exit();
         } else {
             // Insertion failed

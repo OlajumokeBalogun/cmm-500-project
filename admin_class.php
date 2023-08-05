@@ -48,42 +48,67 @@ Class Action {
 			return 3;
 		}
 	}
+
 	function save_user()
+
 {
     extract($_POST);
-    
-	$data = "";
-	
-    foreach ($_POST as $k => $v) {
-        if (!in_array($k, array('id', 'cpass', 'password')) && !is_numeric($k)) {
-            if (empty($data)) {
-                $data .= " $k='$v' ";
-            } else {
-                $data .= ", $k='$v' ";
-            }
+
+$data = "";
+
+foreach ($_POST as $k => $v) {
+    if (!in_array($k, array('id', 'cpass', 'password')) && !is_numeric($k)) {
+        if (empty($data)) {
+            $data .= " $k='$v' ";
+        } else {
+            $data .= ", $k='$v' ";
         }
     }
-	 if (!empty($password)) {
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $data .= ", password='$hashedPassword' ";
-    }
+}
 
-    $check = $this->db->query("SELECT * FROM users where email ='$email'" . (!empty($id) ? " and id != {$id} " : ''))->num_rows;
-    if ($check > 0) {
-        return 2;
+if (!empty($password)) {
+    // Validate password strength
+    if (!is_valid_password($password)) {
+        echo "<script>
+        alert('Prescription  record updated successfully!!.');
+        setTimeout(function() {
+            window.location.href = 'index.php?page=prescription';
+        }, 200); // 1000 milliseconds = 3 seconds
+    </script>";
         exit;
     }
 
-    if (empty($id)) {
-        $save = $this->db->query("INSERT INTO users set $data");
-        $this->send_mail($email, $firstname, $password); // Pass the email and default password as arguments
-    } else {
-        $save = $this->db->query("UPDATE users set $data where id = $id");
-    }
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+    $data .= ", password='$hashedPassword' ";
+}
 
-    if ($save) {
-        return 1;
-    }
+$check = $this->db->query("SELECT * FROM users where email ='$email'" . (!empty($id) ? " and id != {$id} " : ''))->num_rows;
+if ($check > 0) {
+    return 2; // Email already exists
+    exit;
+}
+
+if (empty($id)) {
+    $save = $this->db->query("INSERT INTO users set $data");
+    $this->send_mail($email, $firstname, $password); // Pass the email and default password as arguments
+} else {
+    $save = $this->db->query("UPDATE users set $data where id = $id");
+}
+
+if ($save) {
+    return 1; // Success
+}
+
+// Function to validate the password
+function is_valid_password($password) {
+    // Check if the password meets the following criteria:
+    // 1. Minimum length of 8 characters
+    // 2. Contains at least one uppercase letter
+    // 3. Contains at least one lowercase letter
+    // 4. Contains at least one special character
+    return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/', $password);
+}
+
 }
 
 function send_mail($to = "", $firstname = "", $password = "")

@@ -24,7 +24,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("ssssi", $Patient_name, $Amount, $Payment_mode, $Payment_status,  $Billing_id);
 
     if ($stmt->execute()) {
-        echo "Record updated. <a href='./index.php?page=billing' role='button'> Go back to billing</a>";
+        echo "<script>
+		alert('patient record updated successfully.');
+		setTimeout(function() {
+			window.location.href = 'index.php?page=billing';
+		}, 200); // 1000 milliseconds = 3 seconds
+	</script>";
         exit();
     } else {
         // Update failed

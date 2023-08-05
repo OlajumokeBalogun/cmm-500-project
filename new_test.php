@@ -22,7 +22,7 @@
               	$users = $conn->query("SELECT *,concat(	firstname,' ',	lastname) as name FROM users order by concat(firstname,' ',	lastname) asc ");
               	while($row= $users->fetch_assoc()):
               	?>
-              	<option value="<?php echo $row['id'] ?>" <?php echo isset($id) && $id== $row['id'] ? "selected" : '' ?>><?php echo ucwords($row['name']) ?></option>
+              	<option value="<?php echo $row['name'] ?>" <?php echo isset($id) && $id== $row['id'] ? "selected" : '' ?>><?php echo ucwords($row['name']) ?></option>
               	<?php endwhile; ?>
               </select>
 				</div>
@@ -41,7 +41,7 @@
               	$patient = $conn->query("SELECT *,concat(	firstname,' ',	lastname) as name FROM patient order by concat(firstname,' ',	lastname) asc ");
               	while($row= $patient->fetch_assoc()):
               	?>
-              	<option value="<?php echo $row['Patient_Id'] ?>" <?php echo isset($id) && $id== $row['Patient_Id'] ? "selected" : '' ?>><?php echo ucwords($row['name']) ?></option>
+              	<option value="<?php echo $row['name'] ?>" <?php echo isset($id) && $id== $row['Patient_Id'] ? "selected" : '' ?>><?php echo ucwords($row['name']) ?></option>
               	<?php endwhile; ?>
               </select>
 				</div>
@@ -55,7 +55,7 @@
 		  <div class="col-md-6">
 		  <div class="form-group">
               <label for="" class="control-label">Test results</label>
-              <textarea cols="30" rows="10" class="form-control form-control-sm" autocomplete="off" name="Test_results" ></textarea>
+              <textarea cols="30" rows="10" class="summernote form-control" autocomplete="off" name="Test_results" ></textarea>
             </div>
           </div>
    

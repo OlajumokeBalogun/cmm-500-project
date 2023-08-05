@@ -26,7 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($stmt->execute()) {
         
-        header("Location: index.php?page=test"); 
+        echo "<script>
+		alert(' new test  record created successfully!!.');
+		setTimeout(function() {
+			window.location.href = 'index.php?page=test';
+		}, 200); // 1000 milliseconds = 3 seconds
+	</script>";
         exit();
     } else {
         // Insertion failed

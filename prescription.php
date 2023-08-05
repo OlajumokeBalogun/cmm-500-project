@@ -76,10 +76,11 @@
 		                      <a class="dropdown-item view_project" href="./index.php?page=view_prescription&Prescription_id=<?php echo $row['Prescription_id'] ?>" data-id="<?php echo $row['Prescription_id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
 		                    
-		                      <a class="dropdown-item" href="./index.php?page=edit_prescription&id=<?php echo $row['Prescription_id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="./index.php?page=edit_prescription&Prescription_id=<?php echo $row['Prescription_id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item delete_prescription" href="javascript:void(0)" data-id="<?php echo $row['Prescription_id'] ?>">Delete</a>
+		                      <a class="dropdown-item delete_prescription" href="delete_prescription.php?action=delete_prescription&Prescription_id=<?php echo $row['Prescription_id'] ?>">Delete</a>
 		                
+
 		                    </div>
 						</td>
 					</tr>	

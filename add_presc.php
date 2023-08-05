@@ -24,7 +24,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("sssss",  $Patient_name, $Staff_name, $doctorNote, $prescriptionStatus, $drugName);
 
     if ($stmt->execute()) {
-        header("Location: index.php?page=prescription"); 
+        echo "<script>
+        alert('New prescription created successfully!!.');
+        setTimeout(function() {
+            window.location.href = 'index.php?page=prescription';
+        }, 200); // 1000 milliseconds = 3 seconds
+    </script>";
         exit();
     } else {
         // Insertion failed

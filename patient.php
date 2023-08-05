@@ -90,7 +90,7 @@
 		                      
 		                      <a class="dropdown-item" href="./index.php?page=edit_patient&Patient_Id=<?php echo $row['Patient_Id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item delete_project" href="javascript:void(0)" data-id="<?php echo $row['Patient_Id'] ?>">Delete</a>
+		                      <a class="dropdown-item delete_project" href="delete_patient.php?action=delete_patient&Patient_Id=<?php echo $row['Patient_Id'] ?>">Delete</a>
 		                  
 		                    </div>
 						</td>
