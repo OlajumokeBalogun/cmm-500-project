@@ -19,15 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = sanitize_input($_POST['email']);
     $password = $_POST['password']; // No need to sanitize the password as it will be hashed.
     $cpass = $_POST['cpass']; // No need to sanitize the password as it will be hashed.
+    $id = ($_POST['id']);
 
     // Validate the password strength
     if (!is_valid_password($password)) {
         echo "<script>
-                alert('password strength.');
+                alert('password strength  not ok');
                 setTimeout(function() {
                     window.location.href = 'index.php?page=new_user';
                 }, 200); // 1000 milliseconds = 3 seconds
             </script>";
+            
          exit;
     }
 
@@ -47,17 +49,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Prepare and execute the query to insert the user data into the database
-    $stmt = $conn->prepare("INSERT INTO users (firstname, middlename, lastname, type, email, password) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $firstname,  $middlename,  $lastname, $type, $email, $hashedPassword);
+    if (empty($id)) {
+        // INSERT query
+        $stmt = $conn->prepare("INSERT INTO users (firstname, middlename, lastname, type, email, password) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $firstname, $middlename, $lastname, $type, $email, $hashedPassword);
+    } else {
+        // UPDATE query
+        $stmt = $conn->prepare("UPDATE users SET firstname=?, middlename=?, lastname=?, type=?, email=?, password=? WHERE id=?");
+        $stmt->bind_param("ssssssi", $firstname, $middlename, $lastname, $type, $email, $hashedPassword, $id);
+    }
+
+
    
 
     if ($stmt->execute()) {
         echo "<script>
-                alert('password strength.');
+                alert('user records updated.');
                 setTimeout(function() {
-                    window.location.href = 'index.php?page=new_user';
-                }, 200); // 1000 milliseconds = 3 seconds
+                    window.location.href = 'index.php?page=user_list';
+                }, 50); // 1000 milliseconds = 3 seconds
             </script>";
         send_mail($email, $firstname, $password); 
     } else {

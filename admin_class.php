@@ -48,67 +48,44 @@ Class Action {
 			return 3;
 		}
 	}
-
+	
 	function save_user()
 
 {
     extract($_POST);
-
-$data = "";
-
-foreach ($_POST as $k => $v) {
-    if (!in_array($k, array('id', 'cpass', 'password')) && !is_numeric($k)) {
-        if (empty($data)) {
-            $data .= " $k='$v' ";
-        } else {
-            $data .= ", $k='$v' ";
+    
+	$data = "";
+	
+    foreach ($_POST as $k => $v) {
+        if (!in_array($k, array('id', 'cpass', 'password')) && !is_numeric($k)) {
+            if (empty($data)) {
+                $data .= " $k='$v' ";
+            } else {
+                $data .= ", $k='$v' ";
+            }
         }
     }
-}
+	 if (!empty($password)) {
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $data .= ", password='$hashedPassword' ";
+    }
 
-if (!empty($password)) {
-    // Validate password strength
-    if (!is_valid_password($password)) {
-        echo "<script>
-        alert('Prescription  record updated successfully!!.');
-        setTimeout(function() {
-            window.location.href = 'index.php?page=prescription';
-        }, 200); // 1000 milliseconds = 3 seconds
-    </script>";
+    $check = $this->db->query("SELECT * FROM users where email ='$email'" . (!empty($id) ? " and id != {$id} " : ''))->num_rows;
+    if ($check > 0) {
+        return 2;
         exit;
     }
 
-    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-    $data .= ", password='$hashedPassword' ";
-}
+    if (empty($id)) {
+        $save = $this->db->query("INSERT INTO users set $data");
+        $this->send_mail($email, $firstname, $password); // Pass the email and default password as arguments
+    } else {
+        $save = $this->db->query("UPDATE users set $data where id = $id");
+    }
 
-$check = $this->db->query("SELECT * FROM users where email ='$email'" . (!empty($id) ? " and id != {$id} " : ''))->num_rows;
-if ($check > 0) {
-    return 2; // Email already exists
-    exit;
-}
-
-if (empty($id)) {
-    $save = $this->db->query("INSERT INTO users set $data");
-    $this->send_mail($email, $firstname, $password); // Pass the email and default password as arguments
-} else {
-    $save = $this->db->query("UPDATE users set $data where id = $id");
-}
-
-if ($save) {
-    return 1; // Success
-}
-
-// Function to validate the password
-function is_valid_password($password) {
-    // Check if the password meets the following criteria:
-    // 1. Minimum length of 8 characters
-    // 2. Contains at least one uppercase letter
-    // 3. Contains at least one lowercase letter
-    // 4. Contains at least one special character
-    return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/', $password);
-}
-
+    if ($save) {
+        return 1;
+    }
 }
 
 function send_mail($to = "", $firstname = "", $password = "")
@@ -137,8 +114,8 @@ function send_mail($to = "", $firstname = "", $password = "")
 
                     <ol>
                         <li>Log in to your account using your current username and the above default password.</li>
-                        <li>Once logged in, navigate to the 'Manage Account' or 'Account Settings' section.</li>
-                        <li>Look for the 'Change Password' icon or link.</li>
+                        <li>Once logged in, navigate to the 'Update_password' or 'Account Settings' section.</li>
+						
                     </ol>
 
                     <p>Please remember to create a strong password that includes a combination of uppercase and lowercase letters, numbers, and special characters. Your password should be at least 8 characters long.</p>
@@ -161,6 +138,91 @@ function send_mail($to = "", $firstname = "", $password = "")
         }
     }
 }
+
+function change_password($password_changed, $password_created) {
+	// Check if password has been changed
+	if ($password_changed) {
+		return "Password has been changed.";
+	} else {
+		// Check if password has expired
+		if (time() - $password_created > 60) {
+			return "Password has expired.";
+		} else {
+			return "Password is still valid.";
+		}
+	}
+}
+
+
+
+function resend_mail($to = "", $firstname = "", $password = "")
+{
+    if (!empty($to)) {
+        try {
+            // Set up the email parameters
+            $email = 'testbaola20@gmail.com';
+            $subject = 'Your New Default Password and Important Account Update';
+            $headers = "From: $email\r\n";
+            $headers .= "Reply-To: $email\r\n";
+            $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= "Content-type: text/html; charset=UTF-8\r\n";
+
+            // Create the HTML message body
+            $msg = "
+            <html>
+                <head>
+                    <style>
+                        h2 {
+                            color: #2e6c80;
+                        }
+                        p {
+                            font-family: Arial, sans-serif;
+                            font-size: 14px;
+                        }
+                        ol {
+                            font-family: Arial, sans-serif;
+                            font-size: 14px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h2>Baola Hospital System Application: Your New Default Password and Important Account Update</h2>
+                    <p>Dear $firstname,</p>
+
+                    <p>We hope this message finds you well. We are writing to inform you that your account password has been reset, and we have generated a new default password for you.</p>
+
+                    <p>Your new default password is: <strong>$password</strong></p>
+
+                    <p>For security purposes, we strongly recommend that you change your password immediately upon logging in to your account. Please follow these steps to change your password:</p>
+
+                    <ol>
+                        <li>Log in to your account using your current username and the above default password.</li>
+                        <li>Once logged in, navigate to the 'Manage Account' or 'Account Settings' section.</li>
+						http://localhost/cmm-500-project/update_password.php
+                    </ol>
+
+                    <p>Please remember to create a strong password that includes a combination of uppercase and lowercase letters, numbers, and special characters. Your password should be at least 8 characters long.</p>
+
+                    <p>If you have any difficulties changing your password or need further assistance, please don't hesitate to contact our support team at [Your Support Email or Phone Number].</p>
+
+                    <p>Thank you for being a valued member of our community. We prioritize the security of our users, and updating your password is an essential step in maintaining the confidentiality of your account.</p>
+
+                    <p>Best regards,</p>
+                    <p>[Baola EHR Support Team]</p>
+                </body>
+            </html>
+            ";
+
+            // Send email using the mail function
+            mail($to, $subject, $msg, $headers);
+
+        } catch (Exception $e) {
+            // Handle exception if needed
+        }
+    }
+}
+
 
 	function signup(){
 		extract($_POST);

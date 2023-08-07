@@ -38,7 +38,8 @@
 		                      <div class="dropdown-divider"></div>
 		                      <a class="dropdown-item" href="./index.php?page=edit_user&id=<?php echo $row['id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item delete_user" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">Delete</a>
+							  <a class="dropdown-item delete_user" href="delete_user.php?action=delete_user&id=<?php echo $row['id'] ?>">Delete</a>
+
 		                    </div>
 						</td>
 					</tr>	

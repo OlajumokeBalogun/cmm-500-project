@@ -24,34 +24,72 @@ Class MainClass{
             $data = $result->fetch_array();
             $pass_is_right = password_verify($password,$data['password']);
             $has_code = false;
-            if($pass_is_right && (is_null($data['otp']) || (!is_null($data['otp']) && !is_null($data['otp_expiration']) && strtotime($data['otp_expiration']) < time()) ) ){
-                $otp = sprintf("%'.06d",mt_rand(0,999999));
-                $expiration = date("Y-m-d H:i" ,strtotime(date('Y-m-d H:i')." +1 mins"));
-                $update_sql = "UPDATE `users` set otp_expiration = '{$expiration}', otp = '{$otp}' where id='{$data['id']}' ";
-                $update_otp = $this->db->query($update_sql);
-                if($update_otp){
-                    $has_code = true;
-                    $resp['status'] = 'success';
-                    $_SESSION['otp_verify_user_id'] = $data['id'];
-                    $this->send_mail($data['email'],$otp);
-                }else{
-                    $resp['status'] = 'failed';
-                    $_SESSION['flashdata']['type'] = 'danger';
-                    $_SESSION['flashdata']['msg'] = ' An error occurred while loggin in. Please try again later.';
-                }
-                
-            }else if(!$pass_is_right){
-               $resp['status'] = 'failed';
-               $_SESSION['flashdata']['type'] = 'danger';
-               $_SESSION['flashdata']['msg'] = ' Incorrect Password';
+    
+            // Define a constant for the maximum number of failed attempts
+            define("MAX_ATTEMPTS", 3);
+    
+            // Initialize a session variable to store the number of failed attempts
+            if (!isset($_SESSION['failed_attempts'])) {
+                $_SESSION['failed_attempts'] = 0;
             }
-        }else{
+    
+            // Check if the OTP is expired or not set
+            if (is_null($data['otp']) || (!is_null($data['otp']) && !is_null($data['otp_expiration']) && strtotime($data['otp_expiration']) < time())) {
+                // Check if the password is correct
+                if ($pass_is_right) {
+                    // Reset the number of failed attempts
+                    $_SESSION['failed_attempts'] = 0;
+    
+                    $otp = sprintf("%'.06d",mt_rand(0,999999));
+                    $expiration = date("Y-m-d H:i" ,strtotime(date('Y-m-d H:i')." +2 mins"));
+                    $update_sql = "UPDATE `users` set otp_expiration = '{$expiration}', otp = '{$otp}' where id='{$data['id']}' ";
+                    $update_otp = $this->db->query($update_sql);
+                    if($update_otp){
+                        $has_code = true;
+                        $resp['status'] = 'success';
+                        $_SESSION['otp_verify_user_id'] = $data['id'];
+                        $this->send_mail($data['email'],$otp);
+                    }else{
+                        $resp['status'] = 'failed';
+                        $_SESSION['flashdata']['type'] = 'danger';
+                        $_SESSION['flashdata']['msg'] = ' An error occurred while loggin in. Please try again later.';
+                    }
+                } else {
+                    // Increment the number of failed attempts
+                    $_SESSION['failed_attempts']++;
+    
+                    // Check if the number of failed attempts has reached the limit
+                    if ($_SESSION['failed_attempts'] >= MAX_ATTEMPTS) {
+                        // Lock the user out and display an error message
+                        $resp['status'] = 'failed';
+                        $_SESSION['flashdata']['type'] = 'danger';
+                        $_SESSION['flashdata']['msg'] = ' You have exceeded the maximum number of login attempts. Please try again later.';
+                    } else {
+                        // Display an error message for incorrect password
+                        $resp['status'] = 'failed';
+                        $_SESSION['flashdata']['type'] = 'danger';
+                        $_SESSION['flashdata']['msg'] = ' Incorrect Password';
+                    }
+                }
+            } else {
+                // The OTP is still valid
+                $resp['status'] = 'success';
+                $_SESSION['otp_verify_user_id'] = $data['id'];
+            }
+        } else {
+            // Display an error message for unregistered email
             $resp['status'] = 'failed';
             $_SESSION['flashdata']['type'] = 'danger';
             $_SESSION['flashdata']['msg'] = ' Email is not registered.';
         }
         return json_encode($resp);
     }
+    
+    
+
+
+
+    
     public function get_user_data($id){
         extract($_POST);
         $sql = "SELECT * FROM `users` where `id` = ? ";
@@ -75,7 +113,7 @@ Class MainClass{
     }
     public function resend_otp($id){
         $otp = sprintf("%'.06d",mt_rand(0,999999));
-        $expiration = date("Y-m-d H:i" ,strtotime(date('Y-m-d H:i')." +1 mins"));
+        $expiration = date("Y-m-d H:i" ,strtotime(date('Y-m-d H:i')." +2 mins"));
         $update_sql = "UPDATE `users` set otp_expiration = '{$expiration}', otp = '{$otp}' where id = '{$id}' ";
         $update_otp = $this->db->query($update_sql);
         if($update_otp){
@@ -110,10 +148,12 @@ Class MainClass{
          }
          return json_encode($resp);
     }
+    
+    
     function send_mail($to="",$pin=""){
         if(!empty($to)){
             try{
-                $email = 'info@xyzapp.com';
+                $email = 'testbaola20@gmail.com';
                 $headers = 'From:' .$email . '\r\n'. 'Reply-To:' .
                 $email. "\r\n" .
                 'X-Mailer: PHP/' . phpversion()."\r\n";
@@ -125,7 +165,7 @@ Class MainClass{
                     <body>
                         <h2>You are Attempting to Login in Baola Hosipital System Application</h2>
                         <p>Here is your 6 digits OTP (One-Time PIN) to verify your Identity.</p>
-                        <p>Your Pin will expire in 5 minutes</p>
+                        <p>Your Pin will expire in 2 minutes</p>
                         
                         <h3><b>".$pin."</b></h3>
                     </body>

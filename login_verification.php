@@ -85,7 +85,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <?php unset($_SESSION['flashdata']) ?>
                             <?php endif; ?>
                             <div class="form-group">
-                                <p class="">We have sent an OPT in your Email [<?= isset($email) ? $email : '' ?>].</p>
+                                <p class="">We have sent an OTP in your Email [<?= isset($email) ? $email : '' ?>].</p>
                             </div>
                             <div class="form-group">
                                <label for="otp" class="label-control">Please Enter the OTP</label>
