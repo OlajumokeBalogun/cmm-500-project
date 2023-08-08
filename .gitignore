@@ -1,0 +1,28 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+docker-compose.yml
+Dockerfile
+MainClass.php
+
+*.zip
+# testing
+
+
+# next.js
+
+# production
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+
+# local env files
+.env*
+.local
+
+
+# typescript
+*.tsbuildinfo

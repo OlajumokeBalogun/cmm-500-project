@@ -1,12 +1,14 @@
 <?php
 
-
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+require 'vendor/autoload.php';
 
 Class MainClass{
     protected $db;
     function __construct(){
-        $this->db = new mysqli('localhost','root','','kikedb');
+        $this->db = new mysqli('localhost','Kikelomo','Kikelomo123@','kikedb');
         if(!$this->db){
             die("Database Connection Failed. Error: ".$this->db->error);
         }
@@ -153,40 +155,35 @@ Class MainClass{
     
     
     function send_mail($to="",$pin=""){
-        if(!empty($to)){
-            try{
-                $email = 'testbaola20@gmail.com';
-                $headers = 'From:' .$email . '\r\n'. 'Reply-To:' .
-                $email. "\r\n" .
-                'X-Mailer: PHP/' . phpversion()."\r\n";
-                $headers .= "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                // the message
-                $msg = "
-                <html>
-                    <body>
-                        <h2>You are Attempting to Login in Baola Hosipital System Application</h2>
-                        <p>Here is your 6 digits OTP (One-Time PIN) to verify your Identity.</p>
-                        <p>Your Pin will expire in 2 minutes</p>
-                        
-                        <h3><b>".$pin."</b></h3>
-                    </body>
-                </html>
-                ";
+        $mail = new PHPMailer(true);
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'testbaola20@gmail.com';
+        $mail->Password = 'dwytcvdlzkbdobfp';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
 
-                // send email
-                mail($to,"OTP",$msg,$headers);
-                // die("ERROR<br>".$headers."<br>".$msg);
+        // Recipients
+        $mail->setFrom('testbaola20@gmail.com', 'Baola Hospital');
+        $mail->addAddress($to, $pin); // User's email and name
 
-            }catch(Exception $e){
-                $_SESSION['flashdata']['type']='danger';
-                $_SESSION['flashdata']['msg'] = ' An error occurred while sending the OTP. Error: '.$e->getMessage();
-            }
-        }
-    }
-    function __destruct(){
-         $this->db->close();
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = 'Welcome to Our Website';
+        $mail->Body    = "Hello $pin, <br><br>Here is your 6 digits OTP (One-Time PIN) to verify your Identity.";
+
+        $mail->send();
+        
+    }catch(Exception $e){
+        $_SESSION['flashdata']['type']='danger';
+        $_SESSION['flashdata']['msg'] = ' An error occurred while sending the OTP. Error: '.$e->getMessage();
     }
 }
+}
+
+
 $class = new MainClass();
 $conn= $class->db_connect();
