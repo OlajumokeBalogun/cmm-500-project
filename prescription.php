@@ -84,7 +84,7 @@
 		                    
 		                      <a class="dropdown-item" href="./index.php?page=edit_prescription&Prescription_id=<?php echo $row['Prescription_id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item delete_prescription" href="delete_prescription.php?action=delete_prescription&Prescription_id=<?php echo $row['Prescription_id'] ?>">Delete</a>
+		                      <a class="dropdown-item delete_prescription" href="delete.php?action=delete_prescription&id=<?php echo $row['Prescription_id'] ?>">Delete</a>
 		                
 
 		                    </div>

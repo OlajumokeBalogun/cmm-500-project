@@ -83,7 +83,7 @@
 		                     
 		                      <a class="dropdown-item" href="./index.php?page=edit_appointment&Appointment_id=<?php echo $row['Appointment_id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item delete_appointment" href="delete_appointment.php?action=delete_appointment&Appointment_id=<?php echo $row['Appointment_id'] ?>">Delete</a>
+		                      <a class="dropdown-item delete_appointment" href="delete.php?action=delete_appointment&id=<?php echo $row['Appointment_id'] ?>">Delete</a>
 		                 
 		                    </div>
 						</td>

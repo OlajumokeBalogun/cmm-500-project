@@ -75,7 +75,7 @@
 		                      
 		                      <a class="dropdown-item" href="./index.php?page=edit_test&Test_id=<?php echo $row['Test_id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
-							  <a class="dropdown-item delete_project" href="delete_test.php?action=delete_test&Test_id=<?php echo $row['Test_id'] ?>">Delete</a>
+							  <a class="dropdown-item delete_project" href="delete.php?action=delete_test&id=<?php echo $row['Test_id'] ?>">Delete</a>
 
 		                 
 		                    </div>

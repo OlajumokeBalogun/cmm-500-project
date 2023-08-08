@@ -1,36 +1,94 @@
 <?php
-// Step 1: Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "kikedb";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
+$conn = new mysqli('localhost','root','','kikedb');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (isset($_POST["action"]) && $_POST["action"] === "delete_patient") {
-        $patientId = intval($_POST["Patient_Id"]);
 
-        // Step 2: Use prepared statement to delete user by Patient Id
-        $stmt = $conn->prepare("DELETE FROM patient WHERE Patient_Id = ?");
-        $stmt->bind_param("i", $patientId);
-
-        if ($stmt->execute()) {
-            // Deletion successful
-            echo "1";
-        } else {
-            // Deletion failed
-            echo "0";
-        }
-
-        $stmt->close();
-    }
+function sanitize_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
-$conn->close();
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    
+    $action = isset($_GET["action"]) ? sanitize_input($_GET["action"]) : '';
+    $id = isset($_GET["id"]) ? sanitize_input($_GET["id"]) : '';
+
+    if ($action === "delete_appointment") {
+       
+        $sql = "DELETE FROM appointment WHERE appointment_id  = '$id'";
+        $conn->query($sql);
+        echo "<script>
+                alert('appointment record deleted successfully.');
+                setTimeout(function() {
+                    window.location.href = 'index.php?page=appointment';
+                }, 200); // 1000 milliseconds = 3 seconds
+            </script>";
+    } elseif ($action === "delete_billing"){
+        $sql = "DELETE FROM billing WHERE Billing_id  = '$id'";
+        $conn->query($sql);
+        echo "<script>
+                alert('billing record deleted successfully.');
+                setTimeout(function() {
+                    window.location.href = 'index.php?page=billing';
+                }, 200); // 1000 milliseconds = 3 seconds
+            </script>";
+    }elseif ($action === "delete_drugs"){
+        $sql = "DELETE FROM drug WHERE Drug_id  = '$id'";
+        $conn->query($sql);
+        echo "<script>
+                alert('drug record deleted successfully.');
+                setTimeout(function() {
+                    window.location.href = 'index.php?page=drugs';
+                }, 200); // 1000 milliseconds = 3 seconds
+            </script>";
+    }elseif ($action === "delete_patient"){
+        $sql = "DELETE FROM patient WHERE Patient_Id  = '$id'";
+        $conn->query($sql);
+        echo "<script>
+                alert('Record deleted successfully.');
+                setTimeout(function() {
+                    window.location.href = 'index.php?page=patient';
+                }, 200); // 1000 milliseconds = 3 seconds
+            </script>";
+    }elseif ($action === "delete_prescription"){
+        $sql = "DELETE FROM prescription WHERE Prescription_id = '$id'";
+        $conn->query($sql);
+        echo "<script>
+                alert('Prescription record deleted successfully.');
+                setTimeout(function() {
+                    window.location.href = 'index.php?page=prescription';
+                }, 200); // 1000 milliseconds = 3 seconds
+            </script>";
+    }elseif ($action === "delete_test"){
+        $sql = "DELETE FROM test WHERE Test_id = '$id'";
+        $conn->query($sql);
+        echo "<script>
+        alert('Test record deleted successfully.');
+        setTimeout(function() {
+            window.location.href = 'index.php?page=test';
+        }, 200); // 1000 milliseconds = 3 seconds
+    </script>";
+    }elseif ($action === "delete_user"){
+        $sql = "DELETE FROM users WHERE id = '$id'";
+        $conn->query($sql);
+        echo "<script>
+                alert('user record deleted successfully.');
+                setTimeout(function() {
+                    window.location.href = 'index.php?page=user_list';
+                }, 200); // 1000 milliseconds = 3 seconds
+            </script>";
+    }
+     else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+        exit();
+    }
+    
+
+    $conn->close();
+}
 ?>
