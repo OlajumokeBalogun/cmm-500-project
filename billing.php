@@ -9,7 +9,7 @@
             
 		</div>
 		<div class="card-body">
-			<table class="table tabe-hover table-condensed" id="list">
+		<table class="table tabe-hover table-secondary table-striped table-bordered" id="list">
 				
 				<thead>
 					<tr>
@@ -54,11 +54,21 @@
 							<p><b><?php echo ucwords($row['Payment_mode']) ?></b></p>
 							
 						</td>
-
-						<td>
-							<p><b><?php echo ucwords($row['Payment_status']) ?></b></p>
-							
+						<td class="text-center">
+							<?php
+							  if(($row['Payment_status'])  =='Paid'){
+								echo "<span class='badge badge-info'>{$row['Payment_status']}</span>";
+							  }elseif(($row['Payment_status']) =='Due'){
+							  	echo "<span class='badge badge-warning'>{$row['Payment_status']}</span>";
+							  }elseif(($row['Payment_status']) =='Over due'){
+								echo "<span class='badge badge-secondary'>{$row['Payment_status']}</span>";
+							}elseif(($row['Payment_status']) =='Transaction Pending'){
+								echo "<span class='badge badge-secondary'>{$row['Payment_status']}</span>";
+							}
+							?>
 						</td>
+
+						
 
 						
 						<td>

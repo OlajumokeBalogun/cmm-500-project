@@ -57,6 +57,12 @@
                   <p>Appointment</p>
                 </a>
           </li>
+          <li class="nav-item">
+                <a href="./index.php?page=calender" class="nav-link nav-task_list">
+                  <i class="nav-icon fas fa-calendar-check"></i>
+                  <p>Calender</p>
+                </a>
+          </li>
           <?php if ($_SESSION['type'] != 'receptioni') : ?>
           <li class="nav-item">
                 <a href="./index.php?page=drugs" class="nav-link nav-task_list">

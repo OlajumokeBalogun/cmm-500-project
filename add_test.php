@@ -1,4 +1,5 @@
 <?php
+include('session_manager.php');
 // Step 1: Database connection
 $servername = "localhost";
 $username = "root";
@@ -18,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $Test_name = sanitizeInput($_POST["Test_name"]);
     $Test_results = sanitizeInput($_POST["Test_results"]);
     
-    
+    $Test = sanitizeInput($_POST["id"]);
 
     // Step 3: Use prepared statements to insert data into the database
     $stmt = $conn->prepare("INSERT INTO test (Patient_name, Staff_name, Test_name, Test_results) VALUES (?, ?, ?, ?)");

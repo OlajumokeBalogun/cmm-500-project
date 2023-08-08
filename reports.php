@@ -9,7 +9,7 @@
           </div>
           <div class="card-body p-0">
             <div class="table-responsive" id="printable">
-              <table class="table m-0 table-bordered">
+			<table class="table tabe-hover table-secondary table-striped table-bordered" id="list">
                <!--  <colgroup>
                   <col width="5%">
                   <col width="30%">

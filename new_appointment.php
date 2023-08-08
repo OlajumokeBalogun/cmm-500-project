@@ -5,7 +5,20 @@
 		<div class="card-body">
 			<form action="add_appoint.php" method="post">
 
-        
+			<div class="col-md-4">
+			<div class="form-group">
+              <label for="" class="control-label">Patient_id</label>
+              <select class="form-control form-control-sm select2" name="Patient_Id">
+              	<option></option>
+              	<?php 
+              	$patient = $conn->query("SELECT *,concat(Firstname,' ',Lastname) as name FROM patient  order by concat(Firstname,' ',Lastname) asc ");
+              	while($row= $patient->fetch_assoc()):
+              	?>
+              <option value="<?php echo $row['Patient_Id'] ?>" ><?php echo ucwords($row['name']) ?></option>
+              	<?php endwhile; ?>
+              </select>
+            </div>
+			</div>
 		<div class="row">
 			<div class="col-md-4">
 			<div class="form-group">

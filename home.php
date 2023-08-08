@@ -88,7 +88,7 @@ $firstname = $_SESSION['firstname'];
                           </a>
                           <br>
                           <small>
-                              Due: <?php echo date("Y-m-d",strtotime($row['appointment_date'])) ?>
+                              Due: <?php echo date("Y-m-d",strtotime($row['Appointment_date'])) ?>
                           </small>
                       </td>
                       <td>
@@ -107,7 +107,7 @@ $firstname = $_SESSION['firstname'];
                       </td>
                       
                       <td>
-                        <a class="btn btn-primary btn-sm" href="./index.php?page=view_appointment&appointment_id=<?php echo $row['appointment_id'] ?>">
+                        <a class="btn btn-primary btn-sm" href="./index.php?page=view_appointment&Appointment_id=<?php echo $row['Appointment_id'] ?>">
                               <i class="fas fa-folder">
                               </i>
                               View

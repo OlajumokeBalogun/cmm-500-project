@@ -9,7 +9,7 @@
             
 		</div>
 		<div class="card-body">
-			<table class="table tabe-hover table-condensed" id="list">
+		<table class="table tabe-hover table-secondary table-striped table-bordered" id="list">
 				<colgroup>
 					<col width="15%">
 					<col width="15%">
@@ -55,13 +55,21 @@
 							<p><b><?php echo ucwords($row['staff_scheduling']) ?></b></p>
 						</td>
 						<td>
-							<p><b><?php echo ucwords($row['appointment_date']) ?></b></p>
+							<p><b><?php echo ucwords($row['Appointment_date']) ?></b></p>
 						</td>
 						<td>
-							<p><b><?php echo ucwords($row['appointment_time']) ?></b></p>
+							<p><b><?php echo ucwords($row['Appointment_time']) ?></b></p>
 						</td>
-						<td>
-							<p><b><?php echo ucwords($row['status']) ?></b></p>
+						<td class="text-center">
+							<?php
+							  if(($row['status'])  =='Pending'){
+								echo "<span class='badge badge-info'>{$row['status']}</span>";
+							  }elseif(($row['status']) =='On-Hold'){
+							  	echo "<span class='badge badge-warning'>{$row['status']}</span>";
+							  }elseif(($row['status']) =='Done'){
+								echo "<span class='badge badge-secondary'>{$row['status']}</span>";
+							}
+							?>
 						</td>
 						
 						
@@ -70,12 +78,12 @@
 		                      Action
 		                    </button>
 		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item view_project"href="./index.php?page=view_appointment&appointment_id=<?php echo $row['appointment_id'] ?>" data-id="<?php echo $row['appointment_id'] ?>">View</a>
+		                      <a class="dropdown-item view_project"href="./index.php?page=view_appointment&Appointment_id=<?php echo $row['Appointment_id'] ?>" data-id="<?php echo $row['Appointment_id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
 		                     
-		                      <a class="dropdown-item" href="./index.php?page=edit_appointment&appointment_id=<?php echo $row['appointment_id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="./index.php?page=edit_appointment&Appointment_id=<?php echo $row['Appointment_id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item delete_appointment" href="delete_appointment.php?action=delete_appointment&appointment_id=<?php echo $row['appointment_id'] ?>">Delete</a>
+		                      <a class="dropdown-item delete_appointment" href="delete_appointment.php?action=delete_appointment&Appointment_id=<?php echo $row['Appointment_id'] ?>">Delete</a>
 		                 
 		                    </div>
 						</td>

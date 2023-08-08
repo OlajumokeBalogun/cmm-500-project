@@ -9,7 +9,7 @@
             
 		</div>
 		<div class="card-body">
-			<table class="table tabe-hover table-condensed" id="list">
+		<table class="table tabe-hover table-secondary table-striped table-bordered" id="list">
 				
 				<thead>
 					<tr>
@@ -60,10 +60,16 @@
 							<p><b><?php echo ucwords($row['Doctor_note']) ?></b></p>
 						
 						</td>
-						<td>
-							<p><b><?php echo ucwords($row['prescription_status']) ?></b></p>
-						
+						<td class="text-center">
+							<?php
+							  if(($row['prescription_status'])  =='Collected'){
+								echo "<span class='badge badge-info'>{$row['prescription_status']}</span>";
+							  }elseif(($row['prescription_status']) =='Awaiting Collection'){
+							  	echo "<span class='badge badge-secondary'>{$row['prescription_status']}</span>";
+							  }
+							?>
 						</td>
+						
 						<td>
 							<p><b><?php echo ucwords($row['Prescription_date']) ?></b></p>
 						

@@ -1,6 +1,6 @@
 <?php
-if(session_status() === PHP_SESSION_NONE)
-session_start();
+include('session_manager.php');
+
 $link = $_SERVER['PHP_SELF'];
 if(!strpos($link,'login.php') && !strpos($link,'login_verification.php') && !strpos($link,'registration.php') && !isset($_SESSION['user_login'])){
 echo "<script>location.replace('./login.php');</script>";

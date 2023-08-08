@@ -15,10 +15,10 @@ if ($conn->connect_error) {
 
 
 
-if (isset($_GET["appointment_id"])) {
-    $appointment_id= intval($_GET["appointment_id"]);
+if (isset($_GET["Appointment_id"])) {
+    $appointment_id= intval($_GET["Appointment_id"]);
 
-    $sql = "SELECT * FROM appointment WHERE appointment_id = ?";
+    $sql = "SELECT * FROM appointment WHERE Appointment_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $appointment_id);
     $stmt->execute();
@@ -51,7 +51,7 @@ $conn->close();
 
 <!-- HTML Edit Form -->
 <form action="" method="post">
-    <input type="hidden" name="appointment_id" value="<?php echo $row["appointment_id"]; ?>">
+    <input type="hidden" name="appointment_id" value="<?php echo $row["Appointment_id"]; ?>">
    
     <div class="row">
 					<div class="col-md-2">
@@ -75,7 +75,7 @@ $conn->close();
 							<div class="col-md-2">
 							<label for="" class="control-label">Appointment date</label>
 							<div>
-							<?php echo $row["appointment_date"]; ?>
+							<?php echo $row["Appointment_date"]; ?>
 							</div>
 							
 

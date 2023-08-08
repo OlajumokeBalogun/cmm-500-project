@@ -165,7 +165,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <div class="form-group text-end">
                             <button class="btn btn-primary bg-gradient rounded custom-margin">Login with OTP</button>
                             <button class="btn btn-primary bg-gradient rounded custom-margin">Login with Google</button>
-                            <a href="update_password.php">Update Password</a>
                             </div>
                             
                        </form>

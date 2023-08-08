@@ -9,7 +9,7 @@
             
 		</div>
 		<div class="card-body">
-			<table class="table tabe-hover table-condensed" id="list">
+		<table class="table tabe-hover table-secondary table-striped table-bordered" id="list">
 				<colgroup>
 					
 					<col width="30%">

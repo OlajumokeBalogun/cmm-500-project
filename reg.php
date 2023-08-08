@@ -105,8 +105,8 @@ function send_mail($to = "", $firstname = "", $password = "")
 
                     <ol>
                         <li>Log in to your account using your current username and the above default password.</li>
-                        <li>Once logged in, navigate to the 'Manage Account' or 'Account Settings' section.</li>
-                        <li>Look for the 'Change Password' icon or link.</li>
+                        <li>Once logged in, navigate to the <a href='http://localhost/cmm-500-project/update_password.php'>Update_password</a> or 'Account Settings' section.</li>
+						
                     </ol>
 
                     <p>Please remember to create a strong password that includes a combination of uppercase and lowercase letters, numbers, and special characters. Your password should be at least 8 characters long.</p>

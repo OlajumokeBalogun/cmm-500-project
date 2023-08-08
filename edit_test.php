@@ -89,7 +89,7 @@ $conn->close();
             </div>
 			<div class="col-md-6">
 			<div class="form-group">
-              <label for="" class="control-label">Staff name</label>
+              
 			  <input type="text" name="Staff_name" id="Staff_name" class="form-control" value="<?php echo $row['Staff_name'] ?>" >
 			
 			</div>

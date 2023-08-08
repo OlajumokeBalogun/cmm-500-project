@@ -114,7 +114,7 @@ function send_mail($to = "", $firstname = "", $password = "")
 
                     <ol>
                         <li>Log in to your account using your current username and the above default password.</li>
-                        <li>Once logged in, navigate to the 'Update_password' or 'Account Settings' section.</li>
+                        <li>Once logged in, navigate to the <a href='http://localhost/cmm-500-project/update_password.php'>Update_password</a> or 'Account Settings' section.</li>
 						
                     </ol>
 
@@ -155,73 +155,6 @@ function change_password($password_changed, $password_created) {
 
 
 
-function resend_mail($to = "", $firstname = "", $password = "")
-{
-    if (!empty($to)) {
-        try {
-            // Set up the email parameters
-            $email = 'testbaola20@gmail.com';
-            $subject = 'Your New Default Password and Important Account Update';
-            $headers = "From: $email\r\n";
-            $headers .= "Reply-To: $email\r\n";
-            $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-            $headers .= "MIME-Version: 1.0\r\n";
-            $headers .= "Content-type: text/html; charset=UTF-8\r\n";
-
-            // Create the HTML message body
-            $msg = "
-            <html>
-                <head>
-                    <style>
-                        h2 {
-                            color: #2e6c80;
-                        }
-                        p {
-                            font-family: Arial, sans-serif;
-                            font-size: 14px;
-                        }
-                        ol {
-                            font-family: Arial, sans-serif;
-                            font-size: 14px;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <h2>Baola Hospital System Application: Your New Default Password and Important Account Update</h2>
-                    <p>Dear $firstname,</p>
-
-                    <p>We hope this message finds you well. We are writing to inform you that your account password has been reset, and we have generated a new default password for you.</p>
-
-                    <p>Your new default password is: <strong>$password</strong></p>
-
-                    <p>For security purposes, we strongly recommend that you change your password immediately upon logging in to your account. Please follow these steps to change your password:</p>
-
-                    <ol>
-                        <li>Log in to your account using your current username and the above default password.</li>
-                        <li>Once logged in, navigate to the 'Manage Account' or 'Account Settings' section.</li>
-						http://localhost/cmm-500-project/update_password.php
-                    </ol>
-
-                    <p>Please remember to create a strong password that includes a combination of uppercase and lowercase letters, numbers, and special characters. Your password should be at least 8 characters long.</p>
-
-                    <p>If you have any difficulties changing your password or need further assistance, please don't hesitate to contact our support team at [Your Support Email or Phone Number].</p>
-
-                    <p>Thank you for being a valued member of our community. We prioritize the security of our users, and updating your password is an essential step in maintaining the confidentiality of your account.</p>
-
-                    <p>Best regards,</p>
-                    <p>[Baola EHR Support Team]</p>
-                </body>
-            </html>
-            ";
-
-            // Send email using the mail function
-            mail($to, $subject, $msg, $headers);
-
-        } catch (Exception $e) {
-            // Handle exception if needed
-        }
-    }
-}
 
 
 	function signup(){
