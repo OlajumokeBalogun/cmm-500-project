@@ -1,1 +1,62 @@
+version: '3'
 
+services:
+  # PHP Service
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php
+    volumes:
+      - ./:/var/www/html
+    # networks:
+    #   - app-network
+
+  # Nginx Service
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+      - ./nginx-conf:/etc/nginx/conf.d
+    depends_on:
+      - php
+    # networks:
+    #   - app-network
+
+  # MySQL Service
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: kike
+      MYSQL_DATABASE: kikedb
+      MYSQL_USER: kike
+      MYSQL_PASSWORD: kike
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    # networks:
+    #   - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    # links:
+    #   - mysql:db
+    ports:
+      - "8181:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: Kikelomo123@
+
+volumes:
+  mysql-data:
+
+# networks:
+#   app-network:
+#     driver: bridge

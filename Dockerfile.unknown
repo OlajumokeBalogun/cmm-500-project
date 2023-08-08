@@ -1,0 +1,7 @@
+FROM php:8-fpm
+
+# Install the MySQLi extension
+RUN docker-php-ext-install mysqli
+
+# Optional: Other PHP extensions you might need
+RUN docker-php-ext-install pdo pdo_mysql
