@@ -8,7 +8,7 @@ require 'vendor/autoload.php';
 Class MainClass{
     protected $db;
     function __construct(){
-        $this->db = new mysqli('localhost','Kikelomo','Kikelomo123@','kikedb');
+        $this->db = new mysqli('localhost','root','','kikedb');
         if(!$this->db){
             die("Database Connection Failed. Error: ".$this->db->error);
         }

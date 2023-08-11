@@ -1,16 +1,6 @@
 <?php
 include('session_manager.php');
-// Step 1: Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "kikedb";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include ('db_connect.php');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Step 2: Sanitize the form data

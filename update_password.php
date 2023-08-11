@@ -1,11 +1,6 @@
 <?php
 
-// Assuming you have a database connection established
-// Replace 'your_database_credentials' with actual database credentials
-$db_host = "localhost";
-$db_username = "root";
-$db_password = "";
-$db_name = "kikedb";
+include ('db_connect.php');
 
 
 // Function to sanitize input
@@ -19,13 +14,8 @@ function sanitizeInput($data)
 
 
 
-// Attempt to connect to the database
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = sanitizeInput($_POST["email"]);

@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include ('db_connect.php');
 function login($email, $password)
 {
     // Perform authentication here
@@ -34,11 +34,7 @@ function login($email, $password)
 function increment_login_attempts($email)
 {
     // Replace database_connection_code with your actual database connection code.
-    $conn= new mysqli('localhost','root','','kikedb');
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include ('db_connect.php');
 
     $email = mysqli_real_escape_string($conn, $email);
 
@@ -68,11 +64,7 @@ function reset_login_attempts($email)
 {
     // Reset login attempts for the given user.
     // Replace database_connection_code with your actual database connection code.
-    $conn= new mysqli('localhost','root','','kikedb');
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include ('db_connect.php');
 
     $email = mysqli_real_escape_string($conn, $email);
     $query = "UPDATE login_attempts SET attempts = 0 WHERE email = '$email'";

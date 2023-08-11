@@ -42,12 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-    // Save the user information (you'll need to set up your database connection here)
-    // Replace 'your_db_host', 'your_db_user', 'your_db_password', and 'your_db_name' with your actual database credentials
-    $conn = new mysqli('localhost', 'root', '', 'kikedb');
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    
+    include ('db_connect.php');
 
     if (empty($id)) {
         // INSERT query

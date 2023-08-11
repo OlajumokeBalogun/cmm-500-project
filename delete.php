@@ -1,9 +1,6 @@
 <?php
 
-$conn = new mysqli('localhost','root','','kikedb');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include ('db_connect.php');
 
 
 function sanitize_input($data) {
