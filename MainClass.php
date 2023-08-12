@@ -1,8 +1,17 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
+/* Exception class. */
+require 'PHPMailer/src/Exception.php';
+
+/* The main PHPMailer class. */
+require 'PHPMailer/src/PHPMailer.php';
+
+/* SMTP class, needed if you want to use SMTP. */
+require 'PHPMailer/src/SMTP.php';
+
 require 'vendor/autoload.php';
 
 Class MainClass{
@@ -163,7 +172,7 @@ Class MainClass{
         $mail->SMTPAuth = true;
         $mail->Username = 'testbaola20@gmail.com';
         $mail->Password = 'dwytcvdlzkbdobfp';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
         // Recipients
@@ -173,7 +182,7 @@ Class MainClass{
         // Content
         $mail->isHTML(true);
         $mail->Subject = 'Welcome to Our Website';
-        $mail->Body    = "Hello $pin, <br><br>Here is your 6 digits OTP (One-Time PIN) to verify your Identity.";
+        $mail->Body    = "Hello <br> your pin is $pin, <br><br>Here is your 6 digits OTP (One-Time PIN) to verify your Identity.";
 
         $mail->send();
         

@@ -1,8 +1,5 @@
 <?php
-include ('db_connect.php');
-
-
-
+include'db_connect.php';
 
 if (isset($_GET["Billing_id"])) {
     $Billing_id= intval($_GET["Billing_id"]);

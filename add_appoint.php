@@ -1,10 +1,6 @@
 <?php
-include ('db_connect.php');
+include'db_connect.php';
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $Patient_Id = $_POST["Patient_Id"];

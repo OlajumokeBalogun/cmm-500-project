@@ -1,8 +1,5 @@
 <?php
-include ('db_connect.php');
-
-
-
+include'db_connect.php';
 
 if (isset($_GET["Test_id"])) {
     $Test_id= intval($_GET["Test_id"]);

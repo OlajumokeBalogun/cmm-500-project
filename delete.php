@@ -1,7 +1,6 @@
 <?php
 
-include ('db_connect.php');
-
+include'db_connect.php';
 
 function sanitize_input($data) {
     $data = trim($data);

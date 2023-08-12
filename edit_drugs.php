@@ -1,5 +1,5 @@
 <?php
-include ('db_connect.php');
+include'db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $Drug_name= sanitizeInput($_POST["Drug_name"]);

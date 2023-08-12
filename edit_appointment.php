@@ -1,5 +1,5 @@
 <?php
-include ('db_connect.php');
+include'db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $Patient_name= sanitizeInput($_POST["Patient_name"]);
@@ -9,9 +9,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 	$appointment_time= sanitizeInput($_POST["appointment_time"]);
 	$staff_scheduling= sanitizeInput($_POST["staff_scheduling"]);
     
-    $appointment_id= intval($_GET["appointment_id"]);
+    $appointment_id= intval($_GET["Appointment_id"]);
     
-    $stmt = $conn->prepare("UPDATE appointment SET  Patient_name=?, status=?, doctor_name=?, appointment_date=? ,appointment_time=?,staff_scheduling=?  WHERE appointment_id=?");
+    $stmt = $conn->prepare("UPDATE appointment SET  Patient_name=?, status=?, doctor_name=?, Appointment_date=? ,Appointment_time=?,staff_scheduling=?  WHERE Appointment_id=?");
     $stmt->bind_param("ssssssi", $Patient_name, $status,  $doctor_name, $appointment_date,  $appointment_time,$staff_scheduling,$appointment_id);
 
     if ($stmt->execute()) {
@@ -32,10 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 
-if (isset($_GET["appointment_id"])) {
-    $appointment_id= intval($_GET["appointment_id"]);
+if (isset($_GET["Appointment_id"])) {
+    $appointment_id= intval($_GET["Appointment_id"]);
 
-    $sql = "SELECT * FROM appointment WHERE appointment_id = ?";
+    $sql = "SELECT * FROM appointment WHERE Appointment_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $appointment_id);
     $stmt->execute();
@@ -69,7 +69,7 @@ $conn->close();
 	<div id="msg"></div>
 	
 	<form action="" method="post">
-    <input type="hidden" name="appointment_id" value="<?php echo $row["appointment_id"]; ?>">
+    <input type="hidden" name="Appointment_id" value="<?php echo $row["Appointment_id"]; ?>">
 
     <div class="row">
 					<div class="col-md-4 border-right">
@@ -89,12 +89,12 @@ $conn->close();
 					
 						<div class="form-group">
 							<label for="" class="control-label">Appointment date</label>
-							<input type="date" name="appointment_date" class="form-control form-control-sm" value="<?php echo $row["appointment_date"]; ?>" required >
+							<input type="date" name="appointment_date" class="form-control form-control-sm" value="<?php echo $row["Appointment_date"]; ?>" required >
 						</div>
 						
 						<div class="form-group">
 							<label for="" class="control-label">Appointment time</label>
-							<input type="time" name="appointment_time" class="form-control form-control-sm" value="<?php echo $row["appointment_time"]; ?>" required >
+							<input type="time" name="appointment_time" class="form-control form-control-sm" value="<?php echo $row["Appointment_time"]; ?>" required >
 						</div>
 						
 						<div class="form-group">

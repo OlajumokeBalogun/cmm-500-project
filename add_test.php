@@ -1,6 +1,6 @@
 <?php
 include('session_manager.php');
-include ('db_connect.php');
+include'db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Step 2: Sanitize the form data

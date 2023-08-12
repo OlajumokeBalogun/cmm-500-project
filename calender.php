@@ -14,12 +14,7 @@
     
 
 <?php 
-include ('db_connect.php');
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include'db_connect.php';
 $fetch_event = $conn->query("SELECT * FROM appointment");
 ?>
 

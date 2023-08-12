@@ -1,7 +1,5 @@
 <?php
-include ('db_connect.php');
-
-
+include'db_connect.php';
 
 if (isset($_GET["Drug_id"])) {
     $Drug_id= intval($_GET["Drug_id"]);

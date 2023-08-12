@@ -1,6 +1,6 @@
 <?php
 
-include ('db_connect.php');
+include('db_connect.php');
 
 
 // Function to sanitize input
@@ -11,8 +11,6 @@ function sanitizeInput($data)
     $data = htmlspecialchars($data);
     return $data;
 }
-
-
 
 
 
