@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "<script>
         alert('Prescription  record updated successfully!!.');
         setTimeout(function() {
-            window.location.href = 'index.php?page=prescription';
+            window.location.href = 'baola.php?page=prescription';
         }, 200); // 1000 milliseconds = 3 seconds
     </script>";
         exit();

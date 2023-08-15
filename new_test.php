@@ -51,13 +51,17 @@
 
 
 		  </div>
-
-		  <div class="col-md-6">
-		  <div class="form-group">
-              <label for="" class="control-label">Test results</label>
-              <textarea cols="30" rows="10" class="summernote form-control" autocomplete="off" name="Test_results" ></textarea>
-            </div>
-          </div>
+<div class="row">
+			<div class="col-md-10">
+				<div class="form-group">
+					<label for="" class="control-label">Test_results</label>
+					<textarea name="Test_results" id="" cols="30" rows="10" class="summernote form-control">
+						<?php echo isset($Test_results) ? $Test_results : '' ?>
+					</textarea>
+				</div>
+			</div>
+		</div>
+		
    
 		  <hr>
 				<div class="col-lg-12 text-right justify-content-center d-flex">

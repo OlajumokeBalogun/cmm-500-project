@@ -3,7 +3,7 @@
 	<div class="card card-outline card-success">
 		<div class="card-header">
 			<div class="card-tools">
-				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="./index.php?page=new_user"><i class="fa fa-plus"></i> Add New User</a>
+				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="baola.php?page=new_user"><i class="fa fa-plus"></i> Add New User</a>
 			</div>
 		</div>
 		<div class="card-body">
@@ -20,7 +20,7 @@
 				<tbody>
 					<?php
 					$i = 1;
-					$type = array('',"Admin","Project Manager","Employee");
+					
 					$qry = $conn->query("SELECT *,concat(firstname,' ',lastname) as name FROM users order by concat(firstname,' ',lastname) asc");
 					while($row= $qry->fetch_assoc()):
 					?>
@@ -36,7 +36,7 @@
 		                    <div class="dropdown-menu" style="">
 		                      <a class="dropdown-item view_user" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item" href="./index.php?page=edit_user&id=<?php echo $row['id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="baola.php?page=edit_user&id=<?php echo $row['id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
 							  <a class="dropdown-item delete_user" href="delete.php?action=delete_user&id=<?php echo $row['id'] ?>">Delete</a>
 

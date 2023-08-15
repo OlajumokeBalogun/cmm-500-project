@@ -1,5 +1,6 @@
 <?php
 include'db_connect.php';
+session_start();
 
 
 if (isset($_GET["Prescription_id"])) {
@@ -86,7 +87,7 @@ $conn->close();
 				<hr>
 				<div class="col-lg-12 text-right justify-content-center d-flex">
 				
-					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=prescription'">Cancel</button>
+					<button class="btn btn-secondary" type="button" onclick="location.href = 'baola.php?page=prescription'">Cancel</button>
 				</div>
 				
 

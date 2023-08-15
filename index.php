@@ -1,130 +1,172 @@
 <?php
-require_once('auth.php');
-require_once('MainClass.php');
-include 'header.php' 
+
+require 'vendor/autoload.php'; // Assuming you installed GuzzleHttp using composer.
+use GuzzleHttp\Client;
+
+$client = new GuzzleHttp\Client([
+    'base_uri' => 'https://api.abuseipdb.com/api/v2/'
+]);
+
+// Get the user's remote IP address
+$userIp = $_SERVER['REMOTE_ADDR'];
+
+try {
+    $response = $client->request('GET', 'check', [
+        'query' => [
+            'ipAddress' => $userIp,
+            'maxAgeInDays' => '90',
+        ],
+        'headers' => [
+            'Accept' => 'application/json',
+            'Key' => '71ee5cc81e4b166346891de959010cabcf9176343d8b6ee9510d374e3e007c1a41f93730bae4d207'
+        ],
+    ]);
+
+    $output = $response->getBody();
+    $ipDetails = json_decode($output, true);
+
+    if (
+        isset($ipDetails['data']['countryCode']) &&
+        $ipDetails['data']['countryCode'] === 'GB' &&
+        $ipDetails['data']['abuseConfidenceScore'] <= 25
+    ) {
+        // Display a message if conditions are met
+        // Insert redirection code here if needed
+    } else {
+    header("Location: error.php"); // Redirect to error.php if conditions are not met
+    exit; // Stop further processing
+}
+} catch (\Exception $e) {
+    // Handle exception (e.g., log the error, show a generic error message to the user)
+    echo "Error: " . $e->getMessage();
+}
 ?>
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" >
-<div class="wrapper">
-  <?php include 'topbar.php' ?>
-  <?php include 'sidebar.php' ?>
 
-  <!-- Content Wrapper. Contains page content -->
-    
-<div class="card-body" style="background-image: url('https://www.freepik.com/free-photo/happy-general-practitioner-talking-senior-man-while-shaking-hands-with-him-during-home-visit_25623932.htm#query=patient&position=1&from_view=search&track=sph'); background-size: cover; background-repeat: no-repeat;">
-  <div class="content-wrapper" >
-  	 <div class="toast" id="alert_toast" role="alert" aria-live="assertive" aria-atomic="true">
-	    <div class="toast-body text-white">
-	    </div>
-	  </div>
-    <div id="toastsContainerTopRight" class="toasts-top-right fixed"></div>
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0"><?php echo $title ?></h1>
-          </div><!-- /.col -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAOLA EHR</title>
+    <link rel="stylesheet" href="./Font-Awesome-master/css/all.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./Font-Awesome-master/js/all.min.js"></script>
+    <style>
+       .logo {
+            position: absolute;
+            top: 20px;
+            left: 1px;
+        }
+    </style>
+</head>
+<body>
+     <style>
+        .navbar-brand {
+            font-size: 18px; /* Adjust the font size as needed */
+        }
+    </style>
+     <style>
+    .bg-navy {
+    background-color: navy; /* Define the desired color */
+}
+ </style>
 
-        </div><!-- /.row -->
-            <hr class="border-primary">
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-         <?php 
-            $page = isset($_GET['page']) ? $_GET['page'] : 'home';
-            if(!file_exists($page.".php")){
-                include '404.html';
-            }else{
-            include $page.'.php';
-
-            }
-          ?>
-      </div><!--/. container-fluid -->
-    </section>
-    <!-- /.content -->
-    <div class="modal fade" id="confirm_modal" role='dialog'>
-    <div class="modal-dialog modal-md" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title">Confirmation</h5>
-      </div>
-      <div class="modal-body">
-        <div id="delete_content"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id='confirm' onclick="">Continue</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="uni_modal" role='dialog'>
-    <div class="modal-dialog modal-md" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title"></h5>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id='submit' onclick="$('#uni_modal form').submit()">Save</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-      </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="uni_modal_right" role='dialog'>
-    <div class="modal-dialog modal-full-height  modal-md" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span class="fa fa-arrow-right"></span>
+<nav class="navbar navbar-expand-lg navbar-dark bg-navy blue">
+    <div class="container-fluid">
+        <a class="navbar-brand me-3" href="index.php"><img src="assets/img/PalTours.png" alt="PalTours Logo" width="50"></a> 
+        <a class="navbar-brand me-3" href="index.php">Baola EHR</a> 
+        <!-- Added "me-3" class for right margin -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
-      </div>
-      <div class="modal-body">
-      </div>
-      </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto justify-content-between"> <!-- Added "justify-content-between" class -->
+                <li class="nav-item">
+                    <a class="nav-link" href="login.php">Login</a>
+                </li>
+                <li class="nav-item" style=""> <!-- Add margin to the left -->
+                    <a class="nav-link" href="#Resource">Resource Center</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#covid">Covid-19 Protocols</a>
+                </li>
+                <li class="nav-item" style="">
+                    <a class="nav-link" href="#staff">Staff of the Week</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#announcement">Announcements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#branches">Branches</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#careers">Careers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#newsletter">Newsletter</a>
+                </li>
+                <!-- Add more navigation links as needed -->
+            </ul>
+        </div>
     </div>
-  </div>
-  <div class="modal fade" id="viewer_modal" role='dialog'>
-    <div class="modal-dialog modal-md" role="document">
-      <div class="modal-content">
-              <button type="button" class="btn-close" data-dismiss="modal"><span class="fa fa-times"></span></button>
-              <img src="" alt="">
-      </div>
-    </div>
-  </div>
-  </div>
-  <!-- /.content-wrapper -->
+</nav>
+   <style>
+.carousel-container {
+    max-width: 100%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the container */
+    padding: 1px; /* Add padding for spacing */
+}
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+.carousel-inner {
+    max-height: 680px; /* Adjust the height as needed */
+    overflow: hidden; /* Hide overflow content */
+}
+    </style>
 
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2023 <a href="https://www.baola.com/">Baola</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-     
+<div class="col-sm-12">
+    <div class="carousel-container">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="assets\img\female-medical-workers-created-with-generative-ai-technology.jpg" class="d-block w-100 img-fluid" alt="Image 7">
+                </div>
+
+                <div class="carousel-item">
+                    <img src="assets\img\glass-designed-building-view.jpg" class="d-block w-100 img-fluid" alt="Image 3">
+                </div>
+
+                <div class="carousel-item">
+                    <img src="assets\img\diverse-team-professional-surgeons-performing-invasive-surgery-patient-hospital-operating-room-nurse-hands-out-instruments-surgeon-anesthesiologist-monitors-vitals.jpg" class="d-block w-100 img-fluid" alt="Image 4">
+                </div>
+
+                <div class="carousel-item">
+                    <img src="assets\img\front-view-smiley-doctors-work.jpg" class="d-block w-100 img-fluid" alt="Image 7">
+                </div>
+
+                <div class="carousel-item">
+                    <img src="assets\img\cheerful-multiracial-doctors-hospital.jpg" class="d-block w-100 img-fluid" alt="Image 10">
+                </div>
+
+                <div class="carousel-item">
+                    <img src="assets\img\happy-woman-talking-receptionist-while-arriving-spa.jpg" class="d-block w-100 img-fluid" alt="Image 10">
+                </div>
+            </div>
+        </div>
     </div>
-  </footer>
 </div>
-</div>
-<!-- ./wrapper -->
 
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-<!-- Bootstrap -->
-<?php include 'footer.php' ?>
+        <script>
+    // Add JavaScript to activate carousel every 3 seconds
+    $(document).ready(function() {
+        $('.carousel').carousel({
+            interval: 2000 // Slide every 3 seconds
+        });
+    });
+</script>
 
 </body>
-
 </html>

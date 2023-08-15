@@ -8,9 +8,9 @@
 $currentHour = date('H');
 
 // Define the greetings based on the time of day
-if ($currentHour <= 5 && $currentHour < 12) {
+if ($currentHour < 12) {
     $greeting = 'Good morning';
-} elseif ($currentHour <= 12 && $currentHour < 18) {
+} elseif ($currentHour < 18) {
     $greeting = 'Good afternoon';
 } else {
     $greeting = 'Good evening';
@@ -128,7 +128,7 @@ $firstname = $_SESSION['firstname'];
               <div class="inner">
                 <h3><?php echo $conn->query("SELECT * FROM 	appointment ")->num_rows; ?></h3>
 
-                <p>Total Appointment</p>
+                <p>Total Appointments</p>
               </div>
               <div class="icon">
               <i class="nav-icon fas fa-calendar-check"></i>
@@ -140,7 +140,7 @@ $firstname = $_SESSION['firstname'];
               <div class="inner">
                 <h3><?php echo $conn->query("SELECT * FROM 	patient ")->num_rows; ?></h3>
 
-                <p>Total Patient</p>
+                <p>Total Patients</p>
               </div>
               <div class="icon">
               <i class="nav-icon fas fa-hospital-user"></i>

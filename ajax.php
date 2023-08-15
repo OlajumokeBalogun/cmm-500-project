@@ -1,6 +1,6 @@
 <?php
 ob_start();
-date_default_timezone_set("Asia/Manila");
+date_default_timezone_set("Europe");
 
 $action = $_GET['action'];
 include 'admin_class.php';
@@ -51,32 +51,9 @@ if($action == 'delete_user'){
 	if($save)
 		echo $save;
 }
-if($action == 'save_appointment'){
-	$save = $crud->save_appointment();
-	if($save)
-		echo $save;
-}
 
-if($action == 'save_task'){
-	$save = $crud->save_task();
-	if($save)
-		echo $save;
-}
-if($action == 'delete_task'){
-	$save = $crud->delete_task();
-	if($save)
-		echo $save;
-}
-if($action == 'save_progress'){
-	$save = $crud->save_progress();
-	if($save)
-		echo $save;
-}
-if($action == 'delete_patient'){
-	$save = $crud->delete_patient();
-	if($save)
-		echo $save;
-}
+
+
 if($action == 'get_report'){
 	$get = $crud->get_report();
 	if($get)

@@ -17,7 +17,7 @@ require 'vendor/autoload.php';
 Class MainClass{
     protected $db;
     function __construct(){
-        $this->db = new mysqli('localhost','root','','kikedb');
+        $this->db = new mysqli('localhost','u614785957_Kikelomo','Kikelomo123@','u614785957_kikedb');
         if(!$this->db){
             die("Database Connection Failed. Error: ".$this->db->error);
         }
@@ -61,7 +61,7 @@ Class MainClass{
                         $has_code = true;
                         $resp['status'] = 'success';
                         $_SESSION['otp_verify_user_id'] = $data['id'];
-                        $this->send_mail($data['email'],$otp);
+                        $this->send_mail($data['email'], $data['firstname'], $otp);
                     }else{
                         $resp['status'] = 'failed';
                         $_SESSION['flashdata']['type'] = 'danger';
@@ -132,7 +132,7 @@ Class MainClass{
         if($update_otp){
             $resp['status'] = 'success';
             $email = $this->db->query("SELECT email FROM `users` where id = '{$id}'")->fetch_array()[0];
-            $this->send_mail($email,$otp);
+            $this->send_mail($email, $firstname, $otp);
         }else{
             $resp['status'] = 'failed';
             $resp['error'] = $this->db->error;
@@ -163,7 +163,7 @@ Class MainClass{
     }
     
     
-    function send_mail($to="",$pin=""){
+    function send_mail($to="",$firstname="", $pin=""){
         $mail = new PHPMailer(true);
     try {
         // Server settings
@@ -177,12 +177,18 @@ Class MainClass{
 
         // Recipients
         $mail->setFrom('testbaola20@gmail.com', 'Baola Hospital');
-        $mail->addAddress($to, $pin); // User's email and name
+        $mail->addAddress($to, $firstname, $pin); 
 
         // Content
         $mail->isHTML(true);
-        $mail->Subject = 'Welcome to Our Website';
-        $mail->Body    = "Hello <br> your pin is $pin, <br><br>Here is your 6 digits OTP (One-Time PIN) to verify your Identity.";
+        $mail->Subject = 'Your OTP for Secure Login - Action Required';
+        $mail->Body    = "Dear $firstname, <br><br> Here is your 6 digits OTP (One-Time PIN) $pin to verify your Identity. <br>Please use it within the next two minutes to access your account. <br><br> If you didn't initiate this login, contact us immediately at testbaola20@gmail.com] .
+ <br><br>
+Never share your OTP. We won't ask for it via email or phone.
+ <br><br>
+Best regards,
+<br><br>
+[Baola EHR Support team]";
 
         $mail->send();
         

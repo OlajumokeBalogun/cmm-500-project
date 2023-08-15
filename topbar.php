@@ -1,5 +1,5 @@
 <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-primary navbar-dark ">
+ <nav class="main-header navbar navbar-expand navbar " style="background-color: #000080;" >
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <?php if(isset($_SESSION['firstname'])): ?>
@@ -8,7 +8,7 @@
       </li>
     <?php endif; ?>
       <li>
-        <a class="nav-link text-white"  href="./" role="button"> <large><b><?php echo "Baola EHR Application" ?></b></large></a>
+        <a class="nav-link text-white"  href="./baola.php" role="button"> <large><b><?php echo "Baola EHR Application" ?></b></large></a>
       </li>
     </ul>
 

@@ -20,13 +20,13 @@
                 <thead>
 					<tr>
 						
-						<th>Prescription_id </th>
+						<th>Appointment_id </th>
 						<th>Patient_name</th>
 						<th>Staff_name</th>
-						<th>Drug_name</th>
-						<th>Doctor_note</th>
-						<th>Prescription Status</th>
-						<th>Prescription_date</th>
+						<th>Doctor Name</th>
+						<th>Appointment_time</th>
+						<th>status</th>
+						<th>Appointment_date</th>
 						
 					</tr>
 				</thead>
@@ -34,7 +34,7 @@
 					<?php
 					
 					
-					$qry = $conn->query("SELECT * FROM Prescription ");
+					$qry = $conn->query("SELECT * FROM appointment ");
 					while($row= $qry->fetch_assoc()):
 						$trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
 						unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
@@ -43,7 +43,7 @@
 					<tr>
 						
 						<td>
-							<p><b><?php echo ucwords($row['Prescription_id']) ?></b></p>
+							<p><b><?php echo ucwords($row['Appointment_id']) ?></b></p>
 						
 						</td>
 						
@@ -53,25 +53,25 @@
 						</td>
 
 						<td>
-							<p><b><?php echo ucwords($row['Staff_name']) ?></b></p>
+							<p><b><?php echo ucwords($row['staff_scheduling']) ?></b></p>
 						
 						</td>
 
 						<td>
-							<p><b><?php echo ucwords($row['Drug_name']) ?></b></p>
+							<p><b><?php echo ucwords($row['doctor_name']) ?></b></p>
 						
 						</td>
 
 						<td>
-							<p><b><?php echo ucwords($row['Doctor_note']) ?></b></p>
+							<p><b><?php echo ucwords($row['Appointment_date']) ?></b></p>
 						
 						</td>
 						<td>
-							<p><b><?php echo ucwords($row['prescription_status']) ?></b></p>
+							<p><b><?php echo ucwords($row['status']) ?></b></p>
 						
 						</td>
 						<td>
-							<p><b><?php echo ucwords($row['Prescription_date']) ?></b></p>
+							<p><b><?php echo ucwords($row['Appointment_time']) ?></b></p>
 						
 						</td>
 						

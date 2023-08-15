@@ -1,4 +1,5 @@
 <?php include'db_connect.php' ?>
+
 <div class="col-lg-12">
 	<div class="card card-outline card-success" style="background-image: url(''); background-size: cover; background-repeat: no-repeat;">
 		<div class="card-header">
@@ -8,7 +9,7 @@
     border-radius: 50px; /* Adjust the border-radius to control the roundness of the button */
   }
 </style>
-			<a class="btn btn-block btn-sm btn-default btn-flat border-primary btn-round" href="./index.php?page=new_patient">
+			<a class="btn btn-block btn-sm btn-default btn-flat border-primary btn-round" href="./baola.php?page=new_patient">
   <i class="fa fa-plus"></i> Add New patient
 </a>
 
@@ -95,12 +96,13 @@
 		                      Action
 		                    </button>
 		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item view_project" href="./index.php?page=view_patient&Patient_Id=<?php echo $row['Patient_Id'] ?>" data-id="<?php echo $row['Patient_Id'] ?>">View</a>
+		                      <a class="dropdown-item view_project" href="./baola.php?page=view_patient&Patient_Id=<?php echo $row['Patient_Id'] ?>" data-id="<?php echo $row['Patient_Id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
 		                      
-		                      <a class="dropdown-item" href="./index.php?page=edit_patient&Patient_Id=<?php echo $row['Patient_Id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="./baola.php?page=edit_patient&Patient_Id=<?php echo $row['Patient_Id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item delete_project" href="delete.php?action=delete_patient$id=<?php echo $row['Patient_Id'] ?>">Delete</a>
+		                      <a class="dropdown-item delete_project" href="delete_pat.php?action=delete_patient&id=<?php echo $row['Patient_Id']; ?>">Delete</a>
+
 		                  
 		                    </div>
 						</td>

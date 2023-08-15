@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo "<script>
 				alert('New patient record created successfully.');
 				setTimeout(function() {
-					window.location.href = 'index.php?page=patient';
+					window.location.href = 'baola.php?page=patient';
 				}, 200); // 1000 milliseconds = 3 seconds
 			</script>";
         exit();
@@ -138,7 +138,7 @@ $conn->close();
 				<hr>
 				<div class="col-lg-12 text-right justify-content-center d-flex">
 				<button type="submit" class="btn btn-primary mr-2">Save</button>
-					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=patient'">Cancel</button>
+					<button class="btn btn-secondary" type="button" onclick="location.href = 'baola.php?page=patient'">Cancel</button>
 				</div>
 			</form>
 		</div>

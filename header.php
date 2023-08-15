@@ -5,6 +5,8 @@
   
   
   ob_start();
+
+
   $title = isset($_GET['page']) ? ucwords(str_replace("_", ' ', $_GET['page'])) : "Home";
   ?>
   <title><?php echo $title ?> | <?php echo $_SESSION['firstname']?></title>

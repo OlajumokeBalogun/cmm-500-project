@@ -87,28 +87,28 @@ function send_mail($to = "", $firstname = "", $password = "")
 
         // Content
         $mail->isHTML(true);
-        $mail->Subject = 'Welcome to Our Website';
+        $mail->Subject = 'Welcome to Baola EHR';
         $mail->Body    = "
         <h2>Baola Hospital System Application: Your New Default Password and Important Account Update</h2>
         <p>Dear $firstname,</p>
 
-        <p>We hope this message finds you well. We are writing to inform you that your account password has been reset, and we have generated a new default password for you.</p>
+        <p>I hope this message finds you well. I am writing to inform you that your account password has been set, and i have generated a default password for you.</p>
 
-        <p>Your new default password is: $password</p>
+        <p>Your default password is: $password</p>
 
-        <p>For security purposes, we strongly recommend that you change your password immediately upon logging in to your account. Please follow these steps to change your password:</p>
+        <p>For security purposes,Please follow these steps to change your password:</p>
 
         <ol>
-            <li>Log in to your account using your current username and the above default password.</li>
-            <li>Once logged in, navigate to the <a href='http://localhost/cmm-500-project/update_password.php'>Update_password</a> or 'Account Settings' section.</li>
+         
+            <li>Click the <a href='https://kike.online/update_password.php'>Update_password</a> to change your password</li>
             
         </ol>
-
+        <p>Please use the email adress you provided earlier while giving consent </p>
         <p>Please remember to create a strong password that includes a combination of uppercase and lowercase letters, numbers, and special characters. Your password should be at least 8 characters long.</p>
 
-        <p>If you have any difficulties changing your password or need further assistance, please don't hesitate to contact our support team at [Your Support Email or Phone Number].</p>
+        <p>If you have any difficulties changing your password or need further assistance, please don't hesitate to contact the support team at [testbaola20@gmail.com].</p>
 
-        <p>Thank you for being a valued member of our community. We prioritize the security of our users, and updating your password is an essential step in maintaining the confidentiality of your account.</p>
+        <p>Thank you for being a valued member of this community. I prioritize the security of  users, and updating your password is an essential step in maintaining the confidentiality of your account.</p>
 
         <p>Best regards,</p>
         <p>[Baola EHR Support Team]</p>";
@@ -242,42 +242,7 @@ function change_password($password_changed, $password_created) {
 		if($delete)
 			return 1;
 	}
-	function save_system_settings(){
-		extract($_POST);
-		$data = '';
-		foreach($_POST as $k => $v){
-			if(!is_numeric($k)){
-				if(empty($data)){
-					$data .= " $k='$v' ";
-				}else{
-					$data .= ", $k='$v' ";
-				}
-			}
-		}
-		if($_FILES['cover']['tmp_name'] != ''){
-			$fname = strtotime(date('y-m-d H:i')).'_'.$_FILES['cover']['name'];
-			$move = move_uploaded_file($_FILES['cover']['tmp_name'],'../assets/uploads/'. $fname);
-			$data .= ", cover_img = '$fname' ";
-
-		}
-		$chk = $this->db->query("SELECT * FROM system_settings");
-		if($chk->num_rows > 0){
-			$save = $this->db->query("UPDATE system_settings set $data where id =".$chk->fetch_array()['id']);
-		}else{
-			$save = $this->db->query("INSERT INTO system_settings set $data");
-		}
-		if($save){
-			foreach($_POST as $k => $v){
-				if(!is_numeric($k)){
-					$_SESSION['system'][$k] = $v;
-				}
-			}
-			if($_FILES['cover']['tmp_name'] != ''){
-				$_SESSION['system']['cover_img'] = $fname;
-			}
-			return 1;
-		}
-	}
+	
 	function save_image(){
 		extract($_FILES['file']);
 		if(!empty($tmp_name)){
@@ -292,106 +257,7 @@ function change_password($password_changed, $password_created) {
 			}
 		}
 	}
-	function save_appointment(){
-		extract($_POST);
-		$data = "";
-		foreach($_POST as $k => $v){
-			if(!in_array($k, array('appointment_id','patient_name')) && !is_numeric($k)){
-				if($k == 'doctor_name')
-					$v = htmlentities(str_replace("'","&#x2019;",$v));
-				if(empty($data)){
-					$data .= " $k='$v' ";
-				}else{
-					$data .= ", $k='$v' ";
-				}
-			}
-		}
-		if(isset($user_ids)){
-			$data .= ", user_ids='".implode(',',$user_ids)."' ";
-		}
-		// echo $data;exit;
-		if(empty($id)){
-			$save = $this->db->query("INSERT INTO Appointment set $data");
-		}else{
-			$save = $this->db->query("UPDATE Appointment set $data where appointment_id = $id");
-		}
-		if($save){
-			return 1;
-		}
-	}
-	function delete_patient(){
-		extract($_POST);
-		$delete = $this->db->query("DELETE FROM patient where Patient_Id = $id");
-		if($delete){
-			return 1;
-		}
-	}
-	function save_task(){
-		extract($_POST);
-		$data = "";
-		foreach($_POST as $k => $v){
-			if(!in_array($k, array('id')) && !is_numeric($k)){
-				if($k == 'description')
-					$v = htmlentities(str_replace("'","&#x2019;",$v));
-				if(empty($data)){
-					$data .= " $k='$v' ";
-				}else{
-					$data .= ", $k='$v' ";
-				}
-			}
-		}
-		if(empty($id)){
-			$save = $this->db->query("INSERT INTO task_list set $data");
-		}else{
-			$save = $this->db->query("UPDATE task_list set $data where id = $id");
-		}
-		if($save){
-			return 1;
-		}
-	}
-	function delete_task(){
-		extract($_POST);
-		$delete = $this->db->query("DELETE FROM task_list where id = $id");
-		if($delete){
-			return 1;
-		}
-	}
-	function save_progress(){
-		extract($_POST);
-		$data = "";
-		foreach($_POST as $k => $v){
-			if(!in_array($k, array('id')) && !is_numeric($k)){
-				if($k == 'comment')
-					$v = htmlentities(str_replace("'","&#x2019;",$v));
-				if(empty($data)){
-					$data .= " $k='$v' ";
-				}else{
-					$data .= ", $k='$v' ";
-				}
-			}
-		}
-		$dur = abs(strtotime("2020-01-01 ".$end_time)) - abs(strtotime("2020-01-01 ".$start_time));
-		$dur = $dur / (60 * 60);
-		$data .= ", time_rendered='$dur' ";
-		// echo "INSERT INTO user_productivity set $data"; exit;
-		if(empty($id)){
-			$data .= ", user_id={$_SESSION['login_id']} ";
-			
-			$save = $this->db->query("INSERT INTO user_productivity set $data");
-		}else{
-			$save = $this->db->query("UPDATE user_productivity set $data where id = $id");
-		}
-		if($save){
-			return 1;
-		}
-	}
-	function delete_progress(){
-		extract($_POST);
-		$delete = $this->db->query("DELETE FROM user_productivity where id = $id");
-		if($delete){
-			return 1;
-		}
-	}
+	
 	function get_report(){
 		extract($_POST);
 		$data = array();
@@ -407,4 +273,3 @@ function change_password($password_changed, $password_created) {
 		return json_encode($data);
 
 	}
-}

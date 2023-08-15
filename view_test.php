@@ -1,5 +1,6 @@
 <?php
 include'db_connect.php';
+session_start();
 
 if (isset($_GET["Test_id"])) {
     $Test_id= intval($_GET["Test_id"]);
@@ -62,11 +63,10 @@ $conn->close();
 							<div class="col-md-4">
 					
 							<label for="" class="control-label">Test results</label>
-							<div>
-							<?php echo $row["Test_results"]; ?>
-							</div>
-							
-							
+												<div>
+    <?php echo htmlspecialchars($row["Test_results"]); ?>
+</div>
+					
 						
                      
 							<label for="" class="control-label">Test date</label>
@@ -84,7 +84,7 @@ $conn->close();
 				<hr>
 				<div class="col-lg-12 text-right justify-content-center d-flex">
 				
-					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=test'">Cancel</button>
+					<button class="btn btn-secondary" type="button" onclick="location.href = 'baola.php?page=test'">Cancel</button>
 				</div>
 				</div>
 				

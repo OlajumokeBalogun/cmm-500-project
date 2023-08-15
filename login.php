@@ -1,5 +1,6 @@
 <?php
 
+
 require_once('auth.php');
 require_once('MainClass.php');
 
@@ -65,7 +66,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
    
 </head>
 <body class="bg-dark bg-gradient">
-  
+        <a href="index.php" class="btn btn-primary bg-gradient rounded custom-margin btn-sm">Home</a> <!-- Home Button -->
+
 
 <div class="carousel-container">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
@@ -128,8 +130,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             margin-right: 10px; /* Adjust the margin value to increase or decrease the space */
         }
     </style>
-
+        
      <div class="welcome-container">
+         
         <h4>Welcome back!!!</h4>
         <div class="row">
             
@@ -153,6 +156,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         </div>
                         <?php unset($_SESSION['flashdata']) ?>
                         <?php endif; ?>
+                       
+
                            <div class="form-group">
                                <label for="email" class="label-control">Email</label>
                                <input type="email" name="email" id="email" class="form-control rounded"  value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>" autofocus required>
@@ -162,25 +167,23 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                <input type="password" name="password" id="password" class="form-control rounded" value="<?= isset($_POST['password']) ? $_POST['password'] : '' ?>" required>
                             </div>
                             <div class="clear-fix mb-4"></div>
-                            <div class="form-group text-end">
-                            <button class="btn btn-primary bg-gradient rounded custom-margin">Login with OTP</button>
-                            <?php
+                            <div class="form-group">
+                            <button class="btn btn-primary bg-gradient rounded custom-margin">Login</button>
+                           <?php
 require_once 'config.php';
 
 if (isset($_SESSION['user_token'])) {
   header("Location: welcome.php");
 } else {
-  echo "<a href='" . $client->createAuthUrl() . "'>Google Login</a>";
+ echo '
+         
+            <a href="' . $client->createAuthUrl() . '" class="btn btn-primary">Login with Google</a>'
+         
+        ;
 }
 ?>
-                            </div>
-                            
-                       </form>
-            </section>
 
-        </div>
-    </div>
-  </div>
+
   
   <script>
     // Add JavaScript to activate carousel every 3 seconds

@@ -15,6 +15,7 @@
 
 <?php 
 include'db_connect.php';
+session_start();
 $fetch_event = $conn->query("SELECT * FROM appointment");
 ?>
 

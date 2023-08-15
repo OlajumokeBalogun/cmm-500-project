@@ -1,6 +1,7 @@
 <?php
 require_once('auth.php');
 require_once('MainClass.php');
+session_start();
 $user_data = json_decode($class->get_user_data($_SESSION['otp_verify_user_id']));
 if($user_data->status){
     foreach($user_data->data as $k => $v){
@@ -20,7 +21,7 @@ if(isset($_GET['resend']) && $_GET['resend'] == 'true'){
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $verify = json_decode($class->otp_verify());
     if($verify->status == 'success'){
-        echo "<script>location.replace('./');</script>";
+        echo "<script>location.replace('./baola.php');</script>";
     }
 }
 ?>

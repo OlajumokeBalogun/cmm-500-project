@@ -1,4 +1,5 @@
 <?php if(!isset($conn)){ include 'db_connect.php'; } ?>
+session_start();
 
 <div class="col-lg-12">
 	<div class="card card-outline card-primary">

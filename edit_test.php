@@ -1,6 +1,7 @@
 <?php
 
 include'db_connect.php';
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $Patient_name = sanitizeInput($_POST["Patient_name"]);
@@ -18,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		echo "<script>
 		alert('test  record updated successfully.');
 		setTimeout(function() {
-			window.location.href = 'index.php?page=test';
+			window.location.href = 'baola.php?page=test';
 		}, 200); // 1000 milliseconds = 3 seconds
 	</script>";
         exit();

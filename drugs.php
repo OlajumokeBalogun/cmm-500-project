@@ -1,10 +1,11 @@
 <?php include'db_connect.php' ?>
+
 <div class="col-lg-12">
 	<div class="card card-outline card-success">
 		<div class="card-header">
             
 			<div class="card-tools">
-				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="./index.php?page=new_drugs"><i class="fa fa-plus"></i> Add New drugs</a>
+				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="./baola.php?page=new_drugs"><i class="fa fa-plus"></i> Add New drugs</a>
 			</div>
             
 		</div>
@@ -43,7 +44,7 @@
 						<td>
 						<p><b><?php echo ucwords($row['Drug_name']) ?></b></p>
 							</td>
-							<td>
+						<td>
 							<p><b><?php echo ucwords($row['Drug_desc']) ?></b></p>
 							
 						</td>	
@@ -55,10 +56,10 @@
 		                      Action
 		                    </button>
 		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item view_project" href="./index.php?page=view_drugs&Drug_id=<?php echo $row['Drug_id'] ?>" data-id="<?php echo $row['Drug_id'] ?>">View</a>
+		                      <a class="dropdown-item view_project" href="./baola.php?page=view_drugs&Drug_id=<?php echo $row['Drug_id'] ?>" data-id="<?php echo $row['Drug_id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
 		                     
-		                      <a class="dropdown-item" href="./index.php?page=edit_drugs&Drug_id=<?php echo $row['Drug_id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="./baola.php?page=edit_drugs&Drug_id=<?php echo $row['Drug_id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
 							  <a class="dropdown-item delete_drugs" href="delete.php?action=delete_drugs&id=<?php echo $row['Drug_id'] ?>">Delete</a>
 

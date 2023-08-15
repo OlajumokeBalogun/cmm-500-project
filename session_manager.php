@@ -8,8 +8,8 @@ session_start();
 if (isset($_SESSION['id'])) {
     // Check if last activity time is set
     if (isset($_SESSION['last_activity_time'])) {
-        // Define the inactivity threshold (15 minutes in this example)
-        $inactive_threshold = 3 * 60; // 15 minutes in seconds
+        // Define the inactivity threshold 
+        $inactive_threshold = 1 * 60; // one minute
 
         // Calculate the time elapsed since the last activity
         $time_elapsed = time() - $_SESSION['last_activity_time'];
@@ -19,7 +19,7 @@ if (isset($_SESSION['id'])) {
             // Destroy the session and log out the user
             session_unset();
             session_destroy();
-            header("Location: login.php"); // Redirect to login page or any other page
+            header("Location: index.php"); // Redirect to login page or any other page
             exit;
         }
     }

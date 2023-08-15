@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "<script>
             alert('Appointment with the same date and time already exists. Please choose a different date and time..');
             setTimeout(function() {
-                window.location.href = 'index.php?page=new_appointment';
+                window.location.href = 'baola.php?page=new_appointment';
             }, 200); // 1000 milliseconds = 3 seconds
         </script>";
     } else {
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo "<script>
             alert('Appointment record updated successfully.');
             setTimeout(function() {
-                window.location.href = 'index.php?page=appointment';
+                window.location.href = 'baola.php?page=appointment';
             }, 200); // 1000 milliseconds = 3 seconds
         </script>";
         exit();

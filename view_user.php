@@ -1,4 +1,5 @@
 <?php include 'db_connect.php' ?>
+session_start();
 <?php
 if(isset($_GET['id'])){
 	$type_arr = array('',"Admin","Project Manager","Employee");

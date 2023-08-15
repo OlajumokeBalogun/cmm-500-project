@@ -95,7 +95,7 @@
 		<hr>
 				<div class="col-lg-12 text-right justify-content-center d-flex">
 				<button type="submit" class="btn btn-primary mr-2">Save</button>
-					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=appointment'">Cancel</button>
+					<button class="btn btn-secondary" type="button" onclick="location.href = 'baola.php?page=appointment'">Cancel</button>
 				</div>
         </form>
     	</div>
@@ -118,7 +118,7 @@
 				if(resp == 1){
 					alert_toast('Data successfully saved',"success");
 					setTimeout(function(){
-						location.href = 'index.php?page=appointment'
+						location.href = 'baola.php?page=appointment'
 					},2000)
 				}
 			}

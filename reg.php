@@ -16,6 +16,7 @@ require 'vendor/autoload.php';
 
  include'db_connect.php';
  
+ 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Function to sanitize input and prevent SQL injection
     function sanitize_input($input) {
@@ -43,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<script>
                 alert('password strength  not ok');
                 setTimeout(function() {
-                    window.location.href = 'index.php?page=new_user';
+                    window.location.href = 'baola.php?page=new_user';
                 }, 200); // 1000 milliseconds = 3 seconds
             </script>";
             
@@ -74,13 +75,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    
 
     if ($stmt->execute()) {
+        
+        send_mail($email, $firstname, $password); 
         echo "<script>
                 alert('user records updated.');
                 setTimeout(function() {
-                    window.location.href = 'index.php?page=user_list';
+                    window.location.href = 'baola.php?page=user_list';
                 }, 50); // 1000 milliseconds = 3 seconds
             </script>";
-        send_mail($email, $firstname, $password); 
     } else {
         echo "Error: " . $stmt->error;
     }
@@ -114,21 +116,21 @@ function send_mail($to = "", $firstname = "", $password = "")
         <h2>Baola Hospital System Application: Your New Default Password and Important Account Update</h2>
         <p>Dear $firstname,</p>
 
-        <p>We hope this message finds you well. We are writing to inform you that your account password has been reset, and we have generated a new default password for you.</p>
+        <p>I hope this message finds you well. I am writing to inform you that your account password has been reset, and i have generated a new default password for you.</p>
 
         <p>Your new default password is: $password</p>
 
-        <p>For security purposes, we strongly recommend that you change your password immediately upon logging in to your account. Please follow these steps to change your password:</p>
+        <p>For security purposes, Please follow these steps to change your password:</p>
 
         <ol>
             <li>Log in to your account using your current username and the above default password.</li>
-            <li>Once logged in, navigate to the <a href='https://www.kike.online/update_password.php'>Update_password</a> or 'Account Settings' section.</li>
+            <li>Once logged in, navigate to the <a href='https://www.kike.online/update_password.php'>Update_password</a> to change your password.</li>
             
         </ol>
 
         <p>Please remember to create a strong password that includes a combination of uppercase and lowercase letters, numbers, and special characters. Your password should be at least 8 characters long.</p>
 
-        <p>If you have any difficulties changing your password or need further assistance, please don't hesitate to contact our support team at [Your Support Email or Phone Number].</p>
+        <p>If you have any difficulties changing your password or need further assistance, please don't hesitate to contact our support team at [testbaola20@gmail.com].</p>
 
         <p>Thank you for being a valued member of our community. We prioritize the security of our users, and updating your password is an essential step in maintaining the confidentiality of your account.</p>
 

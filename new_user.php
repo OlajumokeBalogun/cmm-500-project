@@ -1,4 +1,5 @@
 <?php
+session_start();
 ?>
 <div class="col-lg-12">
 	<div class="card">
@@ -55,7 +56,7 @@
 				<hr>
 				<div class="col-lg-12 text-right justify-content-center d-flex">
 					<button class="btn btn-primary mr-2">Save</button>
-					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=user_list'">Cancel</button>
+					<button class="btn btn-secondary" type="button" onclick="location.href = 'baola.php?page=user_list'">Cancel</button>
 				</div>
 			</form>
 		</div>

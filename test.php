@@ -4,7 +4,7 @@
 		<div class="card-header">
             
 			<div class="card-tools">
-				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="./index.php?page=new_test"><i class="fa fa-plus"></i> Add New Test</a>
+				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="./baola.php?page=new_test"><i class="fa fa-plus"></i> Add New Test</a>
 			</div>
             
 		</div>
@@ -70,10 +70,10 @@
 		                      Action
 		                    </button>
 		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item view_project" href="./index.php?page=view_test&Test_id=<?php echo $row['Test_id'] ?>" data-id="<?php echo $row['Test_id'] ?>">View</a>
+		                      <a class="dropdown-item view_project" href="./baola.php?page=view_test&Test_id=<?php echo $row['Test_id'] ?>" data-id="<?php echo $row['Test_id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
 		                      
-		                      <a class="dropdown-item" href="./index.php?page=edit_test&Test_id=<?php echo $row['Test_id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="./baola.php?page=edit_test&Test_id=<?php echo $row['Test_id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
 							  <a class="dropdown-item delete_project" href="delete.php?action=delete_test&id=<?php echo $row['Test_id'] ?>">Delete</a>
 

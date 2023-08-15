@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo "<script>
                 alert('appointment record deleted successfully.');
                 setTimeout(function() {
-                    window.location.href = 'index.php?page=appointment';
+                    window.location.href = 'baola.php?page=appointment';
                 }, 200); // 1000 milliseconds = 3 seconds
             </script>";
     } elseif ($action === "delete_billing"){
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo "<script>
                 alert('billing record deleted successfully.');
                 setTimeout(function() {
-                    window.location.href = 'index.php?page=billing';
+                    window.location.href = 'baola.php?page=billing';
                 }, 200); // 1000 milliseconds = 3 seconds
             </script>";
     }elseif ($action === "delete_drugs"){
@@ -39,25 +39,25 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo "<script>
                 alert('drug record deleted successfully.');
                 setTimeout(function() {
-                    window.location.href = 'index.php?page=drugs';
+                    window.location.href = 'baola.php?page=drugs';
                 }, 200); // 1000 milliseconds = 3 seconds
             </script>";
     }elseif ($action === "delete_patient"){
-        $sql = "DELETE FROM patient WHERE Patient_Id  = '$id'";
+        $sql = "DELETE FROM test WHERE Patient_Id = '$id'";
         $conn->query($sql);
         echo "<script>
-                alert('Record deleted successfully.');
-                setTimeout(function() {
-                    window.location.href = 'index.php?page=patient';
-                }, 200); // 1000 milliseconds = 3 seconds
-            </script>";
+        alert('Test record deleted successfully.');
+        setTimeout(function() {
+            window.location.href = 'baola.php?page=patient';
+        }, 200); // 1000 milliseconds = 3 seconds
+    </script>";
     }elseif ($action === "delete_prescription"){
         $sql = "DELETE FROM prescription WHERE Prescription_id = '$id'";
         $conn->query($sql);
         echo "<script>
                 alert('Prescription record deleted successfully.');
                 setTimeout(function() {
-                    window.location.href = 'index.php?page=prescription';
+                    window.location.href = 'baola.php?page=prescription';
                 }, 200); // 1000 milliseconds = 3 seconds
             </script>";
     }elseif ($action === "delete_test"){
@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo "<script>
         alert('Test record deleted successfully.');
         setTimeout(function() {
-            window.location.href = 'index.php?page=test';
+            window.location.href = 'baola.php?page=test';
         }, 200); // 1000 milliseconds = 3 seconds
     </script>";
     }elseif ($action === "delete_user"){
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo "<script>
                 alert('user record deleted successfully.');
                 setTimeout(function() {
-                    window.location.href = 'index.php?page=user_list';
+                    window.location.href = 'baola.php?page=user_list';
                 }, 200); // 1000 milliseconds = 3 seconds
             </script>";
     }

@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "<script>
                 alert(' Drug Record added  successfully.');
                 setTimeout(function() {
-                    window.location.href = 'index.php?page=drugs';
+                    window.location.href = 'baola.php?page=drugs';
                 }, 200); // 1000 milliseconds = 3 seconds
             </script>";
         exit();
@@ -39,6 +39,7 @@ function sanitizeInput($data)
 }
 
 $conn->close();
+include 'header.php' 
 ?>
 
 
@@ -55,12 +56,17 @@ $conn->close();
               <input type="text" class="form-control form-control-sm" autocomplete="off" name="Drug_name" >
             </div>
           </div>
-		  <div class="col-md-6">
-            <div class="form-group">
-              <label for="" class="control-label">Drug desc</label>
-              <textarea cols="30" rows="10" class="summernote form-control" autocomplete="off" name="Drug_desc" ></textarea>
-            </div>
-          </div>
+          <div class="row">
+			<div class="col-md-10">
+				<div class="form-group">
+					<label for="" class="control-label">Description</label>
+					<textarea name="Drug_desc" id="" cols="30" rows="10" class="summernote form-control">
+						<?php echo isset($Drug_desc) ? $Drug_desc : '' ?>
+					</textarea>
+				</div>
+			</div>
+		</div>
+		  
 			
         
 		
@@ -68,7 +74,7 @@ $conn->close();
 		<hr>
 				<div class="col-lg-12 text-right justify-content-center d-flex">
 				<button type="submit" class="btn btn-primary mr-2">Save</button>
-					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=drugs'">Cancel</button>
+					<button class="btn btn-secondary" type="button" onclick="location.href = 'baola.php?page=drugs'">Cancel</button>
 				</div>
         </form>
     	</div>

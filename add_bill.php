@@ -1,6 +1,7 @@
 <?php
 include'db_connect.php';
 
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Step 2: Sanitize the form data
     $Patient_name = sanitizeInput($_POST["Patient_name"]);
@@ -18,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "<script>
 		alert('patient bill records added successfully!!.');
 		setTimeout(function() {
-			window.location.href = 'index.php?page=billing';
+			window.location.href = 'baola.php?page=billing';
 		}, 200); // 1000 milliseconds = 3 seconds
 	</script>";
         exit();
