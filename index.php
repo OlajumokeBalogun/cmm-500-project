@@ -1,13 +1,13 @@
 <?php
 
-require 'vendor/autoload.php'; // Assuming you installed GuzzleHttp using composer.
+require 'vendor/autoload.php'; // installing GuzzleHttp using composer.
 use GuzzleHttp\Client;
 
 $client = new GuzzleHttp\Client([
     'base_uri' => 'https://api.abuseipdb.com/api/v2/'
 ]);
 
-// Get the user's remote IP address
+// checking for the user's remote IP address.......zzzzzzzz
 $userIp = $_SERVER['REMOTE_ADDR'];
 
 try {
@@ -18,7 +18,7 @@ try {
         ],
         'headers' => [
             'Accept' => 'application/json',
-            'Key' => '71ee5cc81e4b166346891de959010cabcf9176343d8b6ee9510d374e3e007c1a41f93730bae4d207'
+            'Key' => '71ee5cc81e4b166346891de959010cabcf9176343d8b6ee9510d374e3e007c1a41f93730bae4d207'//my api key for abuseipdb
         ],
     ]);
 
@@ -30,14 +30,14 @@ try {
         $ipDetails['data']['countryCode'] === 'GB' &&
         $ipDetails['data']['abuseConfidenceScore'] <= 25
     ) {
-        // Display a message if conditions are met
-        // Insert redirection code here if needed
+        
+        // throw them out to the error page
     } else {
     header("Location: error.php"); // Redirect to error.php if conditions are not met
-    exit; // Stop further processing
+    exit; // Stop further processing..leave my site alone please!
 }
 } catch (\Exception $e) {
-    // Handle exception (e.g., log the error, show a generic error message to the user)
+    // Handle exception (i.e log the error, show a generic error message to the user)
     echo "Error: " . $e->getMessage();
 }
 ?>

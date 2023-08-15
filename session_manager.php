@@ -4,19 +4,19 @@
 // Start the session
 session_start();
 
-// Check if the user is logged in
+// Knock Knock!..who is here??
 if (isset($_SESSION['id'])) {
-    // Check if last activity time is set
+    //When last did you come here?
     if (isset($_SESSION['last_activity_time'])) {
-        // Define the inactivity threshold 
+        // Let me set the inactivity threshold 
         $inactive_threshold = 1 * 60; // one minute
 
-        // Calculate the time elapsed since the last activity
+        // Calculating the time elapsed since the last activity
         $time_elapsed = time() - $_SESSION['last_activity_time'];
 
-        // Check if the user has been inactive for too long
+        // How long have you been quiet?
         if ($time_elapsed > $inactive_threshold) {
-            // Destroy the session and log out the user
+            // Destroy the session and log out the user.you are too busy for this session.please leave..
             session_unset();
             session_destroy();
             header("Location: index.php"); // Redirect to login page or any other page

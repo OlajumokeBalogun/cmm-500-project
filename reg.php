@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Hash the password
+    // confuse them with salt!!! and Hash the password
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
    
 

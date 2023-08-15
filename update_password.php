@@ -62,8 +62,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $old_password = sanitizeInput($_POST["old_password"]);
     $new_password = sanitizeInput($_POST["new_password"]);
 
-    // Validate password strength
-    $password_valid = strlen($new_password) >= 8 && preg_match("#[0-9]+#", $new_password) && preg_match("#[a-z]+#", $new_password) && preg_match("#[A-Z]+#", $new_password) && preg_match("/[!@#%^&*]+/", $new_password);
+    // Validate password strength---more muscles!!!
+    $password_valid = strlen($new_password) >= 8 && preg_match("#[0-9]+#", $new_password) && preg_match("#[a-z]+#", $new_password) && 
+    preg_match("#[A-Z]+#", $new_password) && preg_match("/[!@#%^&*]+/", $new_password);
 
 
     if (!$password_valid) {
@@ -72,8 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Hash the new password
         $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
 
-        // Check if the user exists in the database and validate the password
-        // Replace 'your_users_table' with the actual name of your users table
+        // Checking if the user exists in the database and validate the password
+       
         $sql = "SELECT * FROM users WHERE email = '$email'";
         $result = $conn->query($sql);
 

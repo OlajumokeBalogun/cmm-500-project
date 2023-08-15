@@ -38,19 +38,19 @@ Class MainClass{
             $pass_is_right = password_verify($password,$data['password']);
             $has_code = false;
     
-            // Define a constant for the maximum number of failed attempts
+            // I chose  3 as a constant for the maximum number of failed attempts
             define("MAX_ATTEMPTS", 3);
     
-            // Initialize a session variable to store the number of failed attempts
+            // Initializing a session variable to store the number of failed attempts so system starts counting
             if (!isset($_SESSION['failed_attempts'])) {
                 $_SESSION['failed_attempts'] = 0;
             }
     
-            // Check if the OTP is expired or not set
+            // we need to see of the OTP has expired or not
             if (is_null($data['otp']) || (!is_null($data['otp']) && !is_null($data['otp_expiration']) && strtotime($data['otp_expiration']) < time())) {
                 // Check if the password is correct
                 if ($pass_is_right) {
-                    // Reset the number of failed attempts
+                    // Reseting the number of failed attempts
                     $_SESSION['failed_attempts'] = 0;
     
                     $otp = sprintf("%'.06d",mt_rand(0,999999));
@@ -68,12 +68,12 @@ Class MainClass{
                         $_SESSION['flashdata']['msg'] = ' An error occurred while loggin in. Please try again later.';
                     }
                 } else {
-                    // Increment the number of failed attempts
+                    // failed attempts is starting to increase!!!
                     $_SESSION['failed_attempts']++;
     
-                    // Check if the number of failed attempts has reached the limit
+                    // Checking if the number of failed attempts has reached the limit i set
                     if ($_SESSION['failed_attempts'] >= MAX_ATTEMPTS) {
-                        // Lock the user out and display an error message
+                        // Lock the user out and display an error message,now i need to reset them
                         $resp['status'] = 'failed';
                         $_SESSION['flashdata']['type'] = 'danger';
                         $_SESSION['flashdata']['msg'] = ' You have exceeded the maximum number of login attempts. Please try again later.';
