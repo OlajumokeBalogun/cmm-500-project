@@ -28,7 +28,7 @@ Class MainClass{
     
     public function login(){
         extract($_POST);
-        $sql = "SELECT * FROM `users` where `email` = ? ";
+        $sql = "SELECT * FROM users where email = ? ";
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param('s',$email);
         $stmt->execute();
@@ -47,7 +47,8 @@ Class MainClass{
             }
     
             // we need to see of the OTP has expired or not
-            if (is_null($data['otp']) || (!is_null($data['otp']) && !is_null($data['otp_expiration']) && strtotime($data['otp_expiration']) < time())) {
+            if (is_null($data['otp']) || (!is_null($data['otp']) && !is_null($data['otp_expiration']) && strtotime($data['otp_expiration']) 
+            < time())) {
                 // Check if the password is correct
                 if ($pass_is_right) {
                     // Reseting the number of failed attempts
@@ -55,7 +56,7 @@ Class MainClass{
     
                     $otp = sprintf("%'.06d",mt_rand(0,999999));
                     $expiration = date("Y-m-d H:i" ,strtotime(date('Y-m-d H:i')." +2 mins"));
-                    $update_sql = "UPDATE `users` set otp_expiration = '{$expiration}', otp = '{$otp}' where id='{$data['id']}' ";
+                    $update_sql = "UPDATE users set otp_expiration = '{$expiration}', otp = '{$otp}' where id='{$data['id']}' ";
                     $update_otp = $this->db->query($update_sql);
                     if($update_otp){
                         $has_code = true;
@@ -202,3 +203,5 @@ Best regards,
 
 $class = new MainClass();
 $conn= $class->db_connect();
+
+//Refference:Adapted from Codetester.Available at:https://www.youtube.com/watch?v=Fru-BzAr-LE

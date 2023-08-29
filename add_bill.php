@@ -1,16 +1,17 @@
 <?php
+//starting the db connection
 include'db_connect.php';
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Step 2: Sanitize the form data
+    //  Sanitize the form data
     $Patient_name = sanitizeInput($_POST["Patient_name"]);
     $amount = sanitizeInput($_POST["amount"]);
     $Payment_status = sanitizeInput($_POST["Payment_status"]);
     $Payment_mode = sanitizeInput($_POST["Payment_mode"]);
     
 
-    // Step 3: Use prepared statements to insert data into the database
+   //Using prepared statements to insert data into the database to separate user input from SQL code
     $stmt = $conn->prepare("INSERT INTO billing (Patient_name, amount, Payment_status, Payment_mode) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss",  $Patient_name, $amount, $Payment_status, $Payment_mode);
 
@@ -42,3 +43,5 @@ function sanitizeInput($data)
 
 $conn->close();
 ?>
+
+//Refference:Adapted from Codetester.Available at:https://www.youtube.com/watch?v=Fru-BzAr-LE

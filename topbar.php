@@ -42,3 +42,5 @@
         uni_modal('Manage Account','manage_user.php?id=<?php echo $_SESSION['id'] ?>')
       })
   </script>
+
+//Refference:Adapted from Codetester.Available at:https://www.youtube.com/watch?v=Fru-BzAr-LE

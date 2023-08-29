@@ -15,3 +15,4 @@ if(strpos($link,'login.php') > -1 && isset($_SESSION['user_login'])){
 echo "<script>location.replace('./baola.php');</script>";
 }
 ?>
+//Refference:Adapted from Codetester.Available at:https://www.youtube.com/watch?v=Fru-BzAr-LE

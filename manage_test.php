@@ -87,3 +87,5 @@ foreach($user->fetch_array() as $k =>$v){
 	})
 
 </script>
+
+//Refference:Adapted from Codetester.Available at:https://www.youtube.com/watch?v=Fru-BzAr-LE

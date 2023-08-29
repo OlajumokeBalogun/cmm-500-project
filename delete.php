@@ -88,3 +88,4 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $conn->close();
 }
 ?>
+//Refference:Adapted from Codetester.Available at:https://www.youtube.com/watch?v=Fru-BzAr-LE

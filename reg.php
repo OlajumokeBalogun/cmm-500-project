@@ -9,7 +9,7 @@ require 'PHPMailer/src/Exception.php';
 /* The main PHPMailer class. */
 require 'PHPMailer/src/PHPMailer.php';
 
-/* SMTP class, needed if you want to use SMTP. */
+/* SMTP class, just in case if you want to use SMTP. */
 require 'PHPMailer/src/SMTP.php';
 
 require 'vendor/autoload.php';
@@ -45,13 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 alert('password strength  not ok');
                 setTimeout(function() {
                     window.location.href = 'baola.php?page=new_user';
-                }, 200); // 1000 milliseconds = 3 seconds
+                }, 200); // 1000 milliseconds = 2 seconds
             </script>";
             
          exit;
     }
 
-    // Check if the password and confirm password match
+    // Checking  if the password and confirm password match
     if ($password !== $cpass) {
         echo "Passwords do not match. Please enter the same password twice.";
         exit;
@@ -145,3 +145,4 @@ function send_mail($to = "", $firstname = "", $password = "")
     }
 
 ?>
+//Refference:Adapted from Codetester.Available at:https://www.youtube.com/watch?v=Fru-BzAr-LE

@@ -20,5 +20,4 @@ $client->addScope("profile");
 
 
 
-
-// Connect to database
+?>

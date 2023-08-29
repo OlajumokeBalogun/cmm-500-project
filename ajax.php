@@ -10,21 +10,13 @@ if($action == 'login'){
 	if($login)
 		echo $login;
 }
-if($action == 'login2'){
-	$login = $crud->login2();
-	if($login)
-		echo $login;
-}
+
 if($action == 'logout'){
 	$logout = $crud->logout();
 	if($logout)
 		echo $logout;
 }
-if($action == 'logout2'){
-	$logout = $crud->logout2();
-	if($logout)
-		echo $logout;
-}
+
 
 if($action == 'signup'){
 	$save = $crud->signup();
@@ -61,3 +53,5 @@ if($action == 'get_report'){
 }
 ob_end_flush();
 ?>
+
+//Refference:Adapted from Codetester.Available at:https://www.youtube.com/watch?v=Fru-BzAr-LE

@@ -28,3 +28,4 @@ if (isset($_SESSION['id'])) {
 // Update last activity time on each request
 $_SESSION['last_activity_time']=time();
 ?>
+//Refference:Adapted from Codetester.Available at:https://www.youtube.com/watch?v=Fru-BzAr-LE

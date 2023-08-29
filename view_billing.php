@@ -86,3 +86,4 @@ $conn->close();
 					<button class="btn btn-secondary" type="button" onclick="location.href = 'baola.php?page=billing'">Cancel</button>
 				</div>
 
+				//Refference:Adapted from Codetester.Available at:https://www.youtube.com/watch?v=Fru-BzAr-LE

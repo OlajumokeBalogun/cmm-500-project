@@ -1,7 +1,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #000080;">
     <style>
     .bg-navy {
-    background-color: navy; /* Define the desired color */
+    background-color: navy; /* Choosing the  desired color */
 }
  </style>
       
@@ -158,3 +158,4 @@
      
   	})
   </script>
+  //Refference:Adapted from Codetester.Available at:https://www.youtube.com/watch?v=Fru-BzAr-LE
